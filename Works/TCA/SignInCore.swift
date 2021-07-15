@@ -14,30 +14,70 @@ enum SignInCore {
         Reducer { state, action, _ in
             switch action {
             case .onAppear:
-                if let verificationID = UserDefaults.standard.string(forKey: "authVerificationID") {
-                    state.shouldShowPinCodeInput = !verificationID.isEmpty
-                }
+                let verificationId = LocalStore.authVerificationId
+                state.shouldShowPinCodeInput = !verificationId.isEmpty
                 return .none
             case .signIn(let phoneNumber):
+                state.isLoading = true
+                
                 let verify = Future<String, AppError> { promise in
                     PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber.toE164(), uiDelegate: nil) { verificationId, error in
                         if let error = error {
-                            print(error)
+                            promise(.failure(.system(defaultErrorMsg)))
+                            return
+                        }
+                        
+                        guard let verificationId = verificationId else {
                             promise(.failure(.system(defaultErrorMsg)))
                             return
                         }
 
-                        promise(.success(verificationId!))
+                        promise(.success(verificationId))
                     }
                 }
 
-                return verify.catchToEffect().map(SignInCore.Action.verify)
-            case .verify(.success(let verificationId)):
-                UserDefaults.standard.set(verificationId, forKey: "authVerificationID")
+                return verify.catchToEffect().map(SignInCore.Action.sendVerification)
+            case .sendVerification(.success(let verificationId)):
+                LocalStore.setAauthVerificationId(val: verificationId)
                 state.shouldShowPinCodeInput = true
+                state.isLoading = false
                 return .none
-            case .verify(.failure(_)):
+            case .sendVerification(.failure(_)):
                 state.shouldShowPinCodeInput = false
+                state.isLoading = false
+                return .none
+            case .verify(let pinCode):
+                let verificationId = LocalStore.authVerificationId
+                LocalStore.setAauthVerificationId(val: "")
+                state.shouldShowPinCodeInput = false
+                state.isLoading = true
+                
+                let credential = PhoneAuthProvider.provider().credential(
+                    withVerificationID: verificationId,
+                    verificationCode: pinCode)
+                
+                let verify = Future<Me, AppError> { promise in
+                    Auth.auth().signIn(with: credential) { (authResult, error) in
+                        if let error = error {
+                            promise(.failure(.system(defaultErrorMsg)))
+                            return
+                        }
+                        
+                        guard let user = authResult?.user else {
+                            promise(.failure(.system(defaultErrorMsg)))
+                            return
+                        }
+                        
+                        promise(.success(Me(id: user.uid)))
+                    }
+                }
+                
+                return verify.catchToEffect().map(SignInCore.Action.verified)
+            case .verified(.success(let me)):
+                state.isLoading = false
+                return .none
+            case .verified(.failure(_)):
+                state.isLoading = false
                 return .none
             }
         }
@@ -48,10 +88,13 @@ extension SignInCore {
     enum Action: Equatable {
         case onAppear
         case signIn(PhoneNumber)
-        case verify(Result<String, AppError>)
+        case sendVerification(Result<String, AppError>)
+        case verify(String)
+        case verified(Result<Me, AppError>)
     }
 
     struct State: Equatable {
+        var isLoading: Bool = false
         var shouldShowPinCodeInput: Bool = false
     }
 

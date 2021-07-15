@@ -7,19 +7,19 @@
 
 import SwiftUI
 
-public struct PinCodeInputView: View {
+struct PinCodeInputView: View {
     var maxDigits: Int = 6
     var label = "Pinコードを入力してください"
     
     @State var pin: String = ""
     @State var isDisabled = false
     
+    var onSubmit: (String) -> Void
+    
     public var body: some View {
         VStack(spacing: 10) {
             Text(label)
                 .foregroundColor(Color.gray)
-                .fontWeight(.bold)
-                .font(.body)
                 .font(.title)
             Spacer().frame(height: 20)
             ZStack {
@@ -35,6 +35,8 @@ public struct PinCodeInputView: View {
             ForEach(0 ..< maxDigits) { index in
                 Image(systemName: self.getImageName(at: index))
                     .resizable()
+                    .renderingMode(.template)
+                    .foregroundColor(.gray)
                     .font(.system(size: 14, weight: .ultraLight, design: .default))
                     .frame(width: 50, height: 50, alignment: .center)
                 Spacer()
@@ -62,6 +64,7 @@ public struct PinCodeInputView: View {
         
         if pin.count == maxDigits {
             isDisabled = true
+            onSubmit(pin)
         }
         
         if pin.count > maxDigits {

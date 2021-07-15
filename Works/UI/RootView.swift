@@ -15,8 +15,28 @@ struct RootView: View {
         WithViewStore(store) { viewStore in
             Group {
                 if viewStore.authState == .alreadyLogin {
-                    Text("Home")
-
+                    TabView {
+                        Text("請求先")
+                            .tabItem {
+                                VStack {
+                                    Image(systemName: "building")
+                                    Text("請求先")
+                                }
+                            }.tag(1)
+                        IfLetStore(
+                            store.scope(
+                                state: { $0.settingState },
+                                action: RootCore.Action.setting
+                            ),
+                            then: SettingView.init(store:)
+                        )
+                        .tabItem {
+                            VStack {
+                                Image(systemName: "gearshape")
+                                Text("設定")
+                            }
+                        }.tag(2)
+                    }
                 } else if viewStore.authState == .shouldLogin {
                     IfLetStore(
                         store.scope(

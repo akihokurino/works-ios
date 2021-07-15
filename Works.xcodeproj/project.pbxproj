@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0219580F269FCDD200AB4D22 /* Hud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0219580E269FCDD200AB4D22 /* Hud.swift */; };
+		02195812269FCE6000AB4D22 /* ActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = 02195811269FCE6000AB4D22 /* ActivityIndicatorView */; };
+		02195814269FDA3C00AB4D22 /* Me.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02195813269FDA3B00AB4D22 /* Me.swift */; };
+		02195817269FE0A000AB4D22 /* LocalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02195816269FE0A000AB4D22 /* LocalStore.swift */; };
+		0219581A269FEC1700AB4D22 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02195819269FEC1700AB4D22 /* SettingView.swift */; };
+		0219581C269FEC8000AB4D22 /* SettingCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0219581B269FEC8000AB4D22 /* SettingCore.swift */; };
 		021FF958269F2F6200FF55C1 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 021FF957269F2F6200FF55C1 /* FirebaseAuth */; };
 		021FF95A269F2FB400FF55C1 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FF959269F2FB400FF55C1 /* SignInView.swift */; };
 		021FF95C269F31A200FF55C1 /* SignInCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FF95B269F31A200FF55C1 /* SignInCore.swift */; };
@@ -17,6 +23,7 @@
 		021FF969269F52FE00FF55C1 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FF968269F52FE00FF55C1 /* Error.swift */; };
 		021FF96C269F557600FF55C1 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FF96B269F557600FF55C1 /* String.swift */; };
 		021FF96E269F557E00FF55C1 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FF96D269F557E00FF55C1 /* Int.swift */; };
+		023FCEEE26A04DCD00EFF51A /* FirebaseToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023FCEED26A04DCD00EFF51A /* FirebaseToken.swift */; };
 		0242C22F269F0EB300F3D002 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0242C22E269F0EB300F3D002 /* GoogleService-Info.plist */; };
 		02B7019D269EEC4D00BA9937 /* WorksApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B7019C269EEC4D00BA9937 /* WorksApp.swift */; };
 		02B701A1269EEC4F00BA9937 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02B701A0269EEC4F00BA9937 /* Assets.xcassets */; };
@@ -27,6 +34,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0219580E269FCDD200AB4D22 /* Hud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hud.swift; sourceTree = "<group>"; };
+		02195813269FDA3B00AB4D22 /* Me.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Me.swift; sourceTree = "<group>"; };
+		02195816269FE0A000AB4D22 /* LocalStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStore.swift; sourceTree = "<group>"; };
+		02195819269FEC1700AB4D22 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		0219581B269FEC8000AB4D22 /* SettingCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCore.swift; sourceTree = "<group>"; };
 		021FF959269F2FB400FF55C1 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		021FF95B269F31A200FF55C1 /* SignInCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInCore.swift; sourceTree = "<group>"; };
 		021FF95E269F38DA00FF55C1 /* TextFieldInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldInput.swift; sourceTree = "<group>"; };
@@ -36,6 +48,7 @@
 		021FF968269F52FE00FF55C1 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		021FF96B269F557600FF55C1 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		021FF96D269F557E00FF55C1 /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
+		023FCEED26A04DCD00EFF51A /* FirebaseToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseToken.swift; sourceTree = "<group>"; };
 		0242C22E269F0EB300F3D002 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		02B7019C269EEC4D00BA9937 /* WorksApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorksApp.swift; sourceTree = "<group>"; };
 		02B701A0269EEC4F00BA9937 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -52,6 +65,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				02B701AE269EEF5500BA9937 /* ComposableArchitecture in Frameworks */,
+				02195812269FCE6000AB4D22 /* ActivityIndicatorView in Frameworks */,
 				021FF958269F2F6200FF55C1 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -59,6 +73,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		02195815269FE08F00AB4D22 /* Infra */ = {
+			isa = PBXGroup;
+			children = (
+				02195816269FE0A000AB4D22 /* LocalStore.swift */,
+				023FCEED26A04DCD00EFF51A /* FirebaseToken.swift */,
+			);
+			path = Infra;
+			sourceTree = "<group>";
+		};
+		02195818269FEC0200AB4D22 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				02195819269FEC1700AB4D22 /* SettingView.swift */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
 		021FF956269F2F6200FF55C1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -71,6 +102,7 @@
 			children = (
 				021FF95E269F38DA00FF55C1 /* TextFieldInput.swift */,
 				021FF960269F39CA00FF55C1 /* ActionButton.swift */,
+				0219580E269FCDD200AB4D22 /* Hud.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -80,6 +112,7 @@
 			children = (
 				021FF963269F45EF00FF55C1 /* PhoneNumber.swift */,
 				021FF968269F52FE00FF55C1 /* Error.swift */,
+				02195813269FDA3B00AB4D22 /* Me.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -114,6 +147,7 @@
 		02B7019B269EEC4D00BA9937 /* Works */ = {
 			isa = PBXGroup;
 			children = (
+				02195815269FE08F00AB4D22 /* Infra */,
 				021FF96A269F555D00FF55C1 /* Extension */,
 				021FF962269F45DA00FF55C1 /* Model */,
 				02B701B3269EF04B00BA9937 /* TCA */,
@@ -138,6 +172,7 @@
 		02B701AF269EEF7900BA9937 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				02195818269FEC0200AB4D22 /* Setting */,
 				021FF965269F4CBB00FF55C1 /* SignIn */,
 				021FF95D269F38C500FF55C1 /* Component */,
 				02B701B4269EF08B00BA9937 /* RootView.swift */,
@@ -150,6 +185,7 @@
 			children = (
 				02B701B6269EF0B300BA9937 /* RootCore.swift */,
 				021FF95B269F31A200FF55C1 /* SignInCore.swift */,
+				0219581B269FEC8000AB4D22 /* SettingCore.swift */,
 			);
 			path = TCA;
 			sourceTree = "<group>";
@@ -173,6 +209,7 @@
 			packageProductDependencies = (
 				02B701AD269EEF5500BA9937 /* ComposableArchitecture */,
 				021FF957269F2F6200FF55C1 /* FirebaseAuth */,
+				02195811269FCE6000AB4D22 /* ActivityIndicatorView */,
 			);
 			productName = Works;
 			productReference = 02E558DB269F21A600A8AE55 /* Works.app */;
@@ -204,6 +241,7 @@
 			packageReferences = (
 				02B701AC269EEF5500BA9937 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
 				021FF955269F2F2700FF55C1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				02195810269FCE6000AB4D22 /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */,
 			);
 			productRefGroup = 02B70190269EEC4D00BA9937;
 			projectDirPath = "";
@@ -237,10 +275,16 @@
 				021FF967269F4CF100FF55C1 /* PinCodeInputView.swift in Sources */,
 				021FF96E269F557E00FF55C1 /* Int.swift in Sources */,
 				02B7019D269EEC4D00BA9937 /* WorksApp.swift in Sources */,
+				02195814269FDA3C00AB4D22 /* Me.swift in Sources */,
+				023FCEEE26A04DCD00EFF51A /* FirebaseToken.swift in Sources */,
+				0219581A269FEC1700AB4D22 /* SettingView.swift in Sources */,
+				0219580F269FCDD200AB4D22 /* Hud.swift in Sources */,
 				021FF95F269F38DA00FF55C1 /* TextFieldInput.swift in Sources */,
+				02195817269FE0A000AB4D22 /* LocalStore.swift in Sources */,
 				021FF95A269F2FB400FF55C1 /* SignInView.swift in Sources */,
 				02B701B7269EF0B300BA9937 /* RootCore.swift in Sources */,
 				021FF95C269F31A200FF55C1 /* SignInCore.swift in Sources */,
+				0219581C269FEC8000AB4D22 /* SettingCore.swift in Sources */,
 				021FF961269F39CA00FF55C1 /* ActionButton.swift in Sources */,
 				021FF969269F52FE00FF55C1 /* Error.swift in Sources */,
 				021FF964269F45EF00FF55C1 /* PhoneNumber.swift in Sources */,
@@ -434,6 +478,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		02195810269FCE6000AB4D22 /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/exyte/ActivityIndicatorView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.7;
+			};
+		};
 		021FF955269F2F2700FF55C1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -453,6 +505,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		02195811269FCE6000AB4D22 /* ActivityIndicatorView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 02195810269FCE6000AB4D22 /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */;
+			productName = ActivityIndicatorView;
+		};
 		021FF957269F2F6200FF55C1 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 021FF955269F2F2700FF55C1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

@@ -24,17 +24,27 @@ struct SignInView: View {
                     }
                 }
                 .padding()
-                .navigationTitle("ログイン")
+                .navigationBarTitle("ログイン", displayMode: .inline)
                 .fullScreenCover(isPresented: Binding(
                     get: { viewStore.shouldShowPinCodeInput },
-                    set: { _ in return }
+                    set: { _ in }
                 )) {
-                    PinCodeInputView()
+                    PinCodeInputView { pinCode in
+                        viewStore.send(.verify(pinCode))
+                    }
                 }
             }
             .onAppear {
                 viewStore.send(.onAppear)
             }
+            .overlay(Group {
+                if viewStore.isLoading {
+                    HUD(isLoading: Binding(
+                        get: { viewStore.isLoading },
+                        set: { _ in }
+                    ))
+                }
+            }, alignment: .center)
         }
     }
 }
