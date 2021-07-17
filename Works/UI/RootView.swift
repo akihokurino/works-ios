@@ -16,13 +16,19 @@ struct RootView: View {
             Group {
                 if viewStore.authState == .alreadyLogin {
                     TabView {
-                        Text("請求先")
-                            .tabItem {
-                                VStack {
-                                    Image(systemName: "building")
-                                    Text("請求先")
-                                }
-                            }.tag(1)
+                        IfLetStore(
+                            store.scope(
+                                state: { $0.supplierListState },
+                                action: RootCore.Action.supplierList
+                            ),
+                            then: SupplierListView.init(store:)
+                        )
+                        .tabItem {
+                            VStack {
+                                Image(systemName: "building")
+                                Text("取引先")
+                            }
+                        }.tag(1)
                         IfLetStore(
                             store.scope(
                                 state: { $0.settingState },
@@ -45,6 +51,8 @@ struct RootView: View {
                         ),
                         then: SignInView.init(store:)
                     )
+                } else {
+                    HUD(isLoading: .constant(true))
                 }
             }
             .onAppear {

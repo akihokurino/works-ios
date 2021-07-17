@@ -67,7 +67,8 @@ struct GraphQLClient {
                 let transport = RequestChainNetworkTransport(
                     interceptorProvider: provider,
                     endpointURL: URL(string: "https://works-api.akiho.app/graphql")!,
-                    additionalHeaders: ["authorization": "bearer \(token)"])
+                    additionalHeaders: ["authorization": "bearer \(token)"]
+                )
 
                 let apollo = ApolloClient(networkTransport: transport, store: store)
 
@@ -79,7 +80,7 @@ struct GraphQLClient {
 
 struct GraphQLCaller {
     let cli: ApolloClient
-    
+
     func me() -> Future<Me, AppError> {
         return Future<Me, AppError> { promise in
             cli.fetch(query: GraphQL.GetMeQuery()) { result in
@@ -89,7 +90,14 @@ struct GraphQLCaller {
                             promise(.failure(AppError.system(defaultErrorMsg)))
                             return
                         }
-                        promise(.success(Me(id: data.me.fragments.meFragment.id)))
+
+                        let me = Me(
+                            id: data.me.fragments.meFragment.id,
+                            suppliers: data.me.fragments.meFragment.suppliers.edges.map { edge in
+                                Supplier(id: edge.node.id, name: edge.node.name, billingAmount: edge.node.billingAmount, billingType: edge.node.billingType)
+                            }
+                        )
+                        promise(.success(me))
                     case .failure(let error):
                         promise(.failure(AppError.system(error.localizedDescription)))
                 }
@@ -106,7 +114,14 @@ struct GraphQLCaller {
                             promise(.failure(AppError.system(defaultErrorMsg)))
                             return
                         }
-                        promise(.success(Me(id: data.authenticate.fragments.meFragment.id)))
+
+                        let me = Me(
+                            id: data.authenticate.fragments.meFragment.id,
+                            suppliers: data.authenticate.fragments.meFragment.suppliers.edges.map { edge in
+                                Supplier(id: edge.node.id, name: edge.node.name, billingAmount: edge.node.billingAmount, billingType: edge.node.billingType)
+                            }
+                        )
+                        promise(.success(me))
                     case .failure(let error):
                         promise(.failure(AppError.system(error.localizedDescription)))
                 }

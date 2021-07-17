@@ -11,12 +11,10 @@ import Firebase
 
 enum SettingCore {
     static let reducer = Reducer<State, Action, Environment>.combine(
-        Reducer { state, action, _ in
+        Reducer { _, action, _ in
             switch action {
             case .signOut:
-                state.isLoading = true
                 try? Auth.auth().signOut()
-                state.isLoading = false
                 return .none
             }
         }
@@ -28,9 +26,7 @@ extension SettingCore {
         case signOut
     }
 
-    struct State: Equatable {
-        var isLoading: Bool = false
-    }
+    struct State: Equatable {}
 
     struct Environment {
         let mainQueue: AnySchedulerOf<DispatchQueue>

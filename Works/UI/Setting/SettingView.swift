@@ -5,8 +5,8 @@
 //  Created by akiho on 2021/07/15.
 //
 
-import SwiftUI
 import ComposableArchitecture
+import SwiftUI
 
 struct SettingView: View {
     let store: Store<SettingCore.State, SettingCore.Action>
@@ -21,19 +21,15 @@ struct SettingView: View {
                         }
                         .padding(.vertical, 60)
                         .padding(.horizontal, 0)
-                    ) {}
+                    ) {
+                        Menu(text: "振込先") {}.frame(height: 40)
+                        Menu(text: "稼働状況") {}.frame(height: 40)
+                    }
                 }
-                .listStyle(GroupedListStyle())
+                .background(Color.white)
+                .listStyle(InsetGroupedListStyle())
                 .navigationBarTitle("設定", displayMode: .inline)
             }
-            .overlay(Group {
-                if viewStore.isLoading {
-                    HUD(isLoading: Binding(
-                        get: { viewStore.isLoading },
-                        set: { _ in }
-                    ))
-                }
-            }, alignment: .center)
         }
     }
 }

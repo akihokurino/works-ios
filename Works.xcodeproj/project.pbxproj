@@ -30,6 +30,12 @@
 		0242C22F269F0EB300F3D002 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0242C22E269F0EB300F3D002 /* GoogleService-Info.plist */; };
 		027005FF26A2FBCA004E68A1 /* ApolloAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 027005FE26A2FBCA004E68A1 /* ApolloAPI */; };
 		0270060126A310D1004E68A1 /* Me.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270060026A310D1004E68A1 /* Me.swift */; };
+		0270060526A318EE004E68A1 /* Supplier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270060426A318EE004E68A1 /* Supplier.swift */; };
+		0270060726A31A55004E68A1 /* SupplierListCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270060626A31A55004E68A1 /* SupplierListCore.swift */; };
+		0270060A26A31AB7004E68A1 /* SupplierListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270060926A31AB7004E68A1 /* SupplierListView.swift */; };
+		0270060C26A31C9D004E68A1 /* SupplierCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270060B26A31C9D004E68A1 /* SupplierCell.swift */; };
+		0270061026A33722004E68A1 /* RefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270060F26A33722004E68A1 /* RefreshControl.swift */; };
+		029A140626A33CD000ACC9FF /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029A140526A33CD000ACC9FF /* Menu.swift */; };
 		02B7019D269EEC4D00BA9937 /* WorksApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B7019C269EEC4D00BA9937 /* WorksApp.swift */; };
 		02B701A1269EEC4F00BA9937 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02B701A0269EEC4F00BA9937 /* Assets.xcassets */; };
 		02B701A4269EEC4F00BA9937 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02B701A3269EEC4F00BA9937 /* Preview Assets.xcassets */; };
@@ -71,6 +77,12 @@
 		0241DC7A26A2EB8900AFA313 /* GraphQLClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLClient.swift; sourceTree = "<group>"; };
 		0242C22E269F0EB300F3D002 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0270060026A310D1004E68A1 /* Me.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Me.swift; sourceTree = "<group>"; };
+		0270060426A318EE004E68A1 /* Supplier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Supplier.swift; sourceTree = "<group>"; };
+		0270060626A31A55004E68A1 /* SupplierListCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupplierListCore.swift; sourceTree = "<group>"; };
+		0270060926A31AB7004E68A1 /* SupplierListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupplierListView.swift; sourceTree = "<group>"; };
+		0270060B26A31C9D004E68A1 /* SupplierCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupplierCell.swift; sourceTree = "<group>"; };
+		0270060F26A33722004E68A1 /* RefreshControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshControl.swift; sourceTree = "<group>"; };
+		029A140526A33CD000ACC9FF /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		02B7019C269EEC4D00BA9937 /* WorksApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorksApp.swift; sourceTree = "<group>"; };
 		02B701A0269EEC4F00BA9937 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		02B701A3269EEC4F00BA9937 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -127,6 +139,8 @@
 				021FF95E269F38DA00FF55C1 /* TextFieldInput.swift */,
 				021FF960269F39CA00FF55C1 /* ActionButton.swift */,
 				0219580E269FCDD200AB4D22 /* Hud.swift */,
+				0270060F26A33722004E68A1 /* RefreshControl.swift */,
+				029A140526A33CD000ACC9FF /* Menu.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -137,6 +151,7 @@
 				021FF963269F45EF00FF55C1 /* PhoneNumber.swift */,
 				021FF968269F52FE00FF55C1 /* Error.swift */,
 				0270060026A310D1004E68A1 /* Me.swift */,
+				0270060426A318EE004E68A1 /* Supplier.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -167,6 +182,15 @@
 				0241DC7726A2E90800AFA313 /* API.swift */,
 			);
 			path = GraphQL;
+			sourceTree = "<group>";
+		};
+		0270060826A31AA3004E68A1 /* SupplierList */ = {
+			isa = PBXGroup;
+			children = (
+				0270060926A31AB7004E68A1 /* SupplierListView.swift */,
+				0270060B26A31C9D004E68A1 /* SupplierCell.swift */,
+			);
+			path = SupplierList;
 			sourceTree = "<group>";
 		};
 		02B70190269EEC4D00BA9937 = {
@@ -206,9 +230,10 @@
 		02B701AF269EEF7900BA9937 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				021FF95D269F38C500FF55C1 /* Component */,
+				0270060826A31AA3004E68A1 /* SupplierList */,
 				02195818269FEC0200AB4D22 /* Setting */,
 				021FF965269F4CBB00FF55C1 /* SignIn */,
-				021FF95D269F38C500FF55C1 /* Component */,
 				02B701B4269EF08B00BA9937 /* RootView.swift */,
 			);
 			path = UI;
@@ -220,6 +245,7 @@
 				02B701B6269EF0B300BA9937 /* RootCore.swift */,
 				021FF95B269F31A200FF55C1 /* SignInCore.swift */,
 				0219581B269FEC8000AB4D22 /* SettingCore.swift */,
+				0270060626A31A55004E68A1 /* SupplierListCore.swift */,
 			);
 			path = TCA;
 			sourceTree = "<group>";
@@ -312,21 +338,27 @@
 			files = (
 				02B701B5269EF08B00BA9937 /* RootView.swift in Sources */,
 				0241DC7826A2E90800AFA313 /* API.swift in Sources */,
+				0270060C26A31C9D004E68A1 /* SupplierCell.swift in Sources */,
 				021FF96C269F557600FF55C1 /* String.swift in Sources */,
 				021FF967269F4CF100FF55C1 /* PinCodeInputView.swift in Sources */,
 				0241DC7B26A2EB8900AFA313 /* GraphQLClient.swift in Sources */,
 				021FF96E269F557E00FF55C1 /* Int.swift in Sources */,
 				02B7019D269EEC4D00BA9937 /* WorksApp.swift in Sources */,
 				0219581A269FEC1700AB4D22 /* SettingView.swift in Sources */,
+				0270060726A31A55004E68A1 /* SupplierListCore.swift in Sources */,
 				0219580F269FCDD200AB4D22 /* Hud.swift in Sources */,
 				021FF95F269F38DA00FF55C1 /* TextFieldInput.swift in Sources */,
 				02195817269FE0A000AB4D22 /* LocalStore.swift in Sources */,
 				021FF95A269F2FB400FF55C1 /* SignInView.swift in Sources */,
+				029A140626A33CD000ACC9FF /* Menu.swift in Sources */,
 				02B701B7269EF0B300BA9937 /* RootCore.swift in Sources */,
+				0270061026A33722004E68A1 /* RefreshControl.swift in Sources */,
+				0270060A26A31AB7004E68A1 /* SupplierListView.swift in Sources */,
 				021FF95C269F31A200FF55C1 /* SignInCore.swift in Sources */,
 				0219581C269FEC8000AB4D22 /* SettingCore.swift in Sources */,
 				021FF961269F39CA00FF55C1 /* ActionButton.swift in Sources */,
 				021FF969269F52FE00FF55C1 /* Error.swift in Sources */,
+				0270060526A318EE004E68A1 /* Supplier.swift in Sources */,
 				0270060126A310D1004E68A1 /* Me.swift in Sources */,
 				021FF964269F45EF00FF55C1 /* PhoneNumber.swift in Sources */,
 			);
