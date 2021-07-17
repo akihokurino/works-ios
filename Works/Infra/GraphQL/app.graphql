@@ -1,0 +1,25 @@
+query GetMe {
+	me {
+		...MeFragment
+	}
+}
+
+mutation Authenticate {
+	authenticate {
+		...MeFragment
+	}
+}
+
+fragment MeFragment on Me {
+	id
+	suppliers {
+		edges {
+			node {
+				id
+				name
+				billingAmount
+				billingType
+			}
+		}
+	}
+}

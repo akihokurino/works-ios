@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		0219580F269FCDD200AB4D22 /* Hud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0219580E269FCDD200AB4D22 /* Hud.swift */; };
 		02195812269FCE6000AB4D22 /* ActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = 02195811269FCE6000AB4D22 /* ActivityIndicatorView */; };
-		02195814269FDA3C00AB4D22 /* Me.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02195813269FDA3B00AB4D22 /* Me.swift */; };
 		02195817269FE0A000AB4D22 /* LocalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02195816269FE0A000AB4D22 /* LocalStore.swift */; };
 		0219581A269FEC1700AB4D22 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02195819269FEC1700AB4D22 /* SettingView.swift */; };
 		0219581C269FEC8000AB4D22 /* SettingCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0219581B269FEC8000AB4D22 /* SettingCore.swift */; };
@@ -23,8 +22,14 @@
 		021FF969269F52FE00FF55C1 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FF968269F52FE00FF55C1 /* Error.swift */; };
 		021FF96C269F557600FF55C1 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FF96B269F557600FF55C1 /* String.swift */; };
 		021FF96E269F557E00FF55C1 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FF96D269F557E00FF55C1 /* Int.swift */; };
-		023FCEEE26A04DCD00EFF51A /* FirebaseToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023FCEED26A04DCD00EFF51A /* FirebaseToken.swift */; };
+		0241DC7426A2E60500AFA313 /* app.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 0241DC7326A2E60500AFA313 /* app.graphql */; };
+		0241DC7626A2E61E00AFA313 /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = 0241DC7526A2E61E00AFA313 /* schema.json */; };
+		0241DC7826A2E90800AFA313 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0241DC7726A2E90800AFA313 /* API.swift */; };
+		0241DC7B26A2EB8900AFA313 /* GraphQLClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0241DC7A26A2EB8900AFA313 /* GraphQLClient.swift */; };
+		0241DC7D26A2EE9500AFA313 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 0241DC7C26A2EE9500AFA313 /* Apollo */; };
 		0242C22F269F0EB300F3D002 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0242C22E269F0EB300F3D002 /* GoogleService-Info.plist */; };
+		027005FF26A2FBCA004E68A1 /* ApolloAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 027005FE26A2FBCA004E68A1 /* ApolloAPI */; };
+		0270060126A310D1004E68A1 /* Me.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270060026A310D1004E68A1 /* Me.swift */; };
 		02B7019D269EEC4D00BA9937 /* WorksApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B7019C269EEC4D00BA9937 /* WorksApp.swift */; };
 		02B701A1269EEC4F00BA9937 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02B701A0269EEC4F00BA9937 /* Assets.xcassets */; };
 		02B701A4269EEC4F00BA9937 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02B701A3269EEC4F00BA9937 /* Preview Assets.xcassets */; };
@@ -33,9 +38,21 @@
 		02B701B7269EF0B300BA9937 /* RootCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B701B6269EF0B300BA9937 /* RootCore.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		0241DC8B26A2F05400AFA313 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		0219580E269FCDD200AB4D22 /* Hud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hud.swift; sourceTree = "<group>"; };
-		02195813269FDA3B00AB4D22 /* Me.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Me.swift; sourceTree = "<group>"; };
 		02195816269FE0A000AB4D22 /* LocalStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStore.swift; sourceTree = "<group>"; };
 		02195819269FEC1700AB4D22 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		0219581B269FEC8000AB4D22 /* SettingCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCore.swift; sourceTree = "<group>"; };
@@ -48,8 +65,12 @@
 		021FF968269F52FE00FF55C1 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		021FF96B269F557600FF55C1 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		021FF96D269F557E00FF55C1 /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
-		023FCEED26A04DCD00EFF51A /* FirebaseToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseToken.swift; sourceTree = "<group>"; };
+		0241DC7326A2E60500AFA313 /* app.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = app.graphql; sourceTree = "<group>"; };
+		0241DC7526A2E61E00AFA313 /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
+		0241DC7726A2E90800AFA313 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		0241DC7A26A2EB8900AFA313 /* GraphQLClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLClient.swift; sourceTree = "<group>"; };
 		0242C22E269F0EB300F3D002 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		0270060026A310D1004E68A1 /* Me.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Me.swift; sourceTree = "<group>"; };
 		02B7019C269EEC4D00BA9937 /* WorksApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorksApp.swift; sourceTree = "<group>"; };
 		02B701A0269EEC4F00BA9937 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		02B701A3269EEC4F00BA9937 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -65,8 +86,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				02B701AE269EEF5500BA9937 /* ComposableArchitecture in Frameworks */,
+				0241DC7D26A2EE9500AFA313 /* Apollo in Frameworks */,
 				02195812269FCE6000AB4D22 /* ActivityIndicatorView in Frameworks */,
 				021FF958269F2F6200FF55C1 /* FirebaseAuth in Frameworks */,
+				027005FF26A2FBCA004E68A1 /* ApolloAPI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,8 +99,9 @@
 		02195815269FE08F00AB4D22 /* Infra */ = {
 			isa = PBXGroup;
 			children = (
+				0241DC7926A2E96F00AFA313 /* GraphQL */,
 				02195816269FE0A000AB4D22 /* LocalStore.swift */,
-				023FCEED26A04DCD00EFF51A /* FirebaseToken.swift */,
+				0241DC7A26A2EB8900AFA313 /* GraphQLClient.swift */,
 			);
 			path = Infra;
 			sourceTree = "<group>";
@@ -112,7 +136,7 @@
 			children = (
 				021FF963269F45EF00FF55C1 /* PhoneNumber.swift */,
 				021FF968269F52FE00FF55C1 /* Error.swift */,
-				02195813269FDA3B00AB4D22 /* Me.swift */,
+				0270060026A310D1004E68A1 /* Me.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -133,6 +157,16 @@
 				021FF96D269F557E00FF55C1 /* Int.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		0241DC7926A2E96F00AFA313 /* GraphQL */ = {
+			isa = PBXGroup;
+			children = (
+				0241DC7526A2E61E00AFA313 /* schema.json */,
+				0241DC7326A2E60500AFA313 /* app.graphql */,
+				0241DC7726A2E90800AFA313 /* API.swift */,
+			);
+			path = GraphQL;
 			sourceTree = "<group>";
 		};
 		02B70190269EEC4D00BA9937 = {
@@ -200,6 +234,7 @@
 				02B70195269EEC4D00BA9937 /* Sources */,
 				02B70196269EEC4D00BA9937 /* Frameworks */,
 				02B70197269EEC4D00BA9937 /* Resources */,
+				0241DC8B26A2F05400AFA313 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -210,6 +245,8 @@
 				02B701AD269EEF5500BA9937 /* ComposableArchitecture */,
 				021FF957269F2F6200FF55C1 /* FirebaseAuth */,
 				02195811269FCE6000AB4D22 /* ActivityIndicatorView */,
+				0241DC7C26A2EE9500AFA313 /* Apollo */,
+				027005FE26A2FBCA004E68A1 /* ApolloAPI */,
 			);
 			productName = Works;
 			productReference = 02E558DB269F21A600A8AE55 /* Works.app */;
@@ -242,6 +279,7 @@
 				02B701AC269EEF5500BA9937 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
 				021FF955269F2F2700FF55C1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				02195810269FCE6000AB4D22 /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */,
+				023FCEEF26A0786B00EFF51A /* XCRemoteSwiftPackageReference "apollo-ios" */,
 			);
 			productRefGroup = 02B70190269EEC4D00BA9937;
 			projectDirPath = "";
@@ -257,6 +295,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0241DC7426A2E60500AFA313 /* app.graphql in Resources */,
+				0241DC7626A2E61E00AFA313 /* schema.json in Resources */,
 				02B701A4269EEC4F00BA9937 /* Preview Assets.xcassets in Resources */,
 				02B701A1269EEC4F00BA9937 /* Assets.xcassets in Resources */,
 				0242C22F269F0EB300F3D002 /* GoogleService-Info.plist in Resources */,
@@ -271,12 +311,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				02B701B5269EF08B00BA9937 /* RootView.swift in Sources */,
+				0241DC7826A2E90800AFA313 /* API.swift in Sources */,
 				021FF96C269F557600FF55C1 /* String.swift in Sources */,
 				021FF967269F4CF100FF55C1 /* PinCodeInputView.swift in Sources */,
+				0241DC7B26A2EB8900AFA313 /* GraphQLClient.swift in Sources */,
 				021FF96E269F557E00FF55C1 /* Int.swift in Sources */,
 				02B7019D269EEC4D00BA9937 /* WorksApp.swift in Sources */,
-				02195814269FDA3C00AB4D22 /* Me.swift in Sources */,
-				023FCEEE26A04DCD00EFF51A /* FirebaseToken.swift in Sources */,
 				0219581A269FEC1700AB4D22 /* SettingView.swift in Sources */,
 				0219580F269FCDD200AB4D22 /* Hud.swift in Sources */,
 				021FF95F269F38DA00FF55C1 /* TextFieldInput.swift in Sources */,
@@ -287,6 +327,7 @@
 				0219581C269FEC8000AB4D22 /* SettingCore.swift in Sources */,
 				021FF961269F39CA00FF55C1 /* ActionButton.swift in Sources */,
 				021FF969269F52FE00FF55C1 /* Error.swift in Sources */,
+				0270060126A310D1004E68A1 /* Me.swift in Sources */,
 				021FF964269F45EF00FF55C1 /* PhoneNumber.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -494,6 +535,14 @@
 				minimumVersion = 8.3.1;
 			};
 		};
+		023FCEEF26A0786B00EFF51A /* XCRemoteSwiftPackageReference "apollo-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apollographql/apollo-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.45.0;
+			};
+		};
 		02B701AC269EEF5500BA9937 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture.git";
@@ -514,6 +563,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 021FF955269F2F2700FF55C1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
+		};
+		0241DC7C26A2EE9500AFA313 /* Apollo */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 023FCEEF26A0786B00EFF51A /* XCRemoteSwiftPackageReference "apollo-ios" */;
+			productName = Apollo;
+		};
+		027005FE26A2FBCA004E68A1 /* ApolloAPI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 023FCEEF26A0786B00EFF51A /* XCRemoteSwiftPackageReference "apollo-ios" */;
+			productName = ApolloAPI;
 		};
 		02B701AD269EEF5500BA9937 /* ComposableArchitecture */ = {
 			isa = XCSwiftPackageProductDependency;

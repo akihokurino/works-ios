@@ -5,9 +5,10 @@
 //  Created by akiho on 2021/07/14.
 //
 
+import Apollo
 import Combine
 import ComposableArchitecture
-import FirebaseAuth
+import Firebase
 
 enum SignInCore {
     static let reducer = Reducer<State, Action, Environment>.combine(
@@ -19,14 +20,14 @@ enum SignInCore {
                 return .none
             case .signIn(let phoneNumber):
                 state.isLoading = true
-                
+
                 let verify = Future<String, AppError> { promise in
                     PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber.toE164(), uiDelegate: nil) { verificationId, error in
                         if let error = error {
                             promise(.failure(.system(defaultErrorMsg)))
                             return
                         }
-                        
+
                         guard let verificationId = verificationId else {
                             promise(.failure(.system(defaultErrorMsg)))
                             return
@@ -51,28 +52,28 @@ enum SignInCore {
                 LocalStore.setAauthVerificationId(val: "")
                 state.shouldShowPinCodeInput = false
                 state.isLoading = true
-                
+
                 let credential = PhoneAuthProvider.provider().credential(
                     withVerificationID: verificationId,
-                    verificationCode: pinCode)
-                
-                let verify = Future<Me, AppError> { promise in
-                    Auth.auth().signIn(with: credential) { (authResult, error) in
+                    verificationCode: pinCode
+                )
+
+                let verify = Future<Void, AppError> { promise in
+                    Auth.auth().signIn(with: credential) { _, error in
                         if let error = error {
                             promise(.failure(.system(defaultErrorMsg)))
                             return
                         }
-                        
-                        guard let user = authResult?.user else {
-                            promise(.failure(.system(defaultErrorMsg)))
-                            return
-                        }
-                        
-                        promise(.success(Me(id: user.uid)))
+
+                        promise(.success(()))
                     }
                 }
-                
-                return verify.catchToEffect().map(SignInCore.Action.verified)
+
+                return verify
+                    .flatMap { _ in GraphQLClient.shared.caller() }
+                    .flatMap { caller in caller.authenticate() }
+                    .catchToEffect()
+                    .map(SignInCore.Action.verified)
             case .verified(.success(let me)):
                 state.isLoading = false
                 return .none

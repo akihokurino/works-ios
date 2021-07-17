@@ -7,7 +7,7 @@
 
 import Combine
 import ComposableArchitecture
-import FirebaseAuth
+import Firebase
 
 enum SettingCore {
     static let reducer = Reducer<State, Action, Environment>.combine(

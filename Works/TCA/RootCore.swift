@@ -7,7 +7,7 @@
 
 import Combine
 import ComposableArchitecture
-import FirebaseAuth
+import Firebase
 
 enum RootCore {
     static let reducer = Reducer<State, Action, Environment>.combine(
@@ -35,14 +35,16 @@ enum RootCore {
             switch action {
             case .onAppear:
                 if let me = Auth.auth().currentUser {
-                    state.authState = .alreadyLogin
-                    state.settingState = SettingCore.State()
+                    return GraphQLClient.shared.caller()
+                        .flatMap { caller in caller.me() }
+                        .catchToEffect()
+                        .map(RootCore.Action.me)
                 } else {
+                    state.me = nil
                     state.authState = .shouldLogin
                     state.signInState = SignInCore.State()
+                    return .none
                 }
-
-                return .none
             case .signIn(let action):
                 switch action {
                 case .verified(.success(let me)):
@@ -61,6 +63,13 @@ enum RootCore {
                     state.signInState = SignInCore.State()
                 }
                 return .none
+            case .me(.success(let me)):
+                state.me = me
+                state.authState = .alreadyLogin
+                state.settingState = SettingCore.State()
+                return .none
+            case .me(.failure(_)):
+                return .none
             }
         }
     )
@@ -71,6 +80,7 @@ extension RootCore {
         case onAppear
         case signIn(SignInCore.Action)
         case setting(SettingCore.Action)
+        case me(Result<Me, AppError>)
     }
 
     struct State: Equatable {
