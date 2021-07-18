@@ -15,6 +15,42 @@ struct SupplierListView: View {
         WithViewStore(store) { viewStore in
             NavigationView {
                 ScrollView {
+                    Group {
+                        NavigationLink(
+                            destination: IfLetStore(
+                                store.scope(
+                                    state: { $0.crateState },
+                                    action: SupplierListCore.Action.propagateCreate
+                                )
+                            ) {
+                                SupplierCreateView(store: $0)
+                            },
+                            isActive: Binding(
+                                get: { viewStore.crateState != nil },
+                                set: { _ in }
+                            )
+                        ) {
+                            EmptyView()
+                        }
+
+                        NavigationLink(
+                            destination: IfLetStore(
+                                store.scope(
+                                    state: { $0.detailState },
+                                    action: SupplierListCore.Action.propagateDetail
+                                )
+                            ) {
+                                SupplierDetailView(store: $0)
+                            },
+                            isActive: Binding(
+                                get: { viewStore.detailState != nil },
+                                set: { _ in }
+                            )
+                        ) {
+                            EmptyView()
+                        }
+                    }
+
                     RefreshControl(isRefreshing: Binding(
                         get: { viewStore.isRefreshing },
                         set: { _ in }
@@ -35,7 +71,9 @@ struct SupplierListView: View {
 
                     VStack(spacing: 15) {
                         ForEach(viewStore.me.suppliers, id: \.self) { supplier in
-                            SupplierCell(supplier: supplier)
+                            SupplierCell(supplier: supplier) {
+                                viewStore.send(.presentDetailView(supplier))
+                            }
                         }
                     }
                     .padding()
@@ -43,7 +81,9 @@ struct SupplierListView: View {
                 .coordinateSpace(name: "RefreshControl")
                 .navigationBarTitle("取引先", displayMode: .inline)
                 .navigationBarItems(
-                    trailing: Button(action: {}) {
+                    trailing: Button(action: {
+                        viewStore.send(.presentCreateView)
+                    }) {
                         Image(systemName: "plus")
                             .resizable()
                             .frame(width: 20, height: 20)

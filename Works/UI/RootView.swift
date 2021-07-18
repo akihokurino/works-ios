@@ -19,7 +19,7 @@ struct RootView: View {
                         IfLetStore(
                             store.scope(
                                 state: { $0.supplierListState },
-                                action: RootCore.Action.supplierList
+                                action: RootCore.Action.propagateSupplierList
                             ),
                             then: SupplierListView.init(store:)
                         )
@@ -32,7 +32,7 @@ struct RootView: View {
                         IfLetStore(
                             store.scope(
                                 state: { $0.settingState },
-                                action: RootCore.Action.setting
+                                action: RootCore.Action.propagateSetting
                             ),
                             then: SettingView.init(store:)
                         )
@@ -47,7 +47,7 @@ struct RootView: View {
                     IfLetStore(
                         store.scope(
                             state: { $0.signInState },
-                            action: RootCore.Action.signIn
+                            action: RootCore.Action.propagateSignIn
                         ),
                         then: SignInView.init(store:)
                     )

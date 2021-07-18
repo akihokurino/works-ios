@@ -94,7 +94,12 @@ struct GraphQLCaller {
                         let me = Me(
                             id: data.me.fragments.meFragment.id,
                             suppliers: data.me.fragments.meFragment.suppliers.edges.map { edge in
-                                Supplier(id: edge.node.id, name: edge.node.name, billingAmount: edge.node.billingAmount, billingType: edge.node.billingType)
+                                Supplier(
+                                    id: edge.node.fragments.supplierFragment.id,
+                                    name: edge.node.fragments.supplierFragment.name,
+                                    billingAmount: edge.node.fragments.supplierFragment.billingAmount,
+                                    billingType: edge.node.fragments.supplierFragment.billingType
+                                )
                             }
                         )
                         promise(.success(me))
@@ -118,10 +123,76 @@ struct GraphQLCaller {
                         let me = Me(
                             id: data.authenticate.fragments.meFragment.id,
                             suppliers: data.authenticate.fragments.meFragment.suppliers.edges.map { edge in
-                                Supplier(id: edge.node.id, name: edge.node.name, billingAmount: edge.node.billingAmount, billingType: edge.node.billingType)
+                                Supplier(
+                                    id: edge.node.fragments.supplierFragment.id,
+                                    name: edge.node.fragments.supplierFragment.name,
+                                    billingAmount: edge.node.fragments.supplierFragment.billingAmount,
+                                    billingType: edge.node.fragments.supplierFragment.billingType
+                                )
                             }
                         )
                         promise(.success(me))
+                    case .failure(let error):
+                        promise(.failure(AppError.system(error.localizedDescription)))
+                }
+            }
+        }
+    }
+
+    func createSupplier(name: String, billingAmount: Int, billingType: GraphQL.SupplierBillingType) -> Future<Supplier, AppError> {
+        return Future<Supplier, AppError> { promise in
+            cli.perform(mutation: GraphQL.CreateSupplierMutation(name: name, billingAmount: billingAmount, billingType: billingType)) { result in
+                switch result {
+                    case .success(let graphQLResult):
+                        guard let data = graphQLResult.data else {
+                            promise(.failure(AppError.system(defaultErrorMsg)))
+                            return
+                        }
+
+                        let supplier = Supplier(
+                            id: data.createSupplier.fragments.supplierFragment.id,
+                            name: data.createSupplier.fragments.supplierFragment.name,
+                            billingAmount: data.createSupplier.fragments.supplierFragment.billingAmount,
+                            billingType: data.createSupplier.fragments.supplierFragment.billingType
+                        )
+                        promise(.success(supplier))
+                    case .failure(let error):
+                        promise(.failure(AppError.system(error.localizedDescription)))
+                }
+            }
+        }
+    }
+
+    func updateSupplier(id: String, name: String, billingAmount: Int) -> Future<Supplier, AppError> {
+        return Future<Supplier, AppError> { promise in
+            cli.perform(mutation: GraphQL.UpdateSupplierMutation(id: id, name: name, billingAmount: billingAmount)) { result in
+                switch result {
+                    case .success(let graphQLResult):
+                        guard let data = graphQLResult.data else {
+                            promise(.failure(AppError.system(defaultErrorMsg)))
+                            return
+                        }
+
+                        let supplier = Supplier(
+                            id: data.updateSupplier.fragments.supplierFragment.id,
+                            name: data.updateSupplier.fragments.supplierFragment.name,
+                            billingAmount: data.updateSupplier.fragments.supplierFragment.billingAmount,
+                            billingType: data.updateSupplier.fragments.supplierFragment.billingType
+                        )
+                        promise(.success(supplier))
+                    case .failure(let error):
+                        promise(.failure(AppError.system(error.localizedDescription)))
+                }
+            }
+        }
+    }
+
+    func deleteSupplier(id: String) -> Future<Void, AppError> {
+        return Future<Void, AppError> { promise in
+            cli.perform(mutation: GraphQL.DeleteSupplierMutation(id: id)) { result in
+                switch result {
+                    case .success(_):
+                        promise(.success(()))
                     case .failure(let error):
                         promise(.failure(AppError.system(error.localizedDescription)))
                 }

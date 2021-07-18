@@ -18,7 +18,7 @@ struct SignInView: View {
             NavigationView {
                 VStack {
                     TextFieldInput(value: $phoneNumber, label: "電話番号", keyboardType: .decimalPad)
-                    Spacer().frame(height: 20)
+                    Spacer().frame(height: 40)
                     ActionButton(text: "ログイン", background: .primary) {
                         viewStore.send(.signIn(PhoneNumber(val: phoneNumber)))
                     }

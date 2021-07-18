@@ -63,6 +63,7 @@ public enum GraphQL {
     public var queryDocument: String {
       var document: String = operationDefinition
       document.append("\n" + MeFragment.fragmentDefinition)
+      document.append("\n" + SupplierFragment.fragmentDefinition)
       return document
     }
 
@@ -168,6 +169,7 @@ public enum GraphQL {
     public var queryDocument: String {
       var document: String = operationDefinition
       document.append("\n" + MeFragment.fragmentDefinition)
+      document.append("\n" + SupplierFragment.fragmentDefinition)
       return document
     }
 
@@ -256,6 +258,299 @@ public enum GraphQL {
     }
   }
 
+  public final class CreateSupplierMutation: GraphQLMutation {
+    /// The raw GraphQL definition of this operation.
+    public let operationDefinition: String =
+      """
+      mutation CreateSupplier($name: String!, $billingAmount: Int!, $billingType: SupplierBillingType!) {
+        createSupplier(
+          input: {name: $name, billingAmount: $billingAmount, billingType: $billingType}
+        ) {
+          __typename
+          ...SupplierFragment
+        }
+      }
+      """
+
+    public let operationName: String = "CreateSupplier"
+
+    public var queryDocument: String {
+      var document: String = operationDefinition
+      document.append("\n" + SupplierFragment.fragmentDefinition)
+      return document
+    }
+
+    public var name: String
+    public var billingAmount: Int
+    public var billingType: SupplierBillingType
+
+    public init(name: String, billingAmount: Int, billingType: SupplierBillingType) {
+      self.name = name
+      self.billingAmount = billingAmount
+      self.billingType = billingType
+    }
+
+    public var variables: GraphQLMap? {
+      return ["name": name, "billingAmount": billingAmount, "billingType": billingType]
+    }
+
+    public struct Data: GraphQLSelectionSet {
+      public static let possibleTypes: [String] = ["Mutation"]
+
+      public static var selections: [GraphQLSelection] {
+        return [
+          GraphQLField("createSupplier", arguments: ["input": ["name": GraphQLVariable("name"), "billingAmount": GraphQLVariable("billingAmount"), "billingType": GraphQLVariable("billingType")]], type: .nonNull(.object(CreateSupplier.selections))),
+        ]
+      }
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public init(createSupplier: CreateSupplier) {
+        self.init(unsafeResultMap: ["__typename": "Mutation", "createSupplier": createSupplier.resultMap])
+      }
+
+      public var createSupplier: CreateSupplier {
+        get {
+          return CreateSupplier(unsafeResultMap: resultMap["createSupplier"]! as! ResultMap)
+        }
+        set {
+          resultMap.updateValue(newValue.resultMap, forKey: "createSupplier")
+        }
+      }
+
+      public struct CreateSupplier: GraphQLSelectionSet {
+        public static let possibleTypes: [String] = ["Supplier"]
+
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLFragmentSpread(SupplierFragment.self),
+          ]
+        }
+
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
+        }
+
+        public init(id: GraphQLID, name: String, billingAmount: Int, billingType: SupplierBillingType) {
+          self.init(unsafeResultMap: ["__typename": "Supplier", "id": id, "name": name, "billingAmount": billingAmount, "billingType": billingType])
+        }
+
+        public var __typename: String {
+          get {
+            return resultMap["__typename"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "__typename")
+          }
+        }
+
+        public var fragments: Fragments {
+          get {
+            return Fragments(unsafeResultMap: resultMap)
+          }
+          set {
+            resultMap += newValue.resultMap
+          }
+        }
+
+        public struct Fragments {
+          public private(set) var resultMap: ResultMap
+
+          public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+          }
+
+          public var supplierFragment: SupplierFragment {
+            get {
+              return SupplierFragment(unsafeResultMap: resultMap)
+            }
+            set {
+              resultMap += newValue.resultMap
+            }
+          }
+        }
+      }
+    }
+  }
+
+  public final class UpdateSupplierMutation: GraphQLMutation {
+    /// The raw GraphQL definition of this operation.
+    public let operationDefinition: String =
+      """
+      mutation UpdateSupplier($id: String!, $name: String!, $billingAmount: Int!) {
+        updateSupplier(input: {id: $id, name: $name, billingAmount: $billingAmount}) {
+          __typename
+          ...SupplierFragment
+        }
+      }
+      """
+
+    public let operationName: String = "UpdateSupplier"
+
+    public var queryDocument: String {
+      var document: String = operationDefinition
+      document.append("\n" + SupplierFragment.fragmentDefinition)
+      return document
+    }
+
+    public var id: String
+    public var name: String
+    public var billingAmount: Int
+
+    public init(id: String, name: String, billingAmount: Int) {
+      self.id = id
+      self.name = name
+      self.billingAmount = billingAmount
+    }
+
+    public var variables: GraphQLMap? {
+      return ["id": id, "name": name, "billingAmount": billingAmount]
+    }
+
+    public struct Data: GraphQLSelectionSet {
+      public static let possibleTypes: [String] = ["Mutation"]
+
+      public static var selections: [GraphQLSelection] {
+        return [
+          GraphQLField("updateSupplier", arguments: ["input": ["id": GraphQLVariable("id"), "name": GraphQLVariable("name"), "billingAmount": GraphQLVariable("billingAmount")]], type: .nonNull(.object(UpdateSupplier.selections))),
+        ]
+      }
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public init(updateSupplier: UpdateSupplier) {
+        self.init(unsafeResultMap: ["__typename": "Mutation", "updateSupplier": updateSupplier.resultMap])
+      }
+
+      public var updateSupplier: UpdateSupplier {
+        get {
+          return UpdateSupplier(unsafeResultMap: resultMap["updateSupplier"]! as! ResultMap)
+        }
+        set {
+          resultMap.updateValue(newValue.resultMap, forKey: "updateSupplier")
+        }
+      }
+
+      public struct UpdateSupplier: GraphQLSelectionSet {
+        public static let possibleTypes: [String] = ["Supplier"]
+
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLFragmentSpread(SupplierFragment.self),
+          ]
+        }
+
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
+        }
+
+        public init(id: GraphQLID, name: String, billingAmount: Int, billingType: SupplierBillingType) {
+          self.init(unsafeResultMap: ["__typename": "Supplier", "id": id, "name": name, "billingAmount": billingAmount, "billingType": billingType])
+        }
+
+        public var __typename: String {
+          get {
+            return resultMap["__typename"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "__typename")
+          }
+        }
+
+        public var fragments: Fragments {
+          get {
+            return Fragments(unsafeResultMap: resultMap)
+          }
+          set {
+            resultMap += newValue.resultMap
+          }
+        }
+
+        public struct Fragments {
+          public private(set) var resultMap: ResultMap
+
+          public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+          }
+
+          public var supplierFragment: SupplierFragment {
+            get {
+              return SupplierFragment(unsafeResultMap: resultMap)
+            }
+            set {
+              resultMap += newValue.resultMap
+            }
+          }
+        }
+      }
+    }
+  }
+
+  public final class DeleteSupplierMutation: GraphQLMutation {
+    /// The raw GraphQL definition of this operation.
+    public let operationDefinition: String =
+      """
+      mutation DeleteSupplier($id: String!) {
+        deleteSupplier(input: {id: $id})
+      }
+      """
+
+    public let operationName: String = "DeleteSupplier"
+
+    public var id: String
+
+    public init(id: String) {
+      self.id = id
+    }
+
+    public var variables: GraphQLMap? {
+      return ["id": id]
+    }
+
+    public struct Data: GraphQLSelectionSet {
+      public static let possibleTypes: [String] = ["Mutation"]
+
+      public static var selections: [GraphQLSelection] {
+        return [
+          GraphQLField("deleteSupplier", arguments: ["input": ["id": GraphQLVariable("id")]], type: .nonNull(.scalar(Bool.self))),
+        ]
+      }
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public init(deleteSupplier: Bool) {
+        self.init(unsafeResultMap: ["__typename": "Mutation", "deleteSupplier": deleteSupplier])
+      }
+
+      public var deleteSupplier: Bool {
+        get {
+          return resultMap["deleteSupplier"]! as! Bool
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "deleteSupplier")
+        }
+      }
+    }
+  }
+
   public struct MeFragment: GraphQLFragment {
     /// The raw GraphQL definition of this fragment.
     public static let fragmentDefinition: String =
@@ -269,10 +564,7 @@ public enum GraphQL {
             __typename
             node {
               __typename
-              id
-              name
-              billingAmount
-              billingType
+              ...SupplierFragment
             }
           }
         }
@@ -408,10 +700,7 @@ public enum GraphQL {
           public static var selections: [GraphQLSelection] {
             return [
               GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-              GraphQLField("name", type: .nonNull(.scalar(String.self))),
-              GraphQLField("billingAmount", type: .nonNull(.scalar(Int.self))),
-              GraphQLField("billingType", type: .nonNull(.scalar(SupplierBillingType.self))),
+              GraphQLFragmentSpread(SupplierFragment.self),
             ]
           }
 
@@ -434,42 +723,113 @@ public enum GraphQL {
             }
           }
 
-          public var id: GraphQLID {
+          public var fragments: Fragments {
             get {
-              return resultMap["id"]! as! GraphQLID
+              return Fragments(unsafeResultMap: resultMap)
             }
             set {
-              resultMap.updateValue(newValue, forKey: "id")
+              resultMap += newValue.resultMap
             }
           }
 
-          public var name: String {
-            get {
-              return resultMap["name"]! as! String
-            }
-            set {
-              resultMap.updateValue(newValue, forKey: "name")
-            }
-          }
+          public struct Fragments {
+            public private(set) var resultMap: ResultMap
 
-          public var billingAmount: Int {
-            get {
-              return resultMap["billingAmount"]! as! Int
+            public init(unsafeResultMap: ResultMap) {
+              self.resultMap = unsafeResultMap
             }
-            set {
-              resultMap.updateValue(newValue, forKey: "billingAmount")
-            }
-          }
 
-          public var billingType: SupplierBillingType {
-            get {
-              return resultMap["billingType"]! as! SupplierBillingType
-            }
-            set {
-              resultMap.updateValue(newValue, forKey: "billingType")
+            public var supplierFragment: SupplierFragment {
+              get {
+                return SupplierFragment(unsafeResultMap: resultMap)
+              }
+              set {
+                resultMap += newValue.resultMap
+              }
             }
           }
         }
+      }
+    }
+  }
+
+  public struct SupplierFragment: GraphQLFragment {
+    /// The raw GraphQL definition of this fragment.
+    public static let fragmentDefinition: String =
+      """
+      fragment SupplierFragment on Supplier {
+        __typename
+        id
+        name
+        billingAmount
+        billingType
+      }
+      """
+
+    public static let possibleTypes: [String] = ["Supplier"]
+
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
+        GraphQLField("name", type: .nonNull(.scalar(String.self))),
+        GraphQLField("billingAmount", type: .nonNull(.scalar(Int.self))),
+        GraphQLField("billingType", type: .nonNull(.scalar(SupplierBillingType.self))),
+      ]
+    }
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(id: GraphQLID, name: String, billingAmount: Int, billingType: SupplierBillingType) {
+      self.init(unsafeResultMap: ["__typename": "Supplier", "id": id, "name": name, "billingAmount": billingAmount, "billingType": billingType])
+    }
+
+    public var __typename: String {
+      get {
+        return resultMap["__typename"]! as! String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "__typename")
+      }
+    }
+
+    public var id: GraphQLID {
+      get {
+        return resultMap["id"]! as! GraphQLID
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "id")
+      }
+    }
+
+    public var name: String {
+      get {
+        return resultMap["name"]! as! String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "name")
+      }
+    }
+
+    public var billingAmount: Int {
+      get {
+        return resultMap["billingAmount"]! as! Int
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "billingAmount")
+      }
+    }
+
+    public var billingType: SupplierBillingType {
+      get {
+        return resultMap["billingType"]! as! SupplierBillingType
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "billingType")
       }
     }
   }

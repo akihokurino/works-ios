@@ -13,7 +13,7 @@ enum RootCore {
     static let reducer = Reducer<State, Action, Environment>.combine(
         SignInCore.reducer.optional().pullback(
             state: \RootCore.State.signInState,
-            action: /RootCore.Action.signIn,
+            action: /RootCore.Action.propagateSignIn,
             environment: { _environment in
                 SignInCore.Environment(
                     mainQueue: _environment.mainQueue,
@@ -23,7 +23,7 @@ enum RootCore {
         ),
         SupplierListCore.reducer.optional().pullback(
             state: \RootCore.State.supplierListState,
-            action: /RootCore.Action.supplierList,
+            action: /RootCore.Action.propagateSupplierList,
             environment: { _environment in
                 SupplierListCore.Environment(
                     mainQueue: _environment.mainQueue,
@@ -33,7 +33,7 @@ enum RootCore {
         ),
         SettingCore.reducer.optional().pullback(
             state: \RootCore.State.settingState,
-            action: /RootCore.Action.setting,
+            action: /RootCore.Action.propagateSetting,
             environment: { _environment in
                 SettingCore.Environment(
                     mainQueue: _environment.mainQueue,
@@ -54,34 +54,35 @@ enum RootCore {
                     state.setSignOutState()
                     return .none
                 }
-            case .signIn(let action):
-                switch action {
-                case .verified(.success(let me)):
-                    state.setSignInState(me: me)
-                default:
-                    break
-                }
-                return .none
-            case .supplierList(let action):
-                switch action {
-                case .refreshed(.success(let me)):
-                    state.me = me
-                default:
-                    break
-                }
-                return .none
-            case .setting(let action):
-                switch action {
-                case .signOut:
-                    state.setSignOutState()
-                }
-                return .none
             case .me(.success(let me)):
                 state.isLoading = false
                 state.setSignInState(me: me)
                 return .none
             case .me(.failure(_)):
                 return .none
+
+            case .propagateSignIn(let action):
+                switch action {
+                case .verified(.success(let me)):
+                    state.setSignInState(me: me)
+                    return .none
+                default:
+                    return .none
+                }
+            case .propagateSupplierList(let action):
+                switch action {
+                case .refreshed(.success(let me)):
+                    state.me = me
+                    return .none
+                default:
+                    return .none
+                }
+            case .propagateSetting(let action):
+                switch action {
+                case .signOut:
+                    state.setSignOutState()
+                    return .none
+                }
             }
         }
     )
@@ -90,16 +91,18 @@ enum RootCore {
 extension RootCore {
     enum Action: Equatable {
         case onAppear
-        case signIn(SignInCore.Action)
-        case supplierList(SupplierListCore.Action)
-        case setting(SettingCore.Action)
         case me(Result<Me, AppError>)
+
+        case propagateSignIn(SignInCore.Action)
+        case propagateSupplierList(SupplierListCore.Action)
+        case propagateSetting(SettingCore.Action)
     }
 
     struct State: Equatable {
         var isLoading: Bool = false
         var me: Me?
         var authState: AuthState = .unknown
+
         var signInState: SignInCore.State?
         var supplierListState: SupplierListCore.State?
         var settingState: SettingCore.State?

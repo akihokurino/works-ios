@@ -10,16 +10,48 @@ mutation Authenticate {
 	}
 }
 
+mutation CreateSupplier($name: String!, $billingAmount: Int!, $billingType: SupplierBillingType!) {
+	createSupplier(input: {
+		name: $name,
+		billingAmount: $billingAmount,
+		billingType: $billingType
+	}) {
+		...SupplierFragment
+	}
+}
+
+mutation UpdateSupplier($id: String!, $name: String!, $billingAmount: Int!) {
+	updateSupplier(input: {
+		id: $id,
+		name: $name,
+		billingAmount: $billingAmount
+	}) {
+		...SupplierFragment
+	}
+}
+
+mutation DeleteSupplier($id: String!) {
+	deleteSupplier(input: {
+		id: $id
+	})
+}
+
+
 fragment MeFragment on Me {
 	id
 	suppliers {
 		edges {
 			node {
-				id
-				name
-				billingAmount
-				billingType
+				...SupplierFragment
 			}
 		}
 	}
 }
+
+fragment SupplierFragment on Supplier {
+	id
+	name
+	billingAmount
+	billingType
+}
+
