@@ -1,10 +1,3 @@
-//
-//  Reducer+ReplaceNilState.swift
-//  Works
-//
-//  Created by akiho on 2021/07/19.
-//
-
 import ComposableArchitecture
 
 extension Reducer {

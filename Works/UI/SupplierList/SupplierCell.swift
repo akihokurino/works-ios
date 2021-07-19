@@ -1,10 +1,3 @@
-//
-//  SupplierCell.swift
-//  Works
-//
-//  Created by akiho on 2021/07/17.
-//
-
 import SwiftUI
 
 struct SupplierCell: View {

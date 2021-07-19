@@ -1,10 +1,3 @@
-//
-//  SupplierDetailCore.swift
-//  Works
-//
-//  Created by akiho on 2021/07/18.
-//
-
 import Combine
 import ComposableArchitecture
 import Firebase

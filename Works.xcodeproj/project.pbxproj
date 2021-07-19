@@ -356,6 +356,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ja,
 			);
 			mainGroup = 02B70190269EEC4D00BA9937;
 			packageReferences = (

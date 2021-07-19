@@ -1,10 +1,3 @@
-//
-//  SettingView.swift
-//  Works
-//
-//  Created by akiho on 2021/07/15.
-//
-
 import ComposableArchitecture
 import SwiftUI
 

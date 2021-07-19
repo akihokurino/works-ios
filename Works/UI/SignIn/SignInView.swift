@@ -1,10 +1,3 @@
-//
-//  SignInView.swift
-//  Works
-//
-//  Created by akiho on 2021/07/14.
-//
-
 import ComposableArchitecture
 import SwiftUI
 

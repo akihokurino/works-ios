@@ -1,10 +1,3 @@
-//
-//  GraphQLClient.swift
-//  Works
-//
-//  Created by akiho on 2021/07/17.
-//
-
 import Apollo
 import Combine
 import Firebase

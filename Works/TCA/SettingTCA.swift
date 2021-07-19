@@ -1,10 +1,3 @@
-//
-//  SettingCore.swift
-//  Works
-//
-//  Created by akiho on 2021/07/15.
-//
-
 import Combine
 import ComposableArchitecture
 import Firebase

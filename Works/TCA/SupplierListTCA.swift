@@ -1,10 +1,3 @@
-//
-//  SupplierListCore.swift
-//  Works
-//
-//  Created by akiho on 2021/07/17.
-//
-
 import Combine
 import ComposableArchitecture
 import Firebase
@@ -46,15 +39,15 @@ enum SupplierListTCA {
             }
         case .propagateDetail(let action):
             switch action {
+            case .back:
+                state.detailState = nil
+                return .none
             case .deleted(.success(_)):
                 state.detailState = nil
                 return GraphQLClient.shared.caller()
                     .flatMap { caller in caller.me() }
                     .catchToEffect()
                     .map(SupplierListTCA.Action.refreshed)
-            case .back:
-                state.detailState = nil
-                return .none
             default:
                 return .none
             }
@@ -100,7 +93,7 @@ extension SupplierListTCA {
     struct State: Equatable {
         var isRefreshing: Bool = false
         var me: Me
-        
+
         var crateState: SupplierCreateTCA.State?
         var detailState: SupplierDetailTCA.State?
     }

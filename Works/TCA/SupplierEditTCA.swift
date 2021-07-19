@@ -1,10 +1,3 @@
-//
-//  SupplierEditCore.swift
-//  Works
-//
-//  Created by akiho on 2021/07/18.
-//
-
 import Combine
 import ComposableArchitecture
 import Firebase
@@ -23,7 +16,9 @@ extension SupplierEditTCA {
         case back
     }
 
-    struct State: Equatable {}
+    struct State: Equatable {
+        var isLoading: Bool = false
+    }
 
     struct Environment {
         let mainQueue: AnySchedulerOf<DispatchQueue>

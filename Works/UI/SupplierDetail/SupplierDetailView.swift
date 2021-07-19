@@ -1,10 +1,3 @@
-//
-//  SupplierDetailView.swift
-//  Works
-//
-//  Created by akiho on 2021/07/18.
-//
-
 import ComposableArchitecture
 import SwiftUI
 
@@ -21,13 +14,13 @@ struct SupplierDetailView: View {
                 }
                 .padding()
                 .navigationBarTitle(viewStore.supplier.name, displayMode: .inline)
-                .navigationBarBackButtonHidden(true)
+//                .navigationBarBackButtonHidden(true)
                 .navigationBarItems(
-                    leading: Button(action: {
-                        viewStore.send(.back)
-                    }) {
-                        Image(systemName: "chevron.backward").frame(width: 25, height: 25, alignment: .center)
-                    },
+//                    leading: Button(action: {
+//                        viewStore.send(.back)
+//                    }) {
+//                        Image(systemName: "chevron.backward").frame(width: 25, height: 25, alignment: .center)
+//                    },
                     trailing: Button(action: {
                         self.isShowActionSheet = true
                     }) {
