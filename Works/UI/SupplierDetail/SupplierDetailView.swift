@@ -14,13 +14,13 @@ struct SupplierDetailView: View {
                 }
                 .padding()
                 .navigationBarTitle(viewStore.supplier.name, displayMode: .inline)
-//                .navigationBarBackButtonHidden(true)
+                .navigationBarBackButtonHidden(true)
                 .navigationBarItems(
-//                    leading: Button(action: {
-//                        viewStore.send(.back)
-//                    }) {
-//                        Image(systemName: "chevron.backward").frame(width: 25, height: 25, alignment: .center)
-//                    },
+                    leading: Button(action: {
+                        viewStore.send(.back)
+                    }) {
+                        Image(systemName: "chevron.backward").frame(width: 25, height: 25, alignment: .center)
+                    },
                     trailing: Button(action: {
                         self.isShowActionSheet = true
                     }) {
@@ -65,15 +65,15 @@ struct SupplierDetailView: View {
     }
 }
 
-//struct SupplierDetailView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SupplierDetailView(store: .init(
-//            initialState: SupplierDetailTCA.State(supplier: Supplier.mock),
-//            reducer: SupplierDetailTCA.reducer,
-//            environment: SupplierDetailTCA.Environment(
-//                mainQueue: .main,
-//                backgroundQueue: .init(DispatchQueue.global(qos: .background))
-//            )
-//        ))
-//    }
-//}
+struct SupplierDetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        SupplierDetailView(store: .init(
+            initialState: SupplierDetailTCA.State(supplier: Supplier.mock),
+            reducer: .empty,
+            environment: SupplierDetailTCA.Environment(
+                mainQueue: .main,
+                backgroundQueue: .init(DispatchQueue.global(qos: .background))
+            )
+        ))
+    }
+}

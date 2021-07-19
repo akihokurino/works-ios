@@ -22,14 +22,14 @@ struct SupplierCreateView: View {
                 }
                 .padding()
                 .navigationBarTitle("取引先登録", displayMode: .inline)
-//                .navigationBarBackButtonHidden(true)
-//                .navigationBarItems(
-//                    leading: Button(action: {
-//                        viewStore.send(.back)
-//                    }) {
-//                        Image(systemName: "chevron.backward").frame(width: 25, height: 25, alignment: .center)
-//                    }
-//                )
+                .navigationBarBackButtonHidden(true)
+                .navigationBarItems(
+                    leading: Button(action: {
+                        viewStore.send(.back)
+                    }) {
+                        Image(systemName: "chevron.backward").frame(width: 25, height: 25, alignment: .center)
+                    }
+                )
             }
             .overlay(Group {
                 if viewStore.isLoading {
@@ -43,15 +43,15 @@ struct SupplierCreateView: View {
     }
 }
 
-// struct SupplierCreateView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SupplierCreateView(store: .init(
-//            initialState: SupplierCreateTCA.State(),
-//            reducer: SupplierCreateTCA.reducer,
-//            environment: SupplierCreateTCA.Environment(
-//                mainQueue: .main,
-//                backgroundQueue: .init(DispatchQueue.global(qos: .background))
-//            )
-//        ))
-//    }
-// }
+ struct SupplierCreateView_Previews: PreviewProvider {
+    static var previews: some View {
+        SupplierCreateView(store: .init(
+            initialState: SupplierCreateTCA.State(),
+            reducer: .empty,
+            environment: SupplierCreateTCA.Environment(
+                mainQueue: .main,
+                backgroundQueue: .init(DispatchQueue.global(qos: .background))
+            )
+        ))
+    }
+ }

@@ -46,7 +46,7 @@ struct SignInView_Previews: PreviewProvider {
     static var previews: some View {
         SignInView(store: .init(
             initialState: SignInTCA.State(),
-            reducer: SignInTCA.reducer,
+            reducer: .empty,
             environment: SignInTCA.Environment(
                 mainQueue: .main,
                 backgroundQueue: .init(DispatchQueue.global(qos: .background))

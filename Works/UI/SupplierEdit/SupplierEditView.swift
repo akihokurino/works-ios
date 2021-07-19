@@ -39,15 +39,15 @@ struct SupplierEditView: View {
     }
 }
 
-// struct SupplierEditView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SupplierEditView(store: .init(
-//            initialState: SupplierEditTCA.State(),
-//            reducer: SupplierEditTCA.reducer,
-//            environment: SupplierEditTCA.Environment(
-//                mainQueue: .main,
-//                backgroundQueue: .init(DispatchQueue.global(qos: .background))
-//            )
-//        ))
-//    }
-// }
+ struct SupplierEditView_Previews: PreviewProvider {
+    static var previews: some View {
+        SupplierEditView(store: .init(
+            initialState: SupplierEditTCA.State(),
+            reducer: .empty,
+            environment: SupplierEditTCA.Environment(
+                mainQueue: .main,
+                backgroundQueue: .init(DispatchQueue.global(qos: .background))
+            )
+        ))
+    }
+ }

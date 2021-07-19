@@ -29,7 +29,7 @@ struct SettingView_Previews: PreviewProvider {
     static var previews: some View {
         SettingView(store: .init(
             initialState: SettingTCA.State(),
-            reducer: SettingTCA.reducer,
+            reducer: .empty,
             environment: SettingTCA.Environment(
                 mainQueue: .main,
                 backgroundQueue: .init(DispatchQueue.global(qos: .background))

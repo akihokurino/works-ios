@@ -60,15 +60,15 @@ struct RootView: View {
     }
 }
 
-// struct RootView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        RootView(store: .init(
-//            initialState: RootTCA.State(),
-//            reducer: RootTCA.reducer,
-//            environment: RootTCA.Environment(
-//                mainQueue: .main,
-//                backgroundQueue: .init(DispatchQueue.global(qos: .background))
-//            )
-//        ))
-//    }
-// }
+ struct RootView_Previews: PreviewProvider {
+    static var previews: some View {
+        RootView(store: .init(
+            initialState: RootTCA.State(),
+            reducer: .empty,
+            environment: RootTCA.Environment(
+                mainQueue: .main,
+                backgroundQueue: .init(DispatchQueue.global(qos: .background))
+            )
+        ))
+    }
+ }

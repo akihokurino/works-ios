@@ -1,10 +1,3 @@
-//
-//  RefreshControl.swift
-//  Works
-//
-//  Created by akiho on 2021/07/18.
-//
-
 import SwiftUI
 
 struct RefreshControl: View {

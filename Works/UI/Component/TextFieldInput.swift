@@ -1,10 +1,3 @@
-//
-//  TextFieldInput.swift
-//  Works
-//
-//  Created by akiho on 2021/07/15.
-//
-
 import SwiftUI
 
 struct TextFieldInput: View {

@@ -71,15 +71,15 @@ struct SupplierListView: View {
     }
 }
 
-// struct SupplierListView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SupplierListView(store: .init(
-//            initialState: SupplierListTCA.State(me: Me.mock),
-//            reducer: SupplierListTCA.reducer,
-//            environment: SupplierListTCA.Environment(
-//                mainQueue: .main,
-//                backgroundQueue: .init(DispatchQueue.global(qos: .background))
-//            )
-//        ))
-//    }
-// }
+ struct SupplierListView_Previews: PreviewProvider {
+    static var previews: some View {
+        SupplierListView(store: .init(
+            initialState: SupplierListTCA.State(me: Me.mock),
+            reducer: .empty,
+            environment: SupplierListTCA.Environment(
+                mainQueue: .main,
+                backgroundQueue: .init(DispatchQueue.global(qos: .background))
+            )
+        ))
+    }
+ }

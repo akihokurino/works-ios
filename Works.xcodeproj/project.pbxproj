@@ -285,10 +285,6 @@
 				02195818269FEC0200AB4D22 /* Setting */,
 				021FF965269F4CBB00FF55C1 /* SignIn */,
 				02B701B4269EF08B00BA9937 /* RootView.swift */,
-				02362F4A26A5685E0001AA10 /* NavigationLink+Store.swift */,
-				02F2EDEF26A57FF3009ABF50 /* Reducer+ReplaceNilState.swift */,
-				02F2EDF126A58024009ABF50 /* Reducer+CaptureState.swift */,
-				02F2EDF326A58054009ABF50 /* Reducer+Presents.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -296,6 +292,10 @@
 		02B701B3269EF04B00BA9937 /* TCA */ = {
 			isa = PBXGroup;
 			children = (
+				02362F4A26A5685E0001AA10 /* NavigationLink+Store.swift */,
+				02F2EDEF26A57FF3009ABF50 /* Reducer+ReplaceNilState.swift */,
+				02F2EDF126A58024009ABF50 /* Reducer+CaptureState.swift */,
+				02F2EDF326A58054009ABF50 /* Reducer+Presents.swift */,
 				02B701B6269EF0B300BA9937 /* RootTCA.swift */,
 				021FF95B269F31A200FF55C1 /* SignInTCA.swift */,
 				0219581B269FEC8000AB4D22 /* SettingTCA.swift */,
