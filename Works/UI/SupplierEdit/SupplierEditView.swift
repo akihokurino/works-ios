@@ -9,7 +9,7 @@ import ComposableArchitecture
 import SwiftUI
 
 struct SupplierEditView: View {
-    let store: Store<SupplierEditCore.State, SupplierEditCore.Action>
+    let store: Store<SupplierEditTCA.State, SupplierEditTCA.Action>
 
     @State private var name: String = ""
     @State private var billingAmount: Int = 0
@@ -34,27 +34,19 @@ struct SupplierEditView: View {
                     }
                 )
             }
-            .overlay(Group {
-                if viewStore.isLoading {
-                    HUD(isLoading: Binding(
-                        get: { viewStore.isLoading },
-                        set: { _ in }
-                    ))
-                }
-            }, alignment: .center)
         }
     }
 }
 
-struct SupplierEditView_Previews: PreviewProvider {
-    static var previews: some View {
-        SupplierEditView(store: .init(
-            initialState: SupplierEditCore.State(),
-            reducer: SupplierEditCore.reducer,
-            environment: SupplierEditCore.Environment(
-                mainQueue: .main,
-                backgroundQueue: .init(DispatchQueue.global(qos: .background))
-            )
-        ))
-    }
-}
+// struct SupplierEditView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SupplierEditView(store: .init(
+//            initialState: SupplierEditTCA.State(),
+//            reducer: SupplierEditTCA.reducer,
+//            environment: SupplierEditTCA.Environment(
+//                mainQueue: .main,
+//                backgroundQueue: .init(DispatchQueue.global(qos: .background))
+//            )
+//        ))
+//    }
+// }

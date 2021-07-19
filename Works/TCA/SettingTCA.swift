@@ -9,19 +9,17 @@ import Combine
 import ComposableArchitecture
 import Firebase
 
-enum SettingCore {
-    static let reducer = Reducer<State, Action, Environment>.combine(
-        Reducer { _, action, _ in
-            switch action {
-            case .signOut:
-                try? Auth.auth().signOut()
-                return .none
-            }
+enum SettingTCA {
+    static let reducer = Reducer<State, Action, Environment> { _, action, _ in
+        switch action {
+        case .signOut:
+            try? Auth.auth().signOut()
+            return .none
         }
-    )
+    }
 }
 
-extension SettingCore {
+extension SettingTCA {
     enum Action: Equatable {
         case signOut
     }

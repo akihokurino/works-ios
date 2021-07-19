@@ -1,5 +1,5 @@
 //
-//  SupplierEditCore.swift
+//  SupplierCreateCore.swift
 //  Works
 //
 //  Created by akiho on 2021/07/18.
@@ -9,24 +9,21 @@ import Combine
 import ComposableArchitecture
 import Firebase
 
-enum SupplierEditCore {
-    static let reducer = Reducer<State, Action, Environment>.combine(
-        Reducer { _, action, _ in
-            switch action {
-            case .back:
-                return .none
-            }
+enum SupplierCreateTCA {
+    static let reducer = Reducer<State, Action, Environment> { _, action, _ in
+        switch action {
+        case .back:
+            return .none
         }
-    )
+    }
 }
 
-extension SupplierEditCore {
+extension SupplierCreateTCA {
     enum Action: Equatable {
         case back
     }
 
     struct State: Equatable {
-        var isLoading: Bool = false
     }
 
     struct Environment {

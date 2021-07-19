@@ -9,7 +9,7 @@ import ComposableArchitecture
 import SwiftUI
 
 struct SignInView: View {
-    let store: Store<SignInCore.State, SignInCore.Action>
+    let store: Store<SignInTCA.State, SignInTCA.Action>
 
     @State private var phoneNumber: String = ""
 
@@ -52,9 +52,9 @@ struct SignInView: View {
 struct SignInView_Previews: PreviewProvider {
     static var previews: some View {
         SignInView(store: .init(
-            initialState: SignInCore.State(),
-            reducer: SignInCore.reducer,
-            environment: SignInCore.Environment(
+            initialState: SignInTCA.State(),
+            reducer: SignInTCA.reducer,
+            environment: SignInTCA.Environment(
                 mainQueue: .main,
                 backgroundQueue: .init(DispatchQueue.global(qos: .background))
             )

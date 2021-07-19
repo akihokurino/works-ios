@@ -9,7 +9,7 @@ import ComposableArchitecture
 import SwiftUI
 
 struct SupplierCreateView: View {
-    let store: Store<SupplierCreateCore.State, SupplierCreateCore.Action>
+    let store: Store<SupplierCreateTCA.State, SupplierCreateTCA.Action>
 
     @State private var name: String = ""
     @State private var billingAmount: String = ""
@@ -24,7 +24,7 @@ struct SupplierCreateView: View {
 
                     TextFieldInput(value: $billingAmount, label: "請求額", keyboardType: .decimalPad)
                     Spacer().frame(height: 40)
-                    
+
                     ActionButton(text: "登録", background: .primary) {}
                 }
                 .padding()
@@ -38,27 +38,19 @@ struct SupplierCreateView: View {
                     }
                 )
             }
-            .overlay(Group {
-                if viewStore.isLoading {
-                    HUD(isLoading: Binding(
-                        get: { viewStore.isLoading },
-                        set: { _ in }
-                    ))
-                }
-            }, alignment: .center)
         }
     }
 }
 
-struct SupplierCreateView_Previews: PreviewProvider {
-    static var previews: some View {
-        SupplierCreateView(store: .init(
-            initialState: SupplierCreateCore.State(),
-            reducer: SupplierCreateCore.reducer,
-            environment: SupplierCreateCore.Environment(
-                mainQueue: .main,
-                backgroundQueue: .init(DispatchQueue.global(qos: .background))
-            )
-        ))
-    }
-}
+// struct SupplierCreateView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SupplierCreateView(store: .init(
+//            initialState: SupplierCreateTCA.State(),
+//            reducer: SupplierCreateTCA.reducer,
+//            environment: SupplierCreateTCA.Environment(
+//                mainQueue: .main,
+//                backgroundQueue: .init(DispatchQueue.global(qos: .background))
+//            )
+//        ))
+//    }
+// }

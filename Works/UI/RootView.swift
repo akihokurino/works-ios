@@ -9,72 +9,33 @@ import ComposableArchitecture
 import SwiftUI
 
 struct RootView: View {
-    let store: Store<RootCore.State, RootCore.Action>
+    let store: Store<RootTCA.State, RootTCA.Action>
 
     var body: some View {
         WithViewStore(store) { viewStore in
-            Group {
-                if viewStore.authState == .alreadyLogin {
-                    TabView {
-                        NavigationView {
-                            IfLetStore(
-                                store.scope(
-                                    state: { $0.supplierListState },
-                                    action: RootCore.Action.propagateSupplierList
-                                ),
-                                then: SupplierListView.init(store:)
-                            )
-                        }
-                        .tabItem {
-                            VStack {
-                                Image(systemName: "building")
-                                Text("取引先")
-                            }
-                        }.tag(1)
-                        NavigationView {
-                            IfLetStore(
-                                store.scope(
-                                    state: { $0.settingState },
-                                    action: RootCore.Action.propagateSetting
-                                ),
-                                then: SettingView.init(store:)
-                            )
-                        }
-                        .tabItem {
-                            VStack {
-                                Image(systemName: "gearshape")
-                                Text("設定")
-                            }
-                        }.tag(2)
-                    }
-                } else if viewStore.authState == .shouldLogin {
-                    IfLetStore(
-                        store.scope(
-                            state: { $0.signInState },
-                            action: RootCore.Action.propagateSignIn
-                        ),
-                        then: SignInView.init(store:)
-                    )
-                } else {
-                    HUD(isLoading: .constant(true))
-                }
+            NavigationView {
+                IfLetStore(
+                    store.scope(
+                        state: { $0.supplierListState },
+                        action: RootTCA.Action.propagateSupplierList
+                    ),
+                    then: SupplierListView.init(store:)
+                )
             }
-            .onAppear {
-                viewStore.send(.onAppear)
-            }
+            .navigationViewStyle(StackNavigationViewStyle())
         }
     }
 }
 
-struct RootView_Previews: PreviewProvider {
-    static var previews: some View {
-        RootView(store: .init(
-            initialState: RootCore.State(),
-            reducer: RootCore.reducer,
-            environment: RootCore.Environment(
-                mainQueue: .main,
-                backgroundQueue: .init(DispatchQueue.global(qos: .background))
-            )
-        ))
-    }
-}
+//struct RootView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        RootView(store: .init(
+//            initialState: RootTCA.State(),
+//            reducer: RootTCA.reducer,
+//            environment: RootTCA.Environment(
+//                mainQueue: .main,
+//                backgroundQueue: .init(DispatchQueue.global(qos: .background))
+//            )
+//        ))
+//    }
+//}

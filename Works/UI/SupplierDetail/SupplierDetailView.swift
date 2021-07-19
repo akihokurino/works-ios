@@ -9,7 +9,7 @@ import ComposableArchitecture
 import SwiftUI
 
 struct SupplierDetailView: View {
-    let store: Store<SupplierDetailCore.State, SupplierDetailCore.Action>
+    let store: Store<SupplierDetailTCA.State, SupplierDetailTCA.Action>
 
     @State private var isShowActionSheet = false
 
@@ -62,7 +62,7 @@ struct SupplierDetailView: View {
         .navigate(
             using: store.scope(
                 state: \.editState,
-                action: SupplierDetailCore.Action.propagateEdit
+                action: SupplierDetailTCA.Action.propagateEdit
             ),
             destination: SupplierEditView.init(store:),
             onDismiss: {
@@ -72,15 +72,15 @@ struct SupplierDetailView: View {
     }
 }
 
-struct SupplierDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        SupplierDetailView(store: .init(
-            initialState: SupplierDetailCore.State(supplier: Supplier.mock),
-            reducer: SupplierDetailCore.reducer,
-            environment: SupplierDetailCore.Environment(
-                mainQueue: .main,
-                backgroundQueue: .init(DispatchQueue.global(qos: .background))
-            )
-        ))
-    }
-}
+//struct SupplierDetailView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SupplierDetailView(store: .init(
+//            initialState: SupplierDetailTCA.State(supplier: Supplier.mock),
+//            reducer: SupplierDetailTCA.reducer,
+//            environment: SupplierDetailTCA.Environment(
+//                mainQueue: .main,
+//                backgroundQueue: .init(DispatchQueue.global(qos: .background))
+//            )
+//        ))
+//    }
+//}

@@ -9,7 +9,7 @@ import ComposableArchitecture
 import SwiftUI
 
 struct SupplierListView: View {
-    let store: Store<SupplierListCore.State, SupplierListCore.Action>
+    let store: Store<SupplierListTCA.State, SupplierListTCA.Action>
 
     var body: some View {
         WithViewStore(store) { viewStore in
@@ -57,36 +57,36 @@ struct SupplierListView: View {
         }
         .navigate(
             using: store.scope(
-                state: \.detailState,
-                action: SupplierListCore.Action.propagateDetail
-            ),
-            destination: SupplierDetailView.init(store:),
-            onDismiss: {
-                ViewStore(store.stateless).send(.popDetailView)
-            }
-        )
-        .navigate(
-            using: store.scope(
                 state: \.crateState,
-                action: SupplierListCore.Action.propagateCreate
+                action: SupplierListTCA.Action.propagateCreate
             ),
             destination: SupplierCreateView.init(store:),
             onDismiss: {
                 ViewStore(store.stateless).send(.popCreateView)
             }
         )
+        .navigate(
+            using: store.scope(
+                state: \.detailState,
+                action: SupplierListTCA.Action.propagateDetail
+            ),
+            destination: SupplierDetailView.init(store:),
+            onDismiss: {
+                ViewStore(store.stateless).send(.popDetailView)
+            }
+        )
     }
 }
 
-struct SupplierListView_Previews: PreviewProvider {
-    static var previews: some View {
-        SupplierListView(store: .init(
-            initialState: SupplierListCore.State(me: Me.mock),
-            reducer: SupplierListCore.reducer,
-            environment: SupplierListCore.Environment(
-                mainQueue: .main,
-                backgroundQueue: .init(DispatchQueue.global(qos: .background))
-            )
-        ))
-    }
-}
+// struct SupplierListView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SupplierListView(store: .init(
+//            initialState: SupplierListTCA.State(me: Me.mock),
+//            reducer: SupplierListTCA.reducer,
+//            environment: SupplierListTCA.Environment(
+//                mainQueue: .main,
+//                backgroundQueue: .init(DispatchQueue.global(qos: .background))
+//            )
+//        ))
+//    }
+// }
