@@ -22,6 +22,8 @@
 		021FF969269F52FE00FF55C1 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FF968269F52FE00FF55C1 /* Error.swift */; };
 		021FF96C269F557600FF55C1 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FF96B269F557600FF55C1 /* String.swift */; };
 		021FF96E269F557E00FF55C1 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FF96D269F557E00FF55C1 /* Int.swift */; };
+		02362F4B26A5685E0001AA10 /* NavigationLink+Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02362F4A26A5685E0001AA10 /* NavigationLink+Store.swift */; };
+		02362F4D26A568E00001AA10 /* ReplayNonNil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02362F4C26A568E00001AA10 /* ReplayNonNil.swift */; };
 		0241DC7426A2E60500AFA313 /* app.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 0241DC7326A2E60500AFA313 /* app.graphql */; };
 		0241DC7626A2E61E00AFA313 /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = 0241DC7526A2E61E00AFA313 /* schema.json */; };
 		0241DC7826A2E90800AFA313 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0241DC7726A2E90800AFA313 /* API.swift */; };
@@ -77,6 +79,8 @@
 		021FF968269F52FE00FF55C1 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		021FF96B269F557600FF55C1 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		021FF96D269F557E00FF55C1 /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
+		02362F4A26A5685E0001AA10 /* NavigationLink+Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NavigationLink+Store.swift"; sourceTree = "<group>"; };
+		02362F4C26A568E00001AA10 /* ReplayNonNil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplayNonNil.swift; sourceTree = "<group>"; };
 		0241DC7326A2E60500AFA313 /* app.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = app.graphql; sourceTree = "<group>"; };
 		0241DC7526A2E61E00AFA313 /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
 		0241DC7726A2E90800AFA313 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
@@ -177,13 +181,14 @@
 			path = SignIn;
 			sourceTree = "<group>";
 		};
-		021FF96A269F555D00FF55C1 /* Extension */ = {
+		021FF96A269F555D00FF55C1 /* Util */ = {
 			isa = PBXGroup;
 			children = (
 				021FF96B269F557600FF55C1 /* String.swift */,
 				021FF96D269F557E00FF55C1 /* Int.swift */,
+				02362F4C26A568E00001AA10 /* ReplayNonNil.swift */,
 			);
-			path = Extension;
+			path = Util;
 			sourceTree = "<group>";
 		};
 		0241DC7926A2E96F00AFA313 /* GraphQL */ = {
@@ -242,7 +247,7 @@
 			isa = PBXGroup;
 			children = (
 				02195815269FE08F00AB4D22 /* Infra */,
-				021FF96A269F555D00FF55C1 /* Extension */,
+				021FF96A269F555D00FF55C1 /* Util */,
 				021FF962269F45DA00FF55C1 /* Model */,
 				02B701B3269EF04B00BA9937 /* TCA */,
 				02B701AF269EEF7900BA9937 /* UI */,
@@ -274,6 +279,7 @@
 				02195818269FEC0200AB4D22 /* Setting */,
 				021FF965269F4CBB00FF55C1 /* SignIn */,
 				02B701B4269EF08B00BA9937 /* RootView.swift */,
+				02362F4A26A5685E0001AA10 /* NavigationLink+Store.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -389,6 +395,7 @@
 				021FF96E269F557E00FF55C1 /* Int.swift in Sources */,
 				026E551B26A444BC00295866 /* SupplierCreateCore.swift in Sources */,
 				02B7019D269EEC4D00BA9937 /* WorksApp.swift in Sources */,
+				02362F4B26A5685E0001AA10 /* NavigationLink+Store.swift in Sources */,
 				0219581A269FEC1700AB4D22 /* SettingView.swift in Sources */,
 				0270060726A31A55004E68A1 /* SupplierListCore.swift in Sources */,
 				0219580F269FCDD200AB4D22 /* Hud.swift in Sources */,
@@ -403,6 +410,7 @@
 				0270060A26A31AB7004E68A1 /* SupplierListView.swift in Sources */,
 				021FF95C269F31A200FF55C1 /* SignInCore.swift in Sources */,
 				0219581C269FEC8000AB4D22 /* SettingCore.swift in Sources */,
+				02362F4D26A568E00001AA10 /* ReplayNonNil.swift in Sources */,
 				021FF961269F39CA00FF55C1 /* ActionButton.swift in Sources */,
 				021FF969269F52FE00FF55C1 /* Error.swift in Sources */,
 				0270060526A318EE004E68A1 /* Supplier.swift in Sources */,

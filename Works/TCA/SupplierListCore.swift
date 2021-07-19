@@ -49,8 +49,14 @@ enum SupplierListCore {
             case .presentCreateView:
                 state.crateState = SupplierCreateCore.State()
                 return .none
+            case .popCreateView:
+                state.crateState = nil
+                return .none
             case .presentDetailView(let supplier):
                 state.detailState = SupplierDetailCore.State(supplier: supplier)
+                return .none
+            case .popDetailView:
+                state.detailState = nil
                 return .none
                 
             case .propagateCreate(let action):
@@ -83,7 +89,9 @@ extension SupplierListCore {
         case refresh
         case refreshed(Result<Me, AppError>)
         case presentCreateView
+        case popCreateView
         case presentDetailView(Supplier)
+        case popDetailView
 
         case propagateCreate(SupplierCreateCore.Action)
         case propagateDetail(SupplierDetailCore.Action)

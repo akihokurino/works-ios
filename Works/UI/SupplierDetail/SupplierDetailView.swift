@@ -12,29 +12,10 @@ struct SupplierDetailView: View {
     let store: Store<SupplierDetailCore.State, SupplierDetailCore.Action>
 
     @State private var isShowActionSheet = false
-    
+
     var body: some View {
         WithViewStore(store) { viewStore in
             ScrollView {
-                Group {
-                    NavigationLink(
-                        destination: IfLetStore(
-                            store.scope(
-                                state: { $0.editState },
-                                action: SupplierDetailCore.Action.propagateEdit
-                            )
-                        ) {
-                            SupplierEditView(store: $0)
-                        },
-                        isActive: Binding(
-                            get: { viewStore.editState != nil },
-                            set: { _ in }
-                        )
-                    ) {
-                        EmptyView()
-                    }
-                }
-
                 VStack {
                     Text("")
                 }
@@ -78,6 +59,16 @@ struct SupplierDetailView: View {
                     ])
             }
         }
+        .navigate(
+            using: store.scope(
+                state: \.editState,
+                action: SupplierDetailCore.Action.propagateEdit
+            ),
+            destination: SupplierEditView.init(store:),
+            onDismiss: {
+                ViewStore(store.stateless).send(.popEditView)
+            }
+        )
     }
 }
 

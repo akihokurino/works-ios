@@ -28,6 +28,9 @@ enum SupplierDetailCore {
             case .presentEditView:
                 state.editState = SupplierEditCore.State()
                 return .none
+            case .popEditView:
+                state.editState = nil
+                return .none
             case .delete:
                 state.isLoading = true
                 let id = state.supplier.id
@@ -55,6 +58,7 @@ enum SupplierDetailCore {
 extension SupplierDetailCore {
     enum Action: Equatable {
         case presentEditView
+        case popEditView
         case delete
         case deleted(Result<Bool, AppError>)
         case back

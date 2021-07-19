@@ -16,26 +16,30 @@ struct RootView: View {
             Group {
                 if viewStore.authState == .alreadyLogin {
                     TabView {
-                        IfLetStore(
-                            store.scope(
-                                state: { $0.supplierListState },
-                                action: RootCore.Action.propagateSupplierList
-                            ),
-                            then: SupplierListView.init(store:)
-                        )
+                        NavigationView {
+                            IfLetStore(
+                                store.scope(
+                                    state: { $0.supplierListState },
+                                    action: RootCore.Action.propagateSupplierList
+                                ),
+                                then: SupplierListView.init(store:)
+                            )
+                        }
                         .tabItem {
                             VStack {
                                 Image(systemName: "building")
                                 Text("取引先")
                             }
                         }.tag(1)
-                        IfLetStore(
-                            store.scope(
-                                state: { $0.settingState },
-                                action: RootCore.Action.propagateSetting
-                            ),
-                            then: SettingView.init(store:)
-                        )
+                        NavigationView {
+                            IfLetStore(
+                                store.scope(
+                                    state: { $0.settingState },
+                                    action: RootCore.Action.propagateSetting
+                                ),
+                                then: SettingView.init(store:)
+                            )
+                        }
                         .tabItem {
                             VStack {
                                 Image(systemName: "gearshape")
