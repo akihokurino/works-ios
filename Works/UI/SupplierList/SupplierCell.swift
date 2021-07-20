@@ -12,7 +12,7 @@ struct SupplierCell: View {
                 Image(systemName: "building.2.fill")
                     .resizable()
                     .foregroundColor(.gray)
-                    .frame(width: 80, height: 80)
+                    .frame(width: 60, height: 60)
 
                 VStack(alignment: .leading) {
                     Text(supplier.name)
@@ -20,7 +20,7 @@ struct SupplierCell: View {
                         .font(Font.system(size: 20.0))
                         .padding(.horizontal, 15)
 
-                    Text("\(supplier.billingAmount)円")
+                    Text("\(supplier.billingAmountIncludeTax)円（税込）")
                         .font(Font.system(size: 20.0))
                         .fontWeight(.bold)
                         .foregroundColor(Color.black)
@@ -30,7 +30,6 @@ struct SupplierCell: View {
 
                 Spacer()
                 Image(systemName: "chevron.forward")
-                    .padding(.horizontal, 10)
             }
         }
         .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)

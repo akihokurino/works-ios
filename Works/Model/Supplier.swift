@@ -3,7 +3,8 @@ import Foundation
 struct Supplier: Equatable, Hashable {
     let id: String
     let name: String
-    let billingAmount: Int
+    let billingAmountIncludeTax: Int
+    let billingAmountExcludeTax: Int
     let billingType: GraphQL.SupplierBillingType
 
     var billingTypeText: String {
@@ -18,6 +19,6 @@ struct Supplier: Equatable, Hashable {
     }
 
     static var mock: Supplier {
-        Supplier(id: "1", name: "株式会社A", billingAmount: 200000, billingType: .monthly)
+        Supplier(id: "1", name: "株式会社A", billingAmountIncludeTax: 220000, billingAmountExcludeTax: 200000, billingType: .monthly)
     }
 }

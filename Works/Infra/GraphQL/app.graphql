@@ -51,7 +51,8 @@ fragment MeFragment on Me {
 fragment SupplierFragment on Supplier {
 	id
 	name
-	billingAmount
+	billingAmountIncludeTax
+	billingAmountExcludeTax
 	billingType
 }
 

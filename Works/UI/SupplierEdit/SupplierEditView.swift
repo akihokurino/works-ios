@@ -33,7 +33,7 @@ struct SupplierEditView: View {
                 }
                 .onAppear {
                     self.name = viewStore.state.supplier.name
-                    self.billingAmount = String(viewStore.state.supplier.billingAmount)
+                    self.billingAmount = String(viewStore.state.supplier.billingAmountExcludeTax)
                 }
                 .padding()
                 .navigationBarTitle("取引先編集", displayMode: .inline)

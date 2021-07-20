@@ -17,7 +17,6 @@ struct PickerInput: View {
         VStack(alignment: .leading) {
             Text(label)
                 .foregroundColor(Color.gray)
-                .fontWeight(.bold)
                 .font(.body)
                 .padding(.bottom, 10)
             Button(action: {

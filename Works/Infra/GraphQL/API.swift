@@ -338,8 +338,8 @@ public enum GraphQL {
           self.resultMap = unsafeResultMap
         }
 
-        public init(id: GraphQLID, name: String, billingAmount: Int, billingType: SupplierBillingType) {
-          self.init(unsafeResultMap: ["__typename": "Supplier", "id": id, "name": name, "billingAmount": billingAmount, "billingType": billingType])
+        public init(id: GraphQLID, name: String, billingAmountIncludeTax: Int, billingAmountExcludeTax: Int, billingType: SupplierBillingType) {
+          self.init(unsafeResultMap: ["__typename": "Supplier", "id": id, "name": name, "billingAmountIncludeTax": billingAmountIncludeTax, "billingAmountExcludeTax": billingAmountExcludeTax, "billingType": billingType])
         }
 
         public var __typename: String {
@@ -458,8 +458,8 @@ public enum GraphQL {
           self.resultMap = unsafeResultMap
         }
 
-        public init(id: GraphQLID, name: String, billingAmount: Int, billingType: SupplierBillingType) {
-          self.init(unsafeResultMap: ["__typename": "Supplier", "id": id, "name": name, "billingAmount": billingAmount, "billingType": billingType])
+        public init(id: GraphQLID, name: String, billingAmountIncludeTax: Int, billingAmountExcludeTax: Int, billingType: SupplierBillingType) {
+          self.init(unsafeResultMap: ["__typename": "Supplier", "id": id, "name": name, "billingAmountIncludeTax": billingAmountIncludeTax, "billingAmountExcludeTax": billingAmountExcludeTax, "billingType": billingType])
         }
 
         public var __typename: String {
@@ -710,8 +710,8 @@ public enum GraphQL {
             self.resultMap = unsafeResultMap
           }
 
-          public init(id: GraphQLID, name: String, billingAmount: Int, billingType: SupplierBillingType) {
-            self.init(unsafeResultMap: ["__typename": "Supplier", "id": id, "name": name, "billingAmount": billingAmount, "billingType": billingType])
+          public init(id: GraphQLID, name: String, billingAmountIncludeTax: Int, billingAmountExcludeTax: Int, billingType: SupplierBillingType) {
+            self.init(unsafeResultMap: ["__typename": "Supplier", "id": id, "name": name, "billingAmountIncludeTax": billingAmountIncludeTax, "billingAmountExcludeTax": billingAmountExcludeTax, "billingType": billingType])
           }
 
           public var __typename: String {
@@ -761,7 +761,8 @@ public enum GraphQL {
         __typename
         id
         name
-        billingAmount
+        billingAmountIncludeTax
+        billingAmountExcludeTax
         billingType
       }
       """
@@ -773,7 +774,8 @@ public enum GraphQL {
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
         GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
         GraphQLField("name", type: .nonNull(.scalar(String.self))),
-        GraphQLField("billingAmount", type: .nonNull(.scalar(Int.self))),
+        GraphQLField("billingAmountIncludeTax", type: .nonNull(.scalar(Int.self))),
+        GraphQLField("billingAmountExcludeTax", type: .nonNull(.scalar(Int.self))),
         GraphQLField("billingType", type: .nonNull(.scalar(SupplierBillingType.self))),
       ]
     }
@@ -784,8 +786,8 @@ public enum GraphQL {
       self.resultMap = unsafeResultMap
     }
 
-    public init(id: GraphQLID, name: String, billingAmount: Int, billingType: SupplierBillingType) {
-      self.init(unsafeResultMap: ["__typename": "Supplier", "id": id, "name": name, "billingAmount": billingAmount, "billingType": billingType])
+    public init(id: GraphQLID, name: String, billingAmountIncludeTax: Int, billingAmountExcludeTax: Int, billingType: SupplierBillingType) {
+      self.init(unsafeResultMap: ["__typename": "Supplier", "id": id, "name": name, "billingAmountIncludeTax": billingAmountIncludeTax, "billingAmountExcludeTax": billingAmountExcludeTax, "billingType": billingType])
     }
 
     public var __typename: String {
@@ -815,12 +817,21 @@ public enum GraphQL {
       }
     }
 
-    public var billingAmount: Int {
+    public var billingAmountIncludeTax: Int {
       get {
-        return resultMap["billingAmount"]! as! Int
+        return resultMap["billingAmountIncludeTax"]! as! Int
       }
       set {
-        resultMap.updateValue(newValue, forKey: "billingAmount")
+        resultMap.updateValue(newValue, forKey: "billingAmountIncludeTax")
+      }
+    }
+
+    public var billingAmountExcludeTax: Int {
+      get {
+        return resultMap["billingAmountExcludeTax"]! as! Int
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "billingAmountExcludeTax")
       }
     }
 

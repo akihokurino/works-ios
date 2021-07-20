@@ -31,9 +31,10 @@ struct SupplierDetailView: View {
                             .foregroundColor(Color.gray)
                             .font(.body)
                             .frame(width: 150, alignment: .leading)
-                        Text("\(viewStore.supplier.billingAmount)円")
+                        Text("\(viewStore.supplier.billingAmountIncludeTax)円")
                             .foregroundColor(Color.black)
                             .font(Font.system(size: 20.0))
+                            .fontWeight(.bold)
                     }
                 }
                 .frame(

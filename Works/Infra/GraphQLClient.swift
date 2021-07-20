@@ -90,7 +90,8 @@ struct GraphQLCaller {
                                 Supplier(
                                     id: edge.node.fragments.supplierFragment.id,
                                     name: edge.node.fragments.supplierFragment.name,
-                                    billingAmount: edge.node.fragments.supplierFragment.billingAmount,
+                                    billingAmountIncludeTax: edge.node.fragments.supplierFragment.billingAmountIncludeTax,
+                                    billingAmountExcludeTax: edge.node.fragments.supplierFragment.billingAmountExcludeTax,
                                     billingType: edge.node.fragments.supplierFragment.billingType
                                 )
                             }
@@ -119,7 +120,8 @@ struct GraphQLCaller {
                                 Supplier(
                                     id: edge.node.fragments.supplierFragment.id,
                                     name: edge.node.fragments.supplierFragment.name,
-                                    billingAmount: edge.node.fragments.supplierFragment.billingAmount,
+                                    billingAmountIncludeTax: edge.node.fragments.supplierFragment.billingAmountIncludeTax,
+                                    billingAmountExcludeTax: edge.node.fragments.supplierFragment.billingAmountExcludeTax,
                                     billingType: edge.node.fragments.supplierFragment.billingType
                                 )
                             }
@@ -145,7 +147,8 @@ struct GraphQLCaller {
                         let supplier = Supplier(
                             id: data.createSupplier.fragments.supplierFragment.id,
                             name: data.createSupplier.fragments.supplierFragment.name,
-                            billingAmount: data.createSupplier.fragments.supplierFragment.billingAmount,
+                            billingAmountIncludeTax: data.createSupplier.fragments.supplierFragment.billingAmountIncludeTax,
+                            billingAmountExcludeTax: data.createSupplier.fragments.supplierFragment.billingAmountExcludeTax,
                             billingType: data.createSupplier.fragments.supplierFragment.billingType
                         )
                         promise(.success(supplier))
@@ -169,7 +172,8 @@ struct GraphQLCaller {
                         let supplier = Supplier(
                             id: data.updateSupplier.fragments.supplierFragment.id,
                             name: data.updateSupplier.fragments.supplierFragment.name,
-                            billingAmount: data.updateSupplier.fragments.supplierFragment.billingAmount,
+                            billingAmountIncludeTax: data.updateSupplier.fragments.supplierFragment.billingAmountIncludeTax,
+                            billingAmountExcludeTax: data.updateSupplier.fragments.supplierFragment.billingAmountExcludeTax,
                             billingType: data.updateSupplier.fragments.supplierFragment.billingType
                         )
                         promise(.success(supplier))
@@ -184,7 +188,7 @@ struct GraphQLCaller {
         return Future<Void, AppError> { promise in
             cli.perform(mutation: GraphQL.DeleteSupplierMutation(id: id)) { result in
                 switch result {
-                    case .success(_):
+                    case .success:
                         promise(.success(()))
                     case .failure(let error):
                         promise(.failure(AppError.system(error.localizedDescription)))
