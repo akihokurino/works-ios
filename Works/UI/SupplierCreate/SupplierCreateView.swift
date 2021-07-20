@@ -33,7 +33,24 @@ struct SupplierCreateView: View {
                     Spacer().frame(height: 20)
 
                     Spacer().frame(height: 20)
-                    ActionButton(text: "登録", background: .primary) {}
+                    ActionButton(text: "登録", background: .primary) {
+                        var _billingType = GraphQL.SupplierBillingType.monthly
+                        if selectedBillingTypeIndex == 1 {
+                            _billingType = GraphQL.SupplierBillingType.oneTime
+                        }
+
+                        let _billingAmount = Int(billingAmount) ?? 0
+                        
+                        if name.isEmpty || _billingAmount == 0 {
+                            return
+                        }
+
+                        viewStore.send(.create(CreateSupplierParams(
+                            name: name,
+                            billingAmount: _billingAmount,
+                            billingType: _billingType
+                        )))
+                    }
                 }
                 .padding()
                 .navigationBarTitle("取引先登録", displayMode: .inline)

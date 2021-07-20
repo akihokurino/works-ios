@@ -36,6 +36,14 @@ enum SupplierListTCA {
             case .back:
                 state.crateState = nil
                 return .none
+            case .created(.success(_)):
+                state.crateState = nil
+                return GraphQLClient.shared.caller()
+                    .flatMap { caller in caller.me() }
+                    .catchToEffect()
+                    .map(SupplierListTCA.Action.refreshed)
+            default:
+                return .none
             }
         case .propagateDetail(let action):
             switch action {

@@ -5,11 +5,7 @@ struct Supplier: Equatable, Hashable {
     let name: String
     let billingAmount: Int
     let billingType: GraphQL.SupplierBillingType
-    
-    static var mock: Supplier {
-        Supplier(id: "1", name: "株式会社A", billingAmount: 200000, billingType: .monthly)
-    }
-    
+
     var billingTypeText: String {
         switch billingType {
         case .monthly:
@@ -19,5 +15,9 @@ struct Supplier: Equatable, Hashable {
         default:
             return ""
         }
+    }
+
+    static var mock: Supplier {
+        Supplier(id: "1", name: "株式会社A", billingAmount: 200000, billingType: .monthly)
     }
 }

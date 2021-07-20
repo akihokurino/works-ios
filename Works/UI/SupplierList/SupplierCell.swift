@@ -40,6 +40,7 @@ struct SupplierCell: View {
             RoundedRectangle(cornerRadius: 4)
                 .stroke(Color.gray.opacity(0.5), lineWidth: 1)
         )
+        .background(supplier.billingType == .monthly ? Color.green.opacity(0.1) : Color.orange.opacity(0.1))
     }
 }
 

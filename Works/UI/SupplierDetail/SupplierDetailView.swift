@@ -17,8 +17,9 @@ struct SupplierDetailView: View {
                             .font(.body)
                             .frame(width: 150, alignment: .leading)
                         Text(viewStore.supplier.billingTypeText)
-                            .foregroundColor(Color.black)
+                            .foregroundColor(viewStore.supplier.billingType == .monthly ? Color.green : Color.orange)
                             .font(Font.system(size: 20.0))
+                            .fontWeight(.bold)
                     }
                     
                     Spacer().frame(height: 15)
