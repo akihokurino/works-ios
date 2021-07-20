@@ -12,7 +12,7 @@ struct SupplierDetailView: View {
                 VStack(alignment: .leading) {
                     Spacer().frame(height: 10)
                     HStack {
-                        Text("支払いタイミング")
+                        Text("請求タイミング")
                             .foregroundColor(Color.gray)
                             .font(.body)
                             .frame(width: 150, alignment: .leading)
@@ -27,7 +27,7 @@ struct SupplierDetailView: View {
                     Spacer().frame(height: 15)
                     
                     HStack {
-                        Text("支払い額")
+                        Text("請求額（税込）")
                             .foregroundColor(Color.gray)
                             .font(.body)
                             .frame(width: 150, alignment: .leading)

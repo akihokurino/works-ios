@@ -15,7 +15,7 @@ struct SupplierListView: View {
                 })
 
                 VStack {
-                    Text("月毎の合計額")
+                    Text("月毎の合計額（税込）")
                         .foregroundColor(Color.black)
                         .font(Font.system(size: 20.0))
                     Text("\(viewStore.me.totalAmountInMonthly)円")

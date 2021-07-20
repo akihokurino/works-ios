@@ -21,7 +21,7 @@ struct SupplierCreateView: View {
                     TextFieldInput(value: $name, label: "取引先名", keyboardType: .default)
                     Spacer().frame(height: 20)
 
-                    TextFieldInput(value: $billingAmount, label: "請求額", keyboardType: .decimalPad)
+                    TextFieldInput(value: $billingAmount, label: "請求額（税抜）", keyboardType: .decimalPad)
                     Spacer().frame(height: 20)
 
                     PickerInput(

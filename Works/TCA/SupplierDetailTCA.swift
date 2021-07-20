@@ -8,7 +8,7 @@ enum SupplierDetailTCA {
         case .back:
             return .none
         case .presentEditView:
-            state.editState = SupplierEditTCA.State()
+            state.editState = SupplierEditTCA.State(supplier: state.supplier)
             return .none
         case .popEditView:
             state.editState = nil
@@ -30,6 +30,12 @@ enum SupplierDetailTCA {
             switch action {
             case .back:
                 state.editState = nil
+                return .none
+            case .updated(.success(let supplier)):
+                state.supplier = supplier
+                state.editState = nil
+                return .none
+            default:
                 return .none
             }
         }
@@ -59,7 +65,7 @@ extension SupplierDetailTCA {
     }
 
     struct State: Equatable {
-        let supplier: Supplier
+        var supplier: Supplier
         var isLoading: Bool = false
 
         var editState: SupplierEditTCA.State?

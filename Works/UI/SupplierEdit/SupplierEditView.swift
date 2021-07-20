@@ -13,12 +13,27 @@ struct SupplierEditView: View {
                 VStack {
                     TextFieldInput(value: $name, label: "取引先名", keyboardType: .default)
                     Spacer().frame(height: 20)
-                    
-                    TextFieldInput(value: $billingAmount, label: "請求額", keyboardType: .decimalPad)
+
+                    TextFieldInput(value: $billingAmount, label: "請求額（税抜）", keyboardType: .decimalPad)
                     Spacer().frame(height: 20)
 
                     Spacer().frame(height: 20)
-                    ActionButton(text: "編集", background: .primary) {}
+                    ActionButton(text: "編集", background: .primary) {
+                        let _billingAmount = Int(billingAmount) ?? 0
+
+                        if name.isEmpty || _billingAmount == 0 {
+                            return
+                        }
+
+                        viewStore.send(.update(UpdateSupplierParams(
+                            name: name,
+                            billingAmount: _billingAmount
+                        )))
+                    }
+                }
+                .onAppear {
+                    self.name = viewStore.state.supplier.name
+                    self.billingAmount = String(viewStore.state.supplier.billingAmount)
                 }
                 .padding()
                 .navigationBarTitle("取引先編集", displayMode: .inline)
@@ -43,10 +58,10 @@ struct SupplierEditView: View {
     }
 }
 
- struct SupplierEditView_Previews: PreviewProvider {
+struct SupplierEditView_Previews: PreviewProvider {
     static var previews: some View {
         SupplierEditView(store: .init(
-            initialState: SupplierEditTCA.State(),
+            initialState: SupplierEditTCA.State(supplier: Supplier.mock),
             reducer: .empty,
             environment: SupplierEditTCA.Environment(
                 mainQueue: .main,
@@ -54,4 +69,4 @@ struct SupplierEditView: View {
             )
         ))
     }
- }
+}
