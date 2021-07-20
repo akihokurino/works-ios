@@ -7,6 +7,12 @@ struct SupplierCreateView: View {
     @State private var name: String = ""
     @State private var billingAmount: String = ""
     @State private var billingType = GraphQL.SupplierBillingType.monthly
+    @State private var showBillingTypePicker: Bool = false
+    @State private var selectedBillingTypeIndex: Int = 0
+    private let billingTypeSelection = [
+        PickerItem(label: "月々", value: "0"),
+        PickerItem(label: "納品時", value: "1")
+    ]
 
     var body: some View {
         WithViewStore(store) { viewStore in
@@ -16,8 +22,17 @@ struct SupplierCreateView: View {
                     Spacer().frame(height: 20)
 
                     TextFieldInput(value: $billingAmount, label: "請求額", keyboardType: .decimalPad)
-                    Spacer().frame(height: 40)
+                    Spacer().frame(height: 20)
 
+                    PickerInput(
+                        selectIndex: $selectedBillingTypeIndex,
+                        showPicker: $showBillingTypePicker,
+                        label: "請求タイミング",
+                        selection: billingTypeSelection
+                    )
+                    Spacer().frame(height: 20)
+
+                    Spacer().frame(height: 20)
                     ActionButton(text: "登録", background: .primary) {}
                 }
                 .padding()
@@ -32,6 +47,15 @@ struct SupplierCreateView: View {
                 )
             }
             .overlay(Group {
+                PickerView(
+                    selectIndex: $selectedBillingTypeIndex,
+                    showPicker: $showBillingTypePicker,
+                    selection: billingTypeSelection
+                )
+                .animation(.linear)
+                .offset(y: showBillingTypePicker ? 0 : UIScreen.main.bounds.height)
+            }, alignment: .bottom)
+            .overlay(Group {
                 if viewStore.isLoading {
                     HUD(isLoading: Binding(
                         get: { viewStore.isLoading },
@@ -43,7 +67,7 @@ struct SupplierCreateView: View {
     }
 }
 
- struct SupplierCreateView_Previews: PreviewProvider {
+struct SupplierCreateView_Previews: PreviewProvider {
     static var previews: some View {
         SupplierCreateView(store: .init(
             initialState: SupplierCreateTCA.State(),
@@ -54,4 +78,4 @@ struct SupplierCreateView: View {
             )
         ))
     }
- }
+}

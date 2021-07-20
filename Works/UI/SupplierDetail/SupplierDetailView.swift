@@ -9,9 +9,39 @@ struct SupplierDetailView: View {
     var body: some View {
         WithViewStore(store) { viewStore in
             ScrollView {
-                VStack {
-                    Text("")
+                VStack(alignment: .leading) {
+                    Spacer().frame(height: 10)
+                    HStack {
+                        Text("支払いタイミング")
+                            .foregroundColor(Color.gray)
+                            .font(.body)
+                            .frame(width: 150, alignment: .leading)
+                        Text(viewStore.supplier.billingTypeText)
+                            .foregroundColor(Color.black)
+                            .font(Font.system(size: 20.0))
+                    }
+                    
+                    Spacer().frame(height: 15)
+                    Divider().background(Color.gray)
+                    Spacer().frame(height: 15)
+                    
+                    HStack {
+                        Text("支払い額")
+                            .foregroundColor(Color.gray)
+                            .font(.body)
+                            .frame(width: 150, alignment: .leading)
+                        Text("\(viewStore.supplier.billingAmount)円")
+                            .foregroundColor(Color.black)
+                            .font(Font.system(size: 20.0))
+                    }
                 }
+                .frame(
+                    minWidth: 0,
+                    maxWidth: .infinity,
+                    minHeight: 0,
+                    maxHeight: .infinity,
+                    alignment: .topLeading
+                )
                 .padding()
                 .navigationBarTitle(viewStore.supplier.name, displayMode: .inline)
                 .navigationBarBackButtonHidden(true)

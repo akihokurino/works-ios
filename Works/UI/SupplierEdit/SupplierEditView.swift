@@ -5,15 +5,19 @@ struct SupplierEditView: View {
     let store: Store<SupplierEditTCA.State, SupplierEditTCA.Action>
 
     @State private var name: String = ""
-    @State private var billingAmount: Int = 0
+    @State private var billingAmount: String = ""
 
     var body: some View {
         WithViewStore(store) { viewStore in
             ScrollView {
                 VStack {
-                    TextFieldInput(value: $name, label: "取引先名", keyboardType: .decimalPad)
-                    Spacer().frame(height: 40)
+                    TextFieldInput(value: $name, label: "取引先名", keyboardType: .default)
+                    Spacer().frame(height: 20)
+                    
+                    TextFieldInput(value: $billingAmount, label: "請求額", keyboardType: .decimalPad)
+                    Spacer().frame(height: 20)
 
+                    Spacer().frame(height: 20)
                     ActionButton(text: "編集", background: .primary) {}
                 }
                 .padding()

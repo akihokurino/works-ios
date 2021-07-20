@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		020C5B6526A6813300CF8ABB /* PickerInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020C5B6426A6813300CF8ABB /* PickerInput.swift */; };
 		0219580F269FCDD200AB4D22 /* Hud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0219580E269FCDD200AB4D22 /* Hud.swift */; };
 		02195812269FCE6000AB4D22 /* ActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = 02195811269FCE6000AB4D22 /* ActivityIndicatorView */; };
 		02195817269FE0A000AB4D22 /* LocalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02195816269FE0A000AB4D22 /* LocalStore.swift */; };
@@ -69,6 +70,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		020C5B6426A6813300CF8ABB /* PickerInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerInput.swift; sourceTree = "<group>"; };
 		0219580E269FCDD200AB4D22 /* Hud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hud.swift; sourceTree = "<group>"; };
 		02195816269FE0A000AB4D22 /* LocalStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStore.swift; sourceTree = "<group>"; };
 		02195819269FEC1700AB4D22 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 				0219580E269FCDD200AB4D22 /* Hud.swift */,
 				0270060F26A33722004E68A1 /* RefreshControl.swift */,
 				029A140526A33CD000ACC9FF /* Menu.swift */,
+				020C5B6426A6813300CF8ABB /* PickerInput.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -419,6 +422,7 @@
 				029A140626A33CD000ACC9FF /* Menu.swift in Sources */,
 				02F2EDF026A57FF3009ABF50 /* Reducer+ReplaceNilState.swift in Sources */,
 				02B701B7269EF0B300BA9937 /* RootTCA.swift in Sources */,
+				020C5B6526A6813300CF8ABB /* PickerInput.swift in Sources */,
 				0270061026A33722004E68A1 /* RefreshControl.swift in Sources */,
 				0270060A26A31AB7004E68A1 /* SupplierListView.swift in Sources */,
 				021FF95C269F31A200FF55C1 /* SignInTCA.swift in Sources */,

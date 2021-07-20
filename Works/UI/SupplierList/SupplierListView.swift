@@ -3,7 +3,7 @@ import SwiftUI
 
 struct SupplierListView: View {
     let store: Store<SupplierListTCA.State, SupplierListTCA.Action>
-
+    
     var body: some View {
         WithViewStore(store) { viewStore in
             ScrollView {

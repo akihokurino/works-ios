@@ -3,7 +3,7 @@ import SwiftUI
 
 struct RootView: View {
     let store: Store<RootTCA.State, RootTCA.Action>
-
+    
     var body: some View {
         WithViewStore(store, removeDuplicates: { $0.authState == $1.authState }) { viewStore in
             Group {

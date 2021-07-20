@@ -18,9 +18,9 @@ struct WorksApp: App {
     var body: some Scene {
         WindowGroup {
             RootView(store: store)
-            .onOpenURL { url in
-                Auth.auth().canHandle(url)
-            }
+                .onOpenURL { url in
+                    Auth.auth().canHandle(url)
+                }
         }
     }
 }
