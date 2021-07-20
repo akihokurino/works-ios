@@ -13,6 +13,10 @@ struct SettingView: View {
                     Divider()
                     Menu(text: "稼働状況") {}
                     Divider()
+                    Menu(text: "Misoca接続") {
+                        MisocaOAuthView()
+                    }
+                    Divider()
                 }
 
                 Spacer().frame(height: 40)

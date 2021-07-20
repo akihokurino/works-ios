@@ -57,5 +57,13 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIUserInterfaceStyle</key>
+  <string>Light</string>
+	<key>NSAppTransportSecurity</key>
+  <dict>
+    <!-- MisocaのOauth2のログインで必要 -->
+    <key>NSAllowsArbitraryLoads</key>
+    <true/>
+  </dict>
 </dict>
 </plist>
