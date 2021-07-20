@@ -31,21 +31,21 @@ struct SupplierEditView: View {
                         )))
                     }
                 }
+                .padding()
                 .onAppear {
                     self.name = viewStore.state.supplier.name
                     self.billingAmount = String(viewStore.state.supplier.billingAmountExcludeTax)
                 }
-                .padding()
-                .navigationBarTitle("取引先編集", displayMode: .inline)
-//                .navigationBarBackButtonHidden(true)
-//                .navigationBarItems(
-//                    leading: Button(action: {
-//                        viewStore.send(.back)
-//                    }) {
-//                        Image(systemName: "chevron.backward").frame(width: 25, height: 25, alignment: .center)
-//                    }
-//                )
             }
+            .navigationBarTitle("取引先編集", displayMode: .inline)
+//            .navigationBarBackButtonHidden(true)
+//            .navigationBarItems(
+//                leading: Button(action: {
+//                    viewStore.send(.back)
+//                }) {
+//                    Image(systemName: "chevron.backward").frame(width: 25, height: 25, alignment: .center)
+//                }
+//            )
             .overlay(Group {
                 if viewStore.isLoading {
                     HUD(isLoading: Binding(

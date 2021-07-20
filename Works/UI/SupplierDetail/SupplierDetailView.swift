@@ -21,11 +21,11 @@ struct SupplierDetailView: View {
                             .font(Font.system(size: 20.0))
                             .fontWeight(.bold)
                     }
-                    
+
                     Spacer().frame(height: 15)
                     Divider().background(Color.gray)
                     Spacer().frame(height: 15)
-                    
+
                     HStack {
                         Text("請求額（税込）")
                             .foregroundColor(Color.gray)
@@ -45,24 +45,24 @@ struct SupplierDetailView: View {
                     alignment: .topLeading
                 )
                 .padding()
-                .navigationBarTitle(viewStore.supplier.name, displayMode: .inline)
-                .navigationBarBackButtonHidden(true)
-                .navigationBarItems(
-                    leading: Button(action: {
-                        viewStore.send(.back)
-                    }) {
-                        Image(systemName: "chevron.backward").frame(width: 25, height: 25, alignment: .center)
-                    },
-                    trailing: Button(action: {
-                        self.isShowActionSheet = true
-                    }) {
-                        Image(systemName: "ellipsis")
-                            .resizable()
-                            .padding(.vertical, 5)
-                            .foregroundColor(Color.blue)
-                    }
-                )
             }
+            .navigationBarTitle(viewStore.supplier.name, displayMode: .inline)
+//            .navigationBarBackButtonHidden(true)
+            .navigationBarItems(
+//                leading: Button(action: {
+//                    viewStore.send(.back)
+//                }) {
+//                    Image(systemName: "chevron.backward").frame(width: 25, height: 25, alignment: .center)
+//                },
+                trailing: Button(action: {
+                    self.isShowActionSheet = true
+                }) {
+                    Image(systemName: "ellipsis")
+                        .resizable()
+                        .padding(.vertical, 5)
+                        .foregroundColor(Color.blue)
+                }
+            )
             .overlay(Group {
                 if viewStore.isLoading {
                     HUD(isLoading: Binding(
@@ -72,7 +72,7 @@ struct SupplierDetailView: View {
                 }
             }, alignment: .center)
             .actionSheet(isPresented: $isShowActionSheet) {
-                ActionSheet(title: Text(""), buttons:
+                ActionSheet(title: Text("選択してください"), buttons:
                     [
                         .default(Text("編集")) {
                             viewStore.send(.presentEditView)
@@ -80,7 +80,7 @@ struct SupplierDetailView: View {
                         .destructive(Text("削除")) {
                             viewStore.send(.delete)
                         },
-                        .cancel()
+                        .cancel(Text("閉じる"))
                     ])
             }
         }

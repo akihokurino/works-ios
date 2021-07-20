@@ -17,7 +17,11 @@ struct Menu<Next: View>: View {
                 Text(text)
                     .foregroundColor(Color.black)
                 Spacer()
+                Image(systemName: "chevron.forward")
             }
+            .padding(.horizontal, 15)
+            .padding(.vertical, 15)
+            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
         }
         .isDetailLink(true)
     }

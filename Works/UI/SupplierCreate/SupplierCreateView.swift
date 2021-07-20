@@ -6,7 +6,6 @@ struct SupplierCreateView: View {
 
     @State private var name: String = ""
     @State private var billingAmount: String = ""
-    @State private var billingType = GraphQL.SupplierBillingType.monthly
     @State private var showBillingTypePicker: Bool = false
     @State private var selectedBillingTypeIndex: Int = 0
     private let billingTypeSelection = [
@@ -40,7 +39,7 @@ struct SupplierCreateView: View {
                         }
 
                         let _billingAmount = Int(billingAmount) ?? 0
-                        
+
                         if name.isEmpty || _billingAmount == 0 {
                             return
                         }
@@ -53,16 +52,16 @@ struct SupplierCreateView: View {
                     }
                 }
                 .padding()
-                .navigationBarTitle("取引先登録", displayMode: .inline)
-                .navigationBarBackButtonHidden(true)
-                .navigationBarItems(
-                    leading: Button(action: {
-                        viewStore.send(.back)
-                    }) {
-                        Image(systemName: "chevron.backward").frame(width: 25, height: 25, alignment: .center)
-                    }
-                )
             }
+            .navigationBarTitle("取引先登録", displayMode: .inline)
+//            .navigationBarBackButtonHidden(true)
+//            .navigationBarItems(
+//                leading: Button(action: {
+//                    viewStore.send(.back)
+//                }) {
+//                    Image(systemName: "chevron.backward").frame(width: 25, height: 25, alignment: .center)
+//                }
+//            )
             .overlay(Group {
                 PickerView(
                     selectIndex: $selectedBillingTypeIndex,

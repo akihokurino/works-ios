@@ -6,20 +6,22 @@ struct SettingView: View {
 
     var body: some View {
         WithViewStore(store) { viewStore in
-            List {
-                Section(
-                    footer: ActionButton(text: "ログアウト", background: .caution) {
-                        viewStore.send(.signOut)
-                    }
-                    .padding(.vertical, 60)
-                    .padding(.horizontal, 0)
-                ) {
-                    Menu(text: "振込先") {}.frame(height: 40)
-                    Menu(text: "稼働状況") {}.frame(height: 40)
+            ScrollView {
+                VStack {
+                    Divider()
+                    Menu(text: "振込先") {}
+                    Divider()
+                    Menu(text: "稼働状況") {}
+                    Divider()
                 }
+
+                Spacer().frame(height: 40)
+                ActionButton(text: "ログアウト", background: .caution) {
+                    viewStore.send(.signOut)
+                }
+                .padding()
             }
             .background(Color.white)
-            .listStyle(InsetGroupedListStyle())
             .navigationBarTitle("設定", displayMode: .inline)
         }
     }
