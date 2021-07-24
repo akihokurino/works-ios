@@ -12,11 +12,12 @@ enum InvoiceDetailTCA {
             let invoiceId = state.invoice.id
             return GraphQLClient.shared.caller()
                 .flatMap { caller in caller.downloadInvoicePDF(invoiceId: invoiceId) }
+                .flatMap { url in Downloader.shared.download(url: url) }
                 .catchToEffect()
                 .map(InvoiceDetailTCA.Action.downloaded)
-        case .downloaded(.success(let url)):
+        case .downloaded(.success(let data)):
             state.isLoading = false
-            state.pdfURL = url
+            state.pdf = data
             return .none
         case .downloaded(.failure(let e)):
             state.isLoading = false
@@ -35,7 +36,7 @@ extension InvoiceDetailTCA {
     struct State: Equatable {
         let invoice: Invoice
         var isLoading: Bool = false
-        var pdfURL: URL? = nil
+        var pdf: URL? = nil
     }
 
     struct Environment {

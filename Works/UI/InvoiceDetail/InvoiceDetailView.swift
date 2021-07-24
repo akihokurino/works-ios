@@ -6,11 +6,7 @@ struct InvoiceDetailView: View {
 
     var body: some View {
         WithViewStore(store) { viewStore in
-            ScrollView {
-                if viewStore.pdfURL != nil {
-                    PDFKitView(url: viewStore.pdfURL!)
-                }
-            }
+            PDFKitView(data: viewStore.pdf)
             .onAppear {
                 viewStore.send(.onAppear)
             }
