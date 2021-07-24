@@ -836,7 +836,7 @@ public enum GraphQL {
     public let operationDefinition: String =
       """
       mutation DownloadInvoicePDF($invoiceId: String!) {
-        downloadInvoicePdf(input: {invoice: $invoiceId})
+        downloadInvoicePdf(input: {invoiceId: $invoiceId})
       }
       """
 
@@ -857,7 +857,7 @@ public enum GraphQL {
 
       public static var selections: [GraphQLSelection] {
         return [
-          GraphQLField("downloadInvoicePdf", arguments: ["input": ["invoice": GraphQLVariable("invoiceId")]], type: .nonNull(.scalar(String.self))),
+          GraphQLField("downloadInvoicePdf", arguments: ["input": ["invoiceId": GraphQLVariable("invoiceId")]], type: .nonNull(.scalar(String.self))),
         ]
       }
 

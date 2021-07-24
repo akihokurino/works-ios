@@ -49,7 +49,7 @@ struct SupplierDetailView: View {
                 VStack(spacing: 15) {
                     ForEach(viewStore.invoices, id: \.self) { invoice in
                         InvoiceCell(invoice: invoice) {
-                            
+                            viewStore.send(.presentInvoiceDetailView(invoice))
                         }
                     }
                 }
@@ -104,6 +104,16 @@ struct SupplierDetailView: View {
             destination: SupplierEditView.init(store:),
             onDismiss: {
                 ViewStore(store.stateless).send(.popEditView)
+            }
+        )
+        .navigate(
+            using: store.scope(
+                state: \.invoiceDetailState,
+                action: SupplierDetailTCA.Action.propagateInvoiceDetail
+            ),
+            destination: InvoiceDetailView.init(store:),
+            onDismiss: {
+                ViewStore(store.stateless).send(.popInvoiceDetailView)
             }
         )
     }

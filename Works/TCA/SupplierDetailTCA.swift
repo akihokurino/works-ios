@@ -13,6 +13,12 @@ enum SupplierDetailTCA {
         case .popEditView:
             state.editState = nil
             return .none
+        case .presentInvoiceDetailView(let invoice):
+            state.invoiceDetailState = InvoiceDetailTCA.State(invoice: invoice)
+            return .none
+        case .popInvoiceDetailView:
+            state.invoiceDetailState = nil
+            return .none
         case .delete:
             state.isLoading = true
             let id = state.supplier.id
@@ -58,6 +64,11 @@ enum SupplierDetailTCA {
             default:
                 return .none
             }
+        case .propagateInvoiceDetail(let action):
+            switch action {
+            default:
+                return .none
+            }
         }
     }
     .presents(
@@ -71,6 +82,17 @@ enum SupplierDetailTCA {
             )
         }
     )
+    .presents(
+        InvoiceDetailTCA.reducer,
+        state: \.invoiceDetailState,
+        action: /SupplierDetailTCA.Action.propagateInvoiceDetail,
+        environment: { _environment in
+            InvoiceDetailTCA.Environment(
+                mainQueue: _environment.mainQueue,
+                backgroundQueue: _environment.backgroundQueue
+            )
+        }
+    )
 }
 
 extension SupplierDetailTCA {
@@ -78,6 +100,8 @@ extension SupplierDetailTCA {
         case back
         case presentEditView
         case popEditView
+        case presentInvoiceDetailView(Invoice)
+        case popInvoiceDetailView
         case delete
         case deleted(Result<Bool, AppError>)
         case fetchInvoiceList
@@ -85,6 +109,7 @@ extension SupplierDetailTCA {
         case invoiceList(Result<[Invoice], AppError>)
 
         case propagateEdit(SupplierEditTCA.Action)
+        case propagateInvoiceDetail(InvoiceDetailTCA.Action)
     }
 
     struct State: Equatable {
@@ -94,6 +119,7 @@ extension SupplierDetailTCA {
         var isRefreshing: Bool = false
 
         var editState: SupplierEditTCA.State?
+        var invoiceDetailState: InvoiceDetailTCA.State?
     }
 
     struct Environment {

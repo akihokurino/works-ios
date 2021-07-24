@@ -47,11 +47,7 @@ struct GraphQLClient {
                     promise(.failure(.system(defaultErrorMsg)))
                     return
                 }
-
-                print("-----------------------------------")
-                print(token)
-                print("-----------------------------------")
-
+                
                 let cache = InMemoryNormalizedCache()
                 let store = ApolloStore(cache: cache)
                 let client = URLSessionClient()
@@ -238,6 +234,8 @@ struct GraphQLCaller {
                             promise(.failure(AppError.system(defaultErrorMsg)))
                             return
                         }
+                        
+                        print(data.downloadInvoicePdf)
 
                         let url = URL(string: data.downloadInvoicePdf)!
                         promise(.success(url))

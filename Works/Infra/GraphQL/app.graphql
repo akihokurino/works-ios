@@ -50,7 +50,7 @@ mutation DeleteSupplier($id: String!) {
 
 mutation DownloadInvoicePDF($invoiceId: String!) {
 	downloadInvoicePdf(input: {
-		invoice: $invoiceId,
+		invoiceId: $invoiceId,
 	})
 }
 
