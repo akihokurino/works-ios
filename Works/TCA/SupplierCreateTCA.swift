@@ -5,7 +5,7 @@ import Firebase
 struct CreateSupplierParams: Equatable {
     let name: String
     let billingAmount: Int
-    let billingType: GraphQL.SupplierBillingType
+    let billingType: GraphQL.GraphQLBillingType
 }
 
 enum SupplierCreateTCA {

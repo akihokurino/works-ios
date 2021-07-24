@@ -5,7 +5,7 @@ struct Supplier: Equatable, Hashable {
     let name: String
     let billingAmountIncludeTax: Int
     let billingAmountExcludeTax: Int
-    let billingType: GraphQL.SupplierBillingType
+    let billingType: GraphQL.GraphQLBillingType
 
     var billingTypeText: String {
         switch billingType {

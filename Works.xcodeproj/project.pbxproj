@@ -13,6 +13,9 @@
 		02195817269FE0A000AB4D22 /* LocalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02195816269FE0A000AB4D22 /* LocalStore.swift */; };
 		0219581A269FEC1700AB4D22 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02195819269FEC1700AB4D22 /* SettingView.swift */; };
 		0219581C269FEC8000AB4D22 /* SettingTCA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0219581B269FEC8000AB4D22 /* SettingTCA.swift */; };
+		021E092726ABF0E7000C6B8F /* Invoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021E092626ABF0E7000C6B8F /* Invoice.swift */; };
+		021E092B26ABF6E1000C6B8F /* InvoiceDetailTCA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021E092A26ABF6E1000C6B8F /* InvoiceDetailTCA.swift */; };
+		021E092D26ABFAAC000C6B8F /* InvoiceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021E092C26ABFAAC000C6B8F /* InvoiceCell.swift */; };
 		021FF958269F2F6200FF55C1 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 021FF957269F2F6200FF55C1 /* FirebaseAuth */; };
 		021FF95A269F2FB400FF55C1 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FF959269F2FB400FF55C1 /* SignInView.swift */; };
 		021FF95C269F31A200FF55C1 /* SignInTCA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FF95B269F31A200FF55C1 /* SignInTCA.swift */; };
@@ -76,6 +79,9 @@
 		02195816269FE0A000AB4D22 /* LocalStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStore.swift; sourceTree = "<group>"; };
 		02195819269FEC1700AB4D22 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		0219581B269FEC8000AB4D22 /* SettingTCA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTCA.swift; sourceTree = "<group>"; };
+		021E092626ABF0E7000C6B8F /* Invoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invoice.swift; sourceTree = "<group>"; };
+		021E092A26ABF6E1000C6B8F /* InvoiceDetailTCA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceDetailTCA.swift; sourceTree = "<group>"; };
+		021E092C26ABFAAC000C6B8F /* InvoiceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceCell.swift; sourceTree = "<group>"; };
 		021FF959269F2FB400FF55C1 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		021FF95B269F31A200FF55C1 /* SignInTCA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInTCA.swift; sourceTree = "<group>"; };
 		021FF95E269F38DA00FF55C1 /* TextFieldInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldInput.swift; sourceTree = "<group>"; };
@@ -180,6 +186,7 @@
 				021FF968269F52FE00FF55C1 /* Error.swift */,
 				0270060026A310D1004E68A1 /* Me.swift */,
 				0270060426A318EE004E68A1 /* Supplier.swift */,
+				021E092626ABF0E7000C6B8F /* Invoice.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -217,6 +224,7 @@
 			isa = PBXGroup;
 			children = (
 				026E551826A4446400295866 /* SupplierDetailView.swift */,
+				021E092C26ABFAAC000C6B8F /* InvoiceCell.swift */,
 			);
 			path = SupplierDetail;
 			sourceTree = "<group>";
@@ -309,6 +317,7 @@
 				026E551626A4444D00295866 /* SupplierDetailTCA.swift */,
 				026E551A26A444BC00295866 /* SupplierCreateTCA.swift */,
 				026E551C26A444C900295866 /* SupplierEditTCA.swift */,
+				021E092A26ABF6E1000C6B8F /* InvoiceDetailTCA.swift */,
 			);
 			path = TCA;
 			sourceTree = "<group>";
@@ -414,11 +423,14 @@
 				026E551B26A444BC00295866 /* SupplierCreateTCA.swift in Sources */,
 				02B7019D269EEC4D00BA9937 /* WorksApp.swift in Sources */,
 				02362F4B26A5685E0001AA10 /* NavigationLink+Store.swift in Sources */,
+				021E092B26ABF6E1000C6B8F /* InvoiceDetailTCA.swift in Sources */,
 				0219581A269FEC1700AB4D22 /* SettingView.swift in Sources */,
 				02F2EDF426A58054009ABF50 /* Reducer+Presents.swift in Sources */,
 				0270060726A31A55004E68A1 /* SupplierListTCA.swift in Sources */,
 				0219580F269FCDD200AB4D22 /* Hud.swift in Sources */,
+				021E092D26ABFAAC000C6B8F /* InvoiceCell.swift in Sources */,
 				026E551726A4444D00295866 /* SupplierDetailTCA.swift in Sources */,
+				021E092726ABF0E7000C6B8F /* Invoice.swift in Sources */,
 				021FF95F269F38DA00FF55C1 /* TextFieldInput.swift in Sources */,
 				026E551D26A444C900295866 /* SupplierEditTCA.swift in Sources */,
 				02195817269FE0A000AB4D22 /* LocalStore.swift in Sources */,

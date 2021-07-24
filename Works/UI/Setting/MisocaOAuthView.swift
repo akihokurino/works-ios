@@ -2,22 +2,39 @@ import SwiftUI
 import WebKit
 
 struct MisocaOAuthView: View {
+    @Environment(\.presentationMode) private var presentationMode: Binding<PresentationMode>
+
+    let onLogin: (String) -> Void
+    let onRefresh: () -> Void
+
     var body: some View {
-        WebView()
+        WebView(onLogin: { code in
+            presentationMode.wrappedValue.dismiss()
+            onLogin(code)
+        })
+            .navigationBarItems(
+                trailing: Button(action: {
+                    presentationMode.wrappedValue.dismiss()
+                    onRefresh()
+                }) {
+                    Text("再接続")
+                }
+            )
     }
 }
 
 struct MisocaOAuthView_Previews: PreviewProvider {
     static var previews: some View {
-        MisocaOAuthView()
+        MisocaOAuthView(onLogin: { _ in }, onRefresh: {})
     }
 }
 
 struct WebView: UIViewControllerRepresentable {
+    let onLogin: (String) -> Void
     let loadUrl = "https://app.misoca.jp/oauth2/authorize?client_id=jGKRHV2hW_t4kn0w4Ma1Jxo_XkZxUA37rqFPRiYT61k&redirect_uri=https://works-prod.web.app&response_type=code&scope=write"
 
     func makeCoordinator() -> WebView.Coodinator {
-        return Coodinator(self)
+        return Coodinator(self, self.onLogin)
     }
 
     func makeUIViewController(context: Context) -> EmbeddedWebviewController {
@@ -31,9 +48,11 @@ struct WebView: UIViewControllerRepresentable {
 
     class Coodinator: NSObject, WKNavigationDelegate, WKUIDelegate {
         var parent: WebView
+        let onLogin: (String) -> Void
 
-        init(_ parent: WebView) {
+        init(_ parent: WebView, _ onLogin: @escaping (String) -> Void) {
             self.parent = parent
+            self.onLogin = onLogin
         }
 
         func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {}
@@ -46,8 +65,7 @@ struct WebView: UIViewControllerRepresentable {
             if let urlString = navigationAction.request.url?.absoluteString, urlString.hasPrefix("https://works-prod.web.app") {
                 let url = URLComponents(string: urlString)!
                 let code = url.queryItems?.first(where: { $0.name == "code" })?.value
-                print("認証コード")
-                print(code)
+                self.onLogin(code ?? "")
             }
             decisionHandler(.allow)
         }

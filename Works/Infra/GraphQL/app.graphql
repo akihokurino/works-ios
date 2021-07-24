@@ -4,13 +4,25 @@ query GetMe {
 	}
 }
 
+query GetInvoiceList($supplierId: String!) {
+	getInvoiceList(input: {
+		supplierId: $supplierId,
+	}) {
+		edges {
+			node {
+				...InvoiceFragment
+			}
+		}
+	}
+}
+
 mutation Authenticate {
 	authenticate {
 		...MeFragment
 	}
 }
 
-mutation CreateSupplier($name: String!, $billingAmount: Int!, $billingType: SupplierBillingType!) {
+mutation CreateSupplier($name: String!, $billingAmount: Int!, $billingType: GraphQLBillingType!) {
 	createSupplier(input: {
 		name: $name,
 		billingAmount: $billingAmount,
@@ -36,6 +48,21 @@ mutation DeleteSupplier($id: String!) {
 	})
 }
 
+mutation DownloadInvoicePDF($invoiceId: String!) {
+	downloadInvoicePdf(input: {
+		invoice: $invoiceId,
+	})
+}
+
+mutation connectMisoca($code: String!) {
+	connectMisoca(input: {
+		code: $code,
+	})
+}
+
+mutation refreshMisoca {
+	refreshMisoca
+}
 
 fragment MeFragment on Me {
 	id
@@ -54,5 +81,18 @@ fragment SupplierFragment on Supplier {
 	billingAmountIncludeTax
 	billingAmountExcludeTax
 	billingType
+}
+
+fragment InvoiceFragment on Invoice {
+	id
+	issueYmd
+	paymentDueOnYmd
+	invoiceNumber
+	paymentStatus
+	invoiceStatus
+	recipientName
+	subject
+	totalAmount
+	tax
 }
 

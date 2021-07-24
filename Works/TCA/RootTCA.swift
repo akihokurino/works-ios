@@ -44,6 +44,8 @@ enum RootTCA {
             case .signOut:
                 state.setSignOutState()
                 return .none
+            default:
+                return .none
             }
         }
     }

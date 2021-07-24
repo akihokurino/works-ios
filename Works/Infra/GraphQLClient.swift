@@ -104,6 +104,38 @@ struct GraphQLCaller {
         }
     }
 
+    func getInvoiceList(supplierId: String) -> Future<[Invoice], AppError> {
+        return Future<[Invoice], AppError> { promise in
+            cli.fetch(query: GraphQL.GetInvoiceListQuery(supplierId: supplierId)) { result in
+                switch result {
+                    case .success(let graphQLResult):
+                        guard let data = graphQLResult.data else {
+                            promise(.failure(AppError.system(defaultErrorMsg)))
+                            return
+                        }
+
+                        let invoices = data.getInvoiceList.edges.map { edge in
+                            Invoice(
+                                id: edge.node.fragments.invoiceFragment.id,
+                                issueYMD: edge.node.fragments.invoiceFragment.issueYmd,
+                                paymentDueOnYMD: edge.node.fragments.invoiceFragment.paymentDueOnYmd,
+                                invoiceNumber: edge.node.fragments.invoiceFragment.invoiceNumber,
+                                paymentStatus: edge.node.fragments.invoiceFragment.paymentStatus,
+                                invoiceStatus: edge.node.fragments.invoiceFragment.invoiceStatus,
+                                recipientName: edge.node.fragments.invoiceFragment.recipientName,
+                                subject: edge.node.fragments.invoiceFragment.subject,
+                                totalAmount: edge.node.fragments.invoiceFragment.totalAmount,
+                                tax: edge.node.fragments.invoiceFragment.tax
+                            )
+                        }
+                        promise(.success(invoices))
+                    case .failure(let error):
+                        promise(.failure(AppError.system(error.localizedDescription)))
+                }
+            }
+        }
+    }
+
     func authenticate() -> Future<Me, AppError> {
         return Future<Me, AppError> { promise in
             cli.perform(mutation: GraphQL.AuthenticateMutation()) { result in
@@ -134,7 +166,7 @@ struct GraphQLCaller {
         }
     }
 
-    func createSupplier(name: String, billingAmount: Int, billingType: GraphQL.SupplierBillingType) -> Future<Supplier, AppError> {
+    func createSupplier(name: String, billingAmount: Int, billingType: GraphQL.GraphQLBillingType) -> Future<Supplier, AppError> {
         return Future<Supplier, AppError> { promise in
             cli.perform(mutation: GraphQL.CreateSupplierMutation(name: name, billingAmount: billingAmount, billingType: billingType)) { result in
                 switch result {
@@ -189,6 +221,61 @@ struct GraphQLCaller {
             cli.perform(mutation: GraphQL.DeleteSupplierMutation(id: id)) { result in
                 switch result {
                     case .success:
+                        promise(.success(()))
+                    case .failure(let error):
+                        promise(.failure(AppError.system(error.localizedDescription)))
+                }
+            }
+        }
+    }
+
+    func downloadInvoicePDF(invoiceId: String) -> Future<URL, AppError> {
+        return Future<URL, AppError> { promise in
+            cli.perform(mutation: GraphQL.DownloadInvoicePdfMutation(invoiceId: invoiceId)) { result in
+                switch result {
+                    case .success(let graphQLResult):
+                        guard let data = graphQLResult.data else {
+                            promise(.failure(AppError.system(defaultErrorMsg)))
+                            return
+                        }
+
+                        let url = URL(string: data.downloadInvoicePdf)!
+                        promise(.success(url))
+                    case .failure(let error):
+                        promise(.failure(AppError.system(error.localizedDescription)))
+                }
+            }
+        }
+    }
+
+    func connectMisoca(code: String) -> Future<Void, AppError> {
+        return Future<Void, AppError> { promise in
+            cli.perform(mutation: GraphQL.ConnectMisocaMutation(code: code)) { result in
+                switch result {
+                    case .success(let graphQLResult):
+                        guard let _ = graphQLResult.data else {
+                            promise(.failure(AppError.system(defaultErrorMsg)))
+                            return
+                        }
+
+                        promise(.success(()))
+                    case .failure(let error):
+                        promise(.failure(AppError.system(error.localizedDescription)))
+                }
+            }
+        }
+    }
+
+    func refreshMisoca() -> Future<Void, AppError> {
+        return Future<Void, AppError> { promise in
+            cli.perform(mutation: GraphQL.RefreshMisocaMutation()) { result in
+                switch result {
+                    case .success(let graphQLResult):
+                        guard let _ = graphQLResult.data else {
+                            promise(.failure(AppError.system(defaultErrorMsg)))
+                            return
+                        }
+
                         promise(.success(()))
                     case .failure(let error):
                         promise(.failure(AppError.system(error.localizedDescription)))

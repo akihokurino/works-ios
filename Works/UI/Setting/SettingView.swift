@@ -14,7 +14,11 @@ struct SettingView: View {
                     Menu(text: "稼働状況") {}
                     Divider()
                     Menu(text: "Misoca接続") {
-                        MisocaOAuthView()
+                        MisocaOAuthView(onLogin: { code in
+                            viewStore.send(.connectMisoca(code))
+                        }, onRefresh: {
+                            viewStore.send(.refreshMisoca)
+                        })
                     }
                     Divider()
                 }
@@ -27,6 +31,20 @@ struct SettingView: View {
             }
             .background(Color.white)
             .navigationBarTitle("設定", displayMode: .inline)
+            .overlay(Group {
+                if viewStore.isLoading {
+                    HUD(isLoading: Binding(
+                        get: { viewStore.isLoading },
+                        set: { _ in }
+                    ))
+                }
+            }, alignment: .center)
+            .alert(isPresented: viewStore.binding(
+                get: \.isPresentedAlert,
+                send: SettingTCA.Action.isPresentedAlert
+            )) {
+                Alert(title: Text(viewStore.alertText))
+            }
         }
     }
 }

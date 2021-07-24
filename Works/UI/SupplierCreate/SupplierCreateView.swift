@@ -33,9 +33,9 @@ struct SupplierCreateView: View {
 
                     Spacer().frame(height: 20)
                     ActionButton(text: "登録", background: .primary) {
-                        var _billingType = GraphQL.SupplierBillingType.monthly
+                        var _billingType = GraphQL.GraphQLBillingType.monthly
                         if selectedBillingTypeIndex == 1 {
-                            _billingType = GraphQL.SupplierBillingType.oneTime
+                            _billingType = GraphQL.GraphQLBillingType.oneTime
                         }
 
                         let _billingAmount = Int(billingAmount) ?? 0

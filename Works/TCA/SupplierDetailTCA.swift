@@ -25,6 +25,26 @@ enum SupplierDetailTCA {
             return .none
         case .deleted(.failure(_)):
             return .none
+        case .fetchInvoiceList:
+            let supplierId = state.supplier.id
+            return GraphQLClient.shared.caller()
+                .flatMap { caller in caller.getInvoiceList(supplierId: supplierId) }
+                .catchToEffect()
+                .map(SupplierDetailTCA.Action.invoiceList)
+        case .refreshInvoiceList:
+            let supplierId = state.supplier.id
+            state.isRefreshing = true
+            return GraphQLClient.shared.caller()
+                .flatMap { caller in caller.getInvoiceList(supplierId: supplierId) }
+                .catchToEffect()
+                .map(SupplierDetailTCA.Action.invoiceList)
+        case .invoiceList(.success(let items)):
+            state.isRefreshing = false
+            state.invoices = items
+            return .none
+        case .invoiceList(.failure(_)):
+            state.isRefreshing = false
+            return .none
 
         case .propagateEdit(let action):
             switch action {
@@ -60,13 +80,18 @@ extension SupplierDetailTCA {
         case popEditView
         case delete
         case deleted(Result<Bool, AppError>)
+        case fetchInvoiceList
+        case refreshInvoiceList
+        case invoiceList(Result<[Invoice], AppError>)
 
         case propagateEdit(SupplierEditTCA.Action)
     }
 
     struct State: Equatable {
         var supplier: Supplier
+        var invoices: [Invoice] = []
         var isLoading: Bool = false
+        var isRefreshing: Bool = false
 
         var editState: SupplierEditTCA.State?
     }

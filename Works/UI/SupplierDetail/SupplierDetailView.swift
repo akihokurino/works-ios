@@ -45,11 +45,23 @@ struct SupplierDetailView: View {
                     alignment: .topLeading
                 )
                 .padding()
+
+                VStack(spacing: 15) {
+                    ForEach(viewStore.invoices, id: \.self) { invoice in
+                        InvoiceCell(invoice: invoice) {
+                            
+                        }
+                    }
+                }
+                .padding()
+            }
+            .onAppear {
+                viewStore.send(.fetchInvoiceList)
             }
             .navigationBarTitle(viewStore.supplier.name, displayMode: .inline)
 //            .navigationBarBackButtonHidden(true)
             .navigationBarItems(
-//                leading: Button(action: {
+                //                leading: Button(action: {
 //                    viewStore.send(.back)
 //                }) {
 //                    Image(systemName: "chevron.backward").frame(width: 25, height: 25, alignment: .center)
