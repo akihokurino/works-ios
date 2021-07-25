@@ -1,5 +1,3 @@
-//
-
 import PDFKit
 import SwiftUI
 import WebKit
@@ -8,6 +6,7 @@ struct PDFKitView: View {
     let data: URL?
 
     var body: some View {
+        // PDFKitを表示するときにはURLが存在しないといけない
         if let data = data {
             PDFKitRepresentedView(data)
         } else {
@@ -17,9 +16,9 @@ struct PDFKitView: View {
 }
 
 struct PDFKitRepresentedView: UIViewRepresentable {
-    let data: URL?
+    let data: URL
 
-    init(_ data: URL?) {
+    init(_ data: URL) {
         self.data = data
     }
 
@@ -28,9 +27,7 @@ struct PDFKitRepresentedView: UIViewRepresentable {
         pdfView.displayDirection = .vertical
         pdfView.autoScales = true
         pdfView.displayMode = .singlePage
-        if let url = data {
-            pdfView.document = PDFDocument(url: url)
-        }
+        pdfView.document = PDFDocument(url: data)
         return pdfView
     }
 
