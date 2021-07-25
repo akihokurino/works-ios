@@ -3,7 +3,7 @@ import ComposableArchitecture
 import Firebase
 
 enum InvoiceDetailTCA {
-    static let reducer = Reducer<State, Action, Environment> { state, action, _ in
+    static let reducer = Reducer<State, Action, Environment> { state, action, environment in
         switch action {
         case .back:
             return .none
@@ -11,8 +11,10 @@ enum InvoiceDetailTCA {
             state.isLoading = true
             let invoiceId = state.invoice.id
             return GraphQLClient.shared.caller()
+                .subscribe(on: environment.backgroundQueue)
                 .flatMap { caller in caller.downloadInvoicePDF(invoiceId: invoiceId) }
                 .flatMap { url in Downloader.shared.download(url: url) }
+                .receive(on: environment.mainQueue)
                 .catchToEffect()
                 .map(InvoiceDetailTCA.Action.downloaded)
         case .downloaded(.success(let data)):

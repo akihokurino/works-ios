@@ -4,7 +4,7 @@ import ComposableArchitecture
 import Firebase
 
 enum SignInTCA {
-    static let reducer = Reducer<State, Action, Environment> { state, action, _ in
+    static let reducer = Reducer<State, Action, Environment> { state, action, environment in
         switch action {
         case .onAppear:
             let verificationId = LocalStore.authVerificationId
@@ -62,8 +62,10 @@ enum SignInTCA {
             }
 
             return verify
+                .subscribe(on: environment.backgroundQueue)
                 .flatMap { _ in GraphQLClient.shared.caller() }
                 .flatMap { caller in caller.authenticate() }
+                .receive(on: environment.mainQueue)
                 .catchToEffect()
                 .map(SignInTCA.Action.verified)
         case .verified(.success(let me)):

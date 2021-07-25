@@ -3,7 +3,7 @@ import ComposableArchitecture
 import Firebase
 
 enum SupplierDetailTCA {
-    static let reducer = Reducer<State, Action, Environment> { state, action, _ in
+    static let reducer = Reducer<State, Action, Environment> { state, action, environment in
         switch action {
         case .back:
             return .none
@@ -23,8 +23,10 @@ enum SupplierDetailTCA {
             state.isLoading = true
             let id = state.supplier.id
             return GraphQLClient.shared.caller()
+                .subscribe(on: environment.backgroundQueue)
                 .flatMap { caller in caller.deleteSupplier(id: id) }
                 .map { _ in true }
+                .receive(on: environment.mainQueue)
                 .catchToEffect()
                 .map(SupplierDetailTCA.Action.deleted)
         case .deleted(.success(_)):
@@ -34,14 +36,18 @@ enum SupplierDetailTCA {
         case .fetchInvoiceList:
             let supplierId = state.supplier.id
             return GraphQLClient.shared.caller()
+                .subscribe(on: environment.backgroundQueue)
                 .flatMap { caller in caller.getInvoiceList(supplierId: supplierId) }
+                .receive(on: environment.mainQueue)
                 .catchToEffect()
                 .map(SupplierDetailTCA.Action.invoiceList)
         case .refreshInvoiceList:
             let supplierId = state.supplier.id
             state.isRefreshing = true
             return GraphQLClient.shared.caller()
+                .subscribe(on: environment.backgroundQueue)
                 .flatMap { caller in caller.getInvoiceList(supplierId: supplierId) }
+                .receive(on: environment.mainQueue)
                 .catchToEffect()
                 .map(SupplierDetailTCA.Action.invoiceList)
         case .invoiceList(.success(let items)):

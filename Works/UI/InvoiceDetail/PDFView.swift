@@ -8,7 +8,11 @@ struct PDFKitView: View {
     let data: URL?
 
     var body: some View {
-        PDFKitRepresentedView(data)
+        if let data = data {
+            PDFKitRepresentedView(data)
+        } else {
+            Text("loading...")
+        }
     }
 }
 
@@ -21,14 +25,10 @@ struct PDFKitRepresentedView: UIViewRepresentable {
 
     func makeUIView(context: UIViewRepresentableContext<PDFKitRepresentedView>) -> PDFKitRepresentedView.UIViewType {
         let pdfView = PDFView()
-        pdfView.autoresizesSubviews = true
-        pdfView.autoresizingMask = [.flexibleWidth, .flexibleHeight, .flexibleTopMargin, .flexibleLeftMargin]
         pdfView.displayDirection = .vertical
         pdfView.autoScales = true
-        pdfView.displayMode = .singlePageContinuous
-        pdfView.displaysPageBreaks = true
+        pdfView.displayMode = .singlePage
         if let url = data {
-            print(url)
             pdfView.document = PDFDocument(url: url)
         }
         return pdfView

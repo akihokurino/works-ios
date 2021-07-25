@@ -8,7 +8,7 @@ struct UpdateSupplierParams: Equatable {
 }
 
 enum SupplierEditTCA {
-    static let reducer = Reducer<State, Action, Environment> { state, action, _ in
+    static let reducer = Reducer<State, Action, Environment> { state, action, environment in
         switch action {
         case .back:
             return .none
@@ -16,12 +16,14 @@ enum SupplierEditTCA {
             state.isLoading = true
             let id = state.supplier.id
             return GraphQLClient.shared.caller()
+                .subscribe(on: environment.backgroundQueue)
                 .flatMap { caller in
                     caller.updateSupplier(
                         id: id,
                         name: params.name,
                         billingAmount: params.billingAmount)
                 }
+                .receive(on: environment.mainQueue)
                 .catchToEffect()
                 .map(SupplierEditTCA.Action.updated)
         case .updated(.success(_)):

@@ -3,7 +3,7 @@ import ComposableArchitecture
 import Firebase
 
 enum SettingTCA {
-    static let reducer = Reducer<State, Action, Environment> { state, action, _ in
+    static let reducer = Reducer<State, Action, Environment> { state, action, environment in
         switch action {
         case .signOut:
             try? Auth.auth().signOut()
@@ -11,15 +11,19 @@ enum SettingTCA {
         case .connectMisoca(let code):
             state.isLoading = true
             return GraphQLClient.shared.caller()
+                .subscribe(on: environment.backgroundQueue)
                 .flatMap { caller in caller.connectMisoca(code: code) }
                 .map { _ in true }
+                .receive(on: environment.mainQueue)
                 .catchToEffect()
                 .map(SettingTCA.Action.connectedMisoca)
         case .refreshMisoca:
             state.isLoading = true
             return GraphQLClient.shared.caller()
+                .subscribe(on: environment.backgroundQueue)
                 .flatMap { caller in caller.refreshMisoca() }
                 .map { _ in true }
+                .receive(on: environment.mainQueue)
                 .catchToEffect()
                 .map(SettingTCA.Action.connectedMisoca)
         case .connectedMisoca(.success(_)):

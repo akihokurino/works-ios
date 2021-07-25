@@ -3,13 +3,15 @@ import ComposableArchitecture
 import Firebase
 
 enum RootTCA {
-    static let reducer = Reducer<State, Action, Environment> { state, action, _ in
+    static let reducer = Reducer<State, Action, Environment> { state, action, environment in
         switch action {
         case .onAppear:
             if let me = Auth.auth().currentUser {
                 state.isLoading = true
                 return GraphQLClient.shared.caller()
+                    .subscribe(on: environment.backgroundQueue)
                     .flatMap { caller in caller.me() }
+                    .receive(on: environment.mainQueue)
                     .catchToEffect()
                     .map(RootTCA.Action.me)
             } else {

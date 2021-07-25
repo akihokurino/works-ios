@@ -9,19 +9,21 @@ struct CreateSupplierParams: Equatable {
 }
 
 enum SupplierCreateTCA {
-    static let reducer = Reducer<State, Action, Environment> { state, action, _ in
+    static let reducer = Reducer<State, Action, Environment> { state, action, environment in
         switch action {
         case .back:
             return .none
         case .create(let params):
             state.isLoading = true
             return GraphQLClient.shared.caller()
+                .subscribe(on: environment.backgroundQueue)
                 .flatMap { caller in
                     caller.createSupplier(
                         name: params.name,
                         billingAmount: params.billingAmount,
                         billingType: params.billingType)
                 }
+                .receive(on: environment.mainQueue)
                 .catchToEffect()
                 .map(SupplierCreateTCA.Action.created)
         case .created(.success(_)):

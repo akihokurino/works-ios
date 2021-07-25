@@ -3,12 +3,14 @@ import ComposableArchitecture
 import Firebase
 
 enum SupplierListTCA {
-    static let reducer = Reducer<State, Action, Environment> { state, action, _ in
+    static let reducer = Reducer<State, Action, Environment> { state, action, environment in
         switch action {
         case .refresh:
             state.isRefreshing = true
             return GraphQLClient.shared.caller()
+                .subscribe(on: environment.backgroundQueue)
                 .flatMap { caller in caller.me() }
+                .receive(on: environment.mainQueue)
                 .catchToEffect()
                 .map(SupplierListTCA.Action.refreshed)
         case .refreshed(.success(let me)):
@@ -39,7 +41,9 @@ enum SupplierListTCA {
             case .created(.success(_)):
                 state.crateState = nil
                 return GraphQLClient.shared.caller()
+                    .subscribe(on: environment.backgroundQueue)
                     .flatMap { caller in caller.me() }
+                    .receive(on: environment.mainQueue)
                     .catchToEffect()
                     .map(SupplierListTCA.Action.refreshed)
             default:
@@ -53,7 +57,9 @@ enum SupplierListTCA {
             case .deleted(.success(_)):
                 state.detailState = nil
                 return GraphQLClient.shared.caller()
+                    .subscribe(on: environment.backgroundQueue)
                     .flatMap { caller in caller.me() }
+                    .receive(on: environment.mainQueue)
                     .catchToEffect()
                     .map(SupplierListTCA.Action.refreshed)
             default:
