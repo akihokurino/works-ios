@@ -9,8 +9,14 @@ struct SupplierDetailView: View {
     var body: some View {
         WithViewStore(store) { viewStore in
             ScrollView {
+                RefreshControl(isRefreshing: Binding(
+                    get: { viewStore.isRefreshing },
+                    set: { _ in }
+                ), coordinateSpaceName: "RefreshControl", onRefresh: {
+                    viewStore.send(.refreshInvoiceList)
+                })
+                
                 VStack(alignment: .leading) {
-                    Spacer().frame(height: 10)
                     HStack {
                         Text("請求タイミング")
                             .foregroundColor(Color.gray)
@@ -44,7 +50,7 @@ struct SupplierDetailView: View {
                     maxHeight: .infinity,
                     alignment: .topLeading
                 )
-                .padding()
+                .padding(.horizontal, 15)
 
                 VStack(spacing: 15) {
                     ForEach(viewStore.invoices, id: \.self) { invoice in
@@ -53,8 +59,10 @@ struct SupplierDetailView: View {
                         }
                     }
                 }
-                .padding()
+                .padding(.horizontal, 15)
+                .padding(.top, 80)
             }
+            .coordinateSpace(name: "RefreshControl")
             .onAppear {
                 viewStore.send(.fetchInvoiceList)
             }
