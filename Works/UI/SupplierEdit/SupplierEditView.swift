@@ -6,12 +6,16 @@ struct SupplierEditView: View {
 
     @State private var name: String = ""
     @State private var billingAmount: String = ""
+    @State private var subject: String = ""
 
     var body: some View {
         WithViewStore(store) { viewStore in
             ScrollView {
                 VStack {
                     TextFieldInput(value: $name, label: "取引先名", keyboardType: .default)
+                    Spacer().frame(height: 20)
+
+                    TextFieldInput(value: $subject, label: "件名", keyboardType: .default)
                     Spacer().frame(height: 20)
 
                     TextFieldInput(value: $billingAmount, label: "請求額（税抜）", keyboardType: .decimalPad)
@@ -21,13 +25,14 @@ struct SupplierEditView: View {
                     ActionButton(text: "編集", background: .primary) {
                         let _billingAmount = Int(billingAmount) ?? 0
 
-                        if name.isEmpty || _billingAmount == 0 {
+                        if name.isEmpty || subject.isEmpty || _billingAmount == 0 {
                             return
                         }
 
                         viewStore.send(.update(UpdateSupplierParams(
                             name: name,
-                            billingAmount: _billingAmount
+                            billingAmount: _billingAmount,
+                            subject: subject
                         )))
                     }
                 }
@@ -35,6 +40,7 @@ struct SupplierEditView: View {
                 .onAppear {
                     self.name = viewStore.state.supplier.name
                     self.billingAmount = String(viewStore.state.supplier.billingAmountExcludeTax)
+                    self.subject = viewStore.state.supplier.subject
                 }
             }
             .navigationBarTitle("取引先編集", displayMode: .inline)

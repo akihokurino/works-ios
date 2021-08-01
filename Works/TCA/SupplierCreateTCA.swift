@@ -6,6 +6,7 @@ struct CreateSupplierParams: Equatable {
     let name: String
     let billingAmount: Int
     let billingType: GraphQL.GraphQLBillingType
+    let subject: String
 }
 
 enum SupplierCreateTCA {
@@ -21,7 +22,8 @@ enum SupplierCreateTCA {
                     caller.createSupplier(
                         name: params.name,
                         billingAmount: params.billingAmount,
-                        billingType: params.billingType)
+                        billingType: params.billingType,
+                        subject: params.subject)
                 }
                 .receive(on: environment.mainQueue)
                 .catchToEffect()

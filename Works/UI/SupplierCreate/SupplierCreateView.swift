@@ -8,6 +8,7 @@ struct SupplierCreateView: View {
     @State private var billingAmount: String = ""
     @State private var showBillingTypePicker: Bool = false
     @State private var selectedBillingTypeIndex: Int = 0
+    @State private var subject: String = ""
     private let billingTypeSelection = [
         PickerItem(label: "月々", value: "0"),
         PickerItem(label: "納品時", value: "1")
@@ -18,6 +19,9 @@ struct SupplierCreateView: View {
             ScrollView {
                 VStack {
                     TextFieldInput(value: $name, label: "取引先名", keyboardType: .default)
+                    Spacer().frame(height: 20)
+
+                    TextFieldInput(value: $subject, label: "件名", keyboardType: .default)
                     Spacer().frame(height: 20)
 
                     TextFieldInput(value: $billingAmount, label: "請求額（税抜）", keyboardType: .decimalPad)
@@ -40,14 +44,15 @@ struct SupplierCreateView: View {
 
                         let _billingAmount = Int(billingAmount) ?? 0
 
-                        if name.isEmpty || _billingAmount == 0 {
+                        if name.isEmpty || subject.isEmpty || _billingAmount == 0 {
                             return
                         }
 
                         viewStore.send(.create(CreateSupplierParams(
                             name: name,
                             billingAmount: _billingAmount,
-                            billingType: _billingType
+                            billingType: _billingType,
+                            subject: subject
                         )))
                     }
                 }

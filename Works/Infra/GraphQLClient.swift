@@ -88,7 +88,8 @@ struct GraphQLCaller {
                                     name: edge.node.fragments.supplierFragment.name,
                                     billingAmountIncludeTax: edge.node.fragments.supplierFragment.billingAmountIncludeTax,
                                     billingAmountExcludeTax: edge.node.fragments.supplierFragment.billingAmountExcludeTax,
-                                    billingType: edge.node.fragments.supplierFragment.billingType
+                                    billingType: edge.node.fragments.supplierFragment.billingType,
+                                    subject: edge.node.fragments.supplierFragment.subject
                                 )
                             }
                         )
@@ -150,7 +151,8 @@ struct GraphQLCaller {
                                     name: edge.node.fragments.supplierFragment.name,
                                     billingAmountIncludeTax: edge.node.fragments.supplierFragment.billingAmountIncludeTax,
                                     billingAmountExcludeTax: edge.node.fragments.supplierFragment.billingAmountExcludeTax,
-                                    billingType: edge.node.fragments.supplierFragment.billingType
+                                    billingType: edge.node.fragments.supplierFragment.billingType,
+                                    subject: edge.node.fragments.supplierFragment.subject
                                 )
                             }
                         )
@@ -162,9 +164,9 @@ struct GraphQLCaller {
         }
     }
 
-    func createSupplier(name: String, billingAmount: Int, billingType: GraphQL.GraphQLBillingType) -> Future<Supplier, AppError> {
+    func createSupplier(name: String, billingAmount: Int, billingType: GraphQL.GraphQLBillingType, subject: String) -> Future<Supplier, AppError> {
         return Future<Supplier, AppError> { promise in
-            cli.perform(mutation: GraphQL.CreateSupplierMutation(name: name, billingAmount: billingAmount, billingType: billingType)) { result in
+            cli.perform(mutation: GraphQL.CreateSupplierMutation(name: name, billingAmount: billingAmount, billingType: billingType, subject: subject)) { result in
                 switch result {
                     case .success(let graphQLResult):
                         guard let data = graphQLResult.data else {
@@ -177,7 +179,8 @@ struct GraphQLCaller {
                             name: data.createSupplier.fragments.supplierFragment.name,
                             billingAmountIncludeTax: data.createSupplier.fragments.supplierFragment.billingAmountIncludeTax,
                             billingAmountExcludeTax: data.createSupplier.fragments.supplierFragment.billingAmountExcludeTax,
-                            billingType: data.createSupplier.fragments.supplierFragment.billingType
+                            billingType: data.createSupplier.fragments.supplierFragment.billingType,
+                            subject: data.createSupplier.fragments.supplierFragment.subject
                         )
                         promise(.success(supplier))
                     case .failure(let error):
@@ -187,9 +190,9 @@ struct GraphQLCaller {
         }
     }
 
-    func updateSupplier(id: String, name: String, billingAmount: Int) -> Future<Supplier, AppError> {
+    func updateSupplier(id: String, name: String, billingAmount: Int, subject: String) -> Future<Supplier, AppError> {
         return Future<Supplier, AppError> { promise in
-            cli.perform(mutation: GraphQL.UpdateSupplierMutation(id: id, name: name, billingAmount: billingAmount)) { result in
+            cli.perform(mutation: GraphQL.UpdateSupplierMutation(id: id, name: name, billingAmount: billingAmount, subject: subject)) { result in
                 switch result {
                     case .success(let graphQLResult):
                         guard let data = graphQLResult.data else {
@@ -202,7 +205,8 @@ struct GraphQLCaller {
                             name: data.updateSupplier.fragments.supplierFragment.name,
                             billingAmountIncludeTax: data.updateSupplier.fragments.supplierFragment.billingAmountIncludeTax,
                             billingAmountExcludeTax: data.updateSupplier.fragments.supplierFragment.billingAmountExcludeTax,
-                            billingType: data.updateSupplier.fragments.supplierFragment.billingType
+                            billingType: data.updateSupplier.fragments.supplierFragment.billingType,
+                            subject: data.updateSupplier.fragments.supplierFragment.subject
                         )
                         promise(.success(supplier))
                     case .failure(let error):

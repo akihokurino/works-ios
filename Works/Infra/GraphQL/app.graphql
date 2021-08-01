@@ -22,21 +22,23 @@ mutation Authenticate {
 	}
 }
 
-mutation CreateSupplier($name: String!, $billingAmount: Int!, $billingType: GraphQLBillingType!) {
+mutation CreateSupplier($name: String!, $billingAmount: Int!, $billingType: GraphQLBillingType!, $subject: String!) {
 	createSupplier(input: {
 		name: $name,
 		billingAmount: $billingAmount,
-		billingType: $billingType
+		billingType: $billingType,
+		subject: $subject,
 	}) {
 		...SupplierFragment
 	}
 }
 
-mutation UpdateSupplier($id: String!, $name: String!, $billingAmount: Int!) {
+mutation UpdateSupplier($id: String!, $name: String!, $billingAmount: Int!, $subject: String!) {
 	updateSupplier(input: {
 		id: $id,
 		name: $name,
-		billingAmount: $billingAmount
+		billingAmount: $billingAmount,
+		subject: $subject,
 	}) {
 		...SupplierFragment
 	}
@@ -81,6 +83,7 @@ fragment SupplierFragment on Supplier {
 	billingAmountIncludeTax
 	billingAmountExcludeTax
 	billingType
+	subject
 }
 
 fragment InvoiceFragment on Invoice {

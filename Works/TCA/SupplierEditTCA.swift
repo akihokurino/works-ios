@@ -5,6 +5,7 @@ import Firebase
 struct UpdateSupplierParams: Equatable {
     let name: String
     let billingAmount: Int
+    let subject: String
 }
 
 enum SupplierEditTCA {
@@ -21,7 +22,8 @@ enum SupplierEditTCA {
                     caller.updateSupplier(
                         id: id,
                         name: params.name,
-                        billingAmount: params.billingAmount)
+                        billingAmount: params.billingAmount,
+                        subject: params.subject)
                 }
                 .receive(on: environment.mainQueue)
                 .catchToEffect()
