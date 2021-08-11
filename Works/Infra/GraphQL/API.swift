@@ -237,7 +237,7 @@ public enum GraphQL {
     public let operationDefinition: String =
       """
       query GetInvoiceList($supplierId: String!) {
-        getInvoiceList(input: {supplierId: $supplierId}) {
+        invoiceList(supplierId: $supplierId) {
           __typename
           edges {
             __typename
@@ -273,7 +273,7 @@ public enum GraphQL {
 
       public static var selections: [GraphQLSelection] {
         return [
-          GraphQLField("getInvoiceList", arguments: ["input": ["supplierId": GraphQLVariable("supplierId")]], type: .nonNull(.object(GetInvoiceList.selections))),
+          GraphQLField("invoiceList", arguments: ["supplierId": GraphQLVariable("supplierId")], type: .nonNull(.object(InvoiceList.selections))),
         ]
       }
 
@@ -283,20 +283,20 @@ public enum GraphQL {
         self.resultMap = unsafeResultMap
       }
 
-      public init(getInvoiceList: GetInvoiceList) {
-        self.init(unsafeResultMap: ["__typename": "Query", "getInvoiceList": getInvoiceList.resultMap])
+      public init(invoiceList: InvoiceList) {
+        self.init(unsafeResultMap: ["__typename": "Query", "invoiceList": invoiceList.resultMap])
       }
 
-      public var getInvoiceList: GetInvoiceList {
+      public var invoiceList: InvoiceList {
         get {
-          return GetInvoiceList(unsafeResultMap: resultMap["getInvoiceList"]! as! ResultMap)
+          return InvoiceList(unsafeResultMap: resultMap["invoiceList"]! as! ResultMap)
         }
         set {
-          resultMap.updateValue(newValue.resultMap, forKey: "getInvoiceList")
+          resultMap.updateValue(newValue.resultMap, forKey: "invoiceList")
         }
       }
 
-      public struct GetInvoiceList: GraphQLSelectionSet {
+      public struct InvoiceList: GraphQLSelectionSet {
         public static let possibleTypes: [String] = ["InvoiceConnection"]
 
         public static var selections: [GraphQLSelection] {
@@ -420,6 +420,195 @@ public enum GraphQL {
               public var invoiceFragment: InvoiceFragment {
                 get {
                   return InvoiceFragment(unsafeResultMap: resultMap)
+                }
+                set {
+                  resultMap += newValue.resultMap
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  public final class GetInvoiceHistoryListQuery: GraphQLQuery {
+    /// The raw GraphQL definition of this operation.
+    public let operationDefinition: String =
+      """
+      query GetInvoiceHistoryList {
+        invoiceHistoryList {
+          __typename
+          edges {
+            __typename
+            node {
+              __typename
+              ...InvoiceHistoryFragment
+            }
+          }
+        }
+      }
+      """
+
+    public let operationName: String = "GetInvoiceHistoryList"
+
+    public var queryDocument: String {
+      var document: String = operationDefinition
+      document.append("\n" + InvoiceHistoryFragment.fragmentDefinition)
+      return document
+    }
+
+    public init() {
+    }
+
+    public struct Data: GraphQLSelectionSet {
+      public static let possibleTypes: [String] = ["Query"]
+
+      public static var selections: [GraphQLSelection] {
+        return [
+          GraphQLField("invoiceHistoryList", type: .nonNull(.object(InvoiceHistoryList.selections))),
+        ]
+      }
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public init(invoiceHistoryList: InvoiceHistoryList) {
+        self.init(unsafeResultMap: ["__typename": "Query", "invoiceHistoryList": invoiceHistoryList.resultMap])
+      }
+
+      public var invoiceHistoryList: InvoiceHistoryList {
+        get {
+          return InvoiceHistoryList(unsafeResultMap: resultMap["invoiceHistoryList"]! as! ResultMap)
+        }
+        set {
+          resultMap.updateValue(newValue.resultMap, forKey: "invoiceHistoryList")
+        }
+      }
+
+      public struct InvoiceHistoryList: GraphQLSelectionSet {
+        public static let possibleTypes: [String] = ["InvoiceHistoryConnection"]
+
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("edges", type: .nonNull(.list(.nonNull(.object(Edge.selections))))),
+          ]
+        }
+
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
+        }
+
+        public init(edges: [Edge]) {
+          self.init(unsafeResultMap: ["__typename": "InvoiceHistoryConnection", "edges": edges.map { (value: Edge) -> ResultMap in value.resultMap }])
+        }
+
+        public var __typename: String {
+          get {
+            return resultMap["__typename"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "__typename")
+          }
+        }
+
+        public var edges: [Edge] {
+          get {
+            return (resultMap["edges"] as! [ResultMap]).map { (value: ResultMap) -> Edge in Edge(unsafeResultMap: value) }
+          }
+          set {
+            resultMap.updateValue(newValue.map { (value: Edge) -> ResultMap in value.resultMap }, forKey: "edges")
+          }
+        }
+
+        public struct Edge: GraphQLSelectionSet {
+          public static let possibleTypes: [String] = ["InvoiceHistoryEdge"]
+
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("node", type: .nonNull(.object(Node.selections))),
+            ]
+          }
+
+          public private(set) var resultMap: ResultMap
+
+          public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+          }
+
+          public init(node: Node) {
+            self.init(unsafeResultMap: ["__typename": "InvoiceHistoryEdge", "node": node.resultMap])
+          }
+
+          public var __typename: String {
+            get {
+              return resultMap["__typename"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "__typename")
+            }
+          }
+
+          public var node: Node {
+            get {
+              return Node(unsafeResultMap: resultMap["node"]! as! ResultMap)
+            }
+            set {
+              resultMap.updateValue(newValue.resultMap, forKey: "node")
+            }
+          }
+
+          public struct Node: GraphQLSelectionSet {
+            public static let possibleTypes: [String] = ["InvoiceHistory"]
+
+            public static var selections: [GraphQLSelection] {
+              return [
+                GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+                GraphQLFragmentSpread(InvoiceHistoryFragment.self),
+              ]
+            }
+
+            public private(set) var resultMap: ResultMap
+
+            public init(unsafeResultMap: ResultMap) {
+              self.resultMap = unsafeResultMap
+            }
+
+            public var __typename: String {
+              get {
+                return resultMap["__typename"]! as! String
+              }
+              set {
+                resultMap.updateValue(newValue, forKey: "__typename")
+              }
+            }
+
+            public var fragments: Fragments {
+              get {
+                return Fragments(unsafeResultMap: resultMap)
+              }
+              set {
+                resultMap += newValue.resultMap
+              }
+            }
+
+            public struct Fragments {
+              public private(set) var resultMap: ResultMap
+
+              public init(unsafeResultMap: ResultMap) {
+                self.resultMap = unsafeResultMap
+              }
+
+              public var invoiceHistoryFragment: InvoiceHistoryFragment {
+                get {
+                  return InvoiceHistoryFragment(unsafeResultMap: resultMap)
                 }
                 set {
                   resultMap += newValue.resultMap
@@ -1431,6 +1620,303 @@ public enum GraphQL {
       }
       set {
         resultMap.updateValue(newValue, forKey: "tax")
+      }
+    }
+  }
+
+  public struct InvoiceHistoryFragment: GraphQLFragment {
+    /// The raw GraphQL definition of this fragment.
+    public static let fragmentDefinition: String =
+      """
+      fragment InvoiceHistoryFragment on InvoiceHistory {
+        __typename
+        invoice {
+          __typename
+          id
+          issueYmd
+          paymentDueOnYmd
+          invoiceNumber
+          paymentStatus
+          invoiceStatus
+          recipientName
+          subject
+          totalAmount
+          tax
+        }
+        supplier {
+          __typename
+          id
+          name
+          billingAmountIncludeTax
+          billingAmountExcludeTax
+          billingType
+          subject
+        }
+      }
+      """
+
+    public static let possibleTypes: [String] = ["InvoiceHistory"]
+
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("invoice", type: .nonNull(.object(Invoice.selections))),
+        GraphQLField("supplier", type: .nonNull(.object(Supplier.selections))),
+      ]
+    }
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(invoice: Invoice, supplier: Supplier) {
+      self.init(unsafeResultMap: ["__typename": "InvoiceHistory", "invoice": invoice.resultMap, "supplier": supplier.resultMap])
+    }
+
+    public var __typename: String {
+      get {
+        return resultMap["__typename"]! as! String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "__typename")
+      }
+    }
+
+    public var invoice: Invoice {
+      get {
+        return Invoice(unsafeResultMap: resultMap["invoice"]! as! ResultMap)
+      }
+      set {
+        resultMap.updateValue(newValue.resultMap, forKey: "invoice")
+      }
+    }
+
+    public var supplier: Supplier {
+      get {
+        return Supplier(unsafeResultMap: resultMap["supplier"]! as! ResultMap)
+      }
+      set {
+        resultMap.updateValue(newValue.resultMap, forKey: "supplier")
+      }
+    }
+
+    public struct Invoice: GraphQLSelectionSet {
+      public static let possibleTypes: [String] = ["Invoice"]
+
+      public static var selections: [GraphQLSelection] {
+        return [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
+          GraphQLField("issueYmd", type: .nonNull(.scalar(String.self))),
+          GraphQLField("paymentDueOnYmd", type: .nonNull(.scalar(String.self))),
+          GraphQLField("invoiceNumber", type: .nonNull(.scalar(String.self))),
+          GraphQLField("paymentStatus", type: .nonNull(.scalar(GraphQLPaymentStatus.self))),
+          GraphQLField("invoiceStatus", type: .nonNull(.scalar(GraphQLInvoiceStatus.self))),
+          GraphQLField("recipientName", type: .nonNull(.scalar(String.self))),
+          GraphQLField("subject", type: .nonNull(.scalar(String.self))),
+          GraphQLField("totalAmount", type: .nonNull(.scalar(Int.self))),
+          GraphQLField("tax", type: .nonNull(.scalar(Int.self))),
+        ]
+      }
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public init(id: GraphQLID, issueYmd: String, paymentDueOnYmd: String, invoiceNumber: String, paymentStatus: GraphQLPaymentStatus, invoiceStatus: GraphQLInvoiceStatus, recipientName: String, subject: String, totalAmount: Int, tax: Int) {
+        self.init(unsafeResultMap: ["__typename": "Invoice", "id": id, "issueYmd": issueYmd, "paymentDueOnYmd": paymentDueOnYmd, "invoiceNumber": invoiceNumber, "paymentStatus": paymentStatus, "invoiceStatus": invoiceStatus, "recipientName": recipientName, "subject": subject, "totalAmount": totalAmount, "tax": tax])
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var id: GraphQLID {
+        get {
+          return resultMap["id"]! as! GraphQLID
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "id")
+        }
+      }
+
+      public var issueYmd: String {
+        get {
+          return resultMap["issueYmd"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "issueYmd")
+        }
+      }
+
+      public var paymentDueOnYmd: String {
+        get {
+          return resultMap["paymentDueOnYmd"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "paymentDueOnYmd")
+        }
+      }
+
+      public var invoiceNumber: String {
+        get {
+          return resultMap["invoiceNumber"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "invoiceNumber")
+        }
+      }
+
+      public var paymentStatus: GraphQLPaymentStatus {
+        get {
+          return resultMap["paymentStatus"]! as! GraphQLPaymentStatus
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "paymentStatus")
+        }
+      }
+
+      public var invoiceStatus: GraphQLInvoiceStatus {
+        get {
+          return resultMap["invoiceStatus"]! as! GraphQLInvoiceStatus
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "invoiceStatus")
+        }
+      }
+
+      public var recipientName: String {
+        get {
+          return resultMap["recipientName"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "recipientName")
+        }
+      }
+
+      public var subject: String {
+        get {
+          return resultMap["subject"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "subject")
+        }
+      }
+
+      public var totalAmount: Int {
+        get {
+          return resultMap["totalAmount"]! as! Int
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "totalAmount")
+        }
+      }
+
+      public var tax: Int {
+        get {
+          return resultMap["tax"]! as! Int
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "tax")
+        }
+      }
+    }
+
+    public struct Supplier: GraphQLSelectionSet {
+      public static let possibleTypes: [String] = ["Supplier"]
+
+      public static var selections: [GraphQLSelection] {
+        return [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
+          GraphQLField("name", type: .nonNull(.scalar(String.self))),
+          GraphQLField("billingAmountIncludeTax", type: .nonNull(.scalar(Int.self))),
+          GraphQLField("billingAmountExcludeTax", type: .nonNull(.scalar(Int.self))),
+          GraphQLField("billingType", type: .nonNull(.scalar(GraphQLBillingType.self))),
+          GraphQLField("subject", type: .nonNull(.scalar(String.self))),
+        ]
+      }
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public init(id: GraphQLID, name: String, billingAmountIncludeTax: Int, billingAmountExcludeTax: Int, billingType: GraphQLBillingType, subject: String) {
+        self.init(unsafeResultMap: ["__typename": "Supplier", "id": id, "name": name, "billingAmountIncludeTax": billingAmountIncludeTax, "billingAmountExcludeTax": billingAmountExcludeTax, "billingType": billingType, "subject": subject])
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var id: GraphQLID {
+        get {
+          return resultMap["id"]! as! GraphQLID
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "id")
+        }
+      }
+
+      public var name: String {
+        get {
+          return resultMap["name"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "name")
+        }
+      }
+
+      public var billingAmountIncludeTax: Int {
+        get {
+          return resultMap["billingAmountIncludeTax"]! as! Int
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "billingAmountIncludeTax")
+        }
+      }
+
+      public var billingAmountExcludeTax: Int {
+        get {
+          return resultMap["billingAmountExcludeTax"]! as! Int
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "billingAmountExcludeTax")
+        }
+      }
+
+      public var billingType: GraphQLBillingType {
+        get {
+          return resultMap["billingType"]! as! GraphQLBillingType
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "billingType")
+        }
+      }
+
+      public var subject: String {
+        get {
+          return resultMap["subject"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "subject")
+        }
       }
     }
   }

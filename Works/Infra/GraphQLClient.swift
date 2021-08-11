@@ -47,7 +47,7 @@ struct GraphQLClient {
                     promise(.failure(.system(defaultErrorMsg)))
                     return
                 }
-                
+
                 let cache = InMemoryNormalizedCache()
                 let store = ApolloStore(cache: cache)
                 let client = URLSessionClient()
@@ -111,7 +111,7 @@ struct GraphQLCaller {
                             return
                         }
 
-                        let invoices = data.getInvoiceList.edges.map { edge in
+                        let invoices = data.invoiceList.edges.map { edge in
                             Invoice(
                                 id: edge.node.fragments.invoiceFragment.id,
                                 issueYMD: edge.node.fragments.invoiceFragment.issueYmd,
@@ -126,6 +126,49 @@ struct GraphQLCaller {
                             )
                         }
                         promise(.success(invoices))
+                    case .failure(let error):
+                        promise(.failure(AppError.system(error.localizedDescription)))
+                }
+            }
+        }
+    }
+
+    func getInvoiceHistoryList(supplierId: String) -> Future<[InvoiceHistory], AppError> {
+        return Future<[InvoiceHistory], AppError> { promise in
+            cli.fetch(query: GraphQL.GetInvoiceHistoryListQuery()) { result in
+                switch result {
+                    case .success(let graphQLResult):
+                        guard let data = graphQLResult.data else {
+                            promise(.failure(AppError.system(defaultErrorMsg)))
+                            return
+                        }
+
+                        let histories = data.invoiceHistoryList.edges.map { edge in
+                            InvoiceHistory(
+                                id: edge.node.fragments.invoiceHistoryFragment.invoice.id,
+                                invoice: Invoice(
+                                    id: edge.node.fragments.invoiceHistoryFragment.invoice.id,
+                                    issueYMD: edge.node.fragments.invoiceHistoryFragment.invoice.issueYmd,
+                                    paymentDueOnYMD: edge.node.fragments.invoiceHistoryFragment.invoice.paymentDueOnYmd,
+                                    invoiceNumber: edge.node.fragments.invoiceHistoryFragment.invoice.invoiceNumber,
+                                    paymentStatus: edge.node.fragments.invoiceHistoryFragment.invoice.paymentStatus,
+                                    invoiceStatus: edge.node.fragments.invoiceHistoryFragment.invoice.invoiceStatus,
+                                    recipientName: edge.node.fragments.invoiceHistoryFragment.invoice.recipientName,
+                                    subject: edge.node.fragments.invoiceHistoryFragment.invoice.subject,
+                                    totalAmount: edge.node.fragments.invoiceHistoryFragment.invoice.totalAmount,
+                                    tax: edge.node.fragments.invoiceHistoryFragment.invoice.tax
+                                ),
+                                supplier: Supplier(
+                                    id: edge.node.fragments.invoiceHistoryFragment.supplier.id,
+                                    name: edge.node.fragments.invoiceHistoryFragment.supplier.name,
+                                    billingAmountIncludeTax: edge.node.fragments.invoiceHistoryFragment.supplier.billingAmountIncludeTax,
+                                    billingAmountExcludeTax: edge.node.fragments.invoiceHistoryFragment.supplier.billingAmountExcludeTax,
+                                    billingType: edge.node.fragments.invoiceHistoryFragment.supplier.billingType,
+                                    subject: edge.node.fragments.invoiceHistoryFragment.supplier.subject
+                                )
+                            )
+                        }
+                        promise(.success(histories))
                     case .failure(let error):
                         promise(.failure(AppError.system(error.localizedDescription)))
                 }
@@ -238,7 +281,7 @@ struct GraphQLCaller {
                             promise(.failure(AppError.system(defaultErrorMsg)))
                             return
                         }
-                        
+
                         print(data.downloadInvoicePdf)
 
                         let url = URL(string: data.downloadInvoicePdf)!

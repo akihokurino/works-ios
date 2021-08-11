@@ -41,6 +41,11 @@ enum RootTCA {
             default:
                 return .none
             }
+        case .propagateInvoiceHistoryList(let action):
+            switch action {
+            default:
+                return .none
+            }
         case .propagateSetting(let action):
             switch action {
             case .signOut:
@@ -74,6 +79,17 @@ enum RootTCA {
         }
     )
     .presents(
+        InvoiceHistoryListTCA.reducer,
+        state: \.invoiceHistoryListState,
+        action: /RootTCA.Action.propagateInvoiceHistoryList,
+        environment: { _environment in
+            InvoiceHistoryListTCA.Environment(
+                mainQueue: _environment.mainQueue,
+                backgroundQueue: _environment.backgroundQueue
+            )
+        }
+    )
+    .presents(
         SettingTCA.reducer,
         state: \.settingState,
         action: /RootTCA.Action.propagateSetting,
@@ -93,6 +109,7 @@ extension RootTCA {
 
         case propagateSignIn(SignInTCA.Action)
         case propagateSupplierList(SupplierListTCA.Action)
+        case propagateInvoiceHistoryList(InvoiceHistoryListTCA.Action)
         case propagateSetting(SettingTCA.Action)
     }
 
@@ -103,6 +120,7 @@ extension RootTCA {
 
         var signInState: SignInTCA.State?
         var supplierListState: SupplierListTCA.State?
+        var invoiceHistoryListState: InvoiceHistoryListTCA.State?
         var settingState: SettingTCA.State?
 
         mutating func setSignInState(me: Me) {
@@ -110,6 +128,7 @@ extension RootTCA {
             self.authState = .alreadyLogin
             self.signInState = nil
             self.supplierListState = SupplierListTCA.State(me: me)
+            self.invoiceHistoryListState = InvoiceHistoryListTCA.State()
             self.settingState = SettingTCA.State()
         }
 
@@ -118,6 +137,7 @@ extension RootTCA {
             self.authState = .shouldLogin
             self.signInState = SignInTCA.State()
             self.supplierListState = nil
+            self.invoiceHistoryListState = nil
             self.settingState = nil
         }
     }

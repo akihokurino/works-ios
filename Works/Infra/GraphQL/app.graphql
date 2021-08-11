@@ -5,12 +5,20 @@ query GetMe {
 }
 
 query GetInvoiceList($supplierId: String!) {
-	getInvoiceList(input: {
-		supplierId: $supplierId,
-	}) {
+	invoiceList(supplierId: $supplierId) {
 		edges {
 			node {
 				...InvoiceFragment
+			}
+		}
+	}
+}
+
+query GetInvoiceHistoryList {
+	invoiceHistoryList {
+		edges {
+			node {
+				...InvoiceHistoryFragment
 			}
 		}
 	}
@@ -97,5 +105,28 @@ fragment InvoiceFragment on Invoice {
 	subject
 	totalAmount
 	tax
+}
+
+fragment InvoiceHistoryFragment on InvoiceHistory {
+	invoice {
+		id
+		issueYmd
+		paymentDueOnYmd
+		invoiceNumber
+		paymentStatus
+		invoiceStatus
+		recipientName
+		subject
+		totalAmount
+		tax
+	}
+	supplier {
+		id
+		name
+		billingAmountIncludeTax
+		billingAmountExcludeTax
+		billingType
+		subject
+	}
 }
 

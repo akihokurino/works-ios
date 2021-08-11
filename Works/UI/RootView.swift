@@ -3,7 +3,7 @@ import SwiftUI
 
 struct RootView: View {
     let store: Store<RootTCA.State, RootTCA.Action>
-    
+
     var body: some View {
         WithViewStore(store, removeDuplicates: { $0.authState == $1.authState }) { viewStore in
             Group {
@@ -28,6 +28,22 @@ struct RootView: View {
                         NavigationView {
                             IfLetStore(
                                 store.scope(
+                                    state: { $0.invoiceHistoryListState },
+                                    action: RootTCA.Action.propagateInvoiceHistoryList
+                                ),
+                                then: InvoiceHistoryListView.init(store:)
+                            )
+                        }
+                        .tabItem {
+                            VStack {
+                                Image(systemName: "doc")
+                                Text("履歴")
+                            }
+                        }.tag(2)
+
+                        NavigationView {
+                            IfLetStore(
+                                store.scope(
                                     state: { $0.settingState },
                                     action: RootTCA.Action.propagateSetting
                                 ),
@@ -39,7 +55,7 @@ struct RootView: View {
                                 Image(systemName: "gearshape")
                                 Text("設定")
                             }
-                        }.tag(2)
+                        }.tag(3)
                     }
                 } else if viewStore.authState == .shouldLogin {
                     IfLetStore(
@@ -60,7 +76,7 @@ struct RootView: View {
     }
 }
 
- struct RootView_Previews: PreviewProvider {
+struct RootView_Previews: PreviewProvider {
     static var previews: some View {
         RootView(store: .init(
             initialState: RootTCA.State(),
@@ -71,4 +87,4 @@ struct RootView: View {
             )
         ))
     }
- }
+}
