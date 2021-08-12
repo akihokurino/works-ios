@@ -6,18 +6,41 @@ struct InvoiceHistoryListView: View {
 
     var body: some View {
         WithViewStore(store) { viewStore in
-            ScrollView {}
-                .background(Color.white)
-                .navigationBarTitle("履歴", displayMode: .inline)
-                .overlay(Group {
-                    if viewStore.isLoading {
-                        HUD(isLoading: Binding(
-                            get: { viewStore.isLoading },
-                            set: { _ in }
-                        ))
+            ScrollView {
+                RefreshControl(isRefreshing: Binding(
+                    get: { viewStore.isRefreshing },
+                    set: { _ in }
+                ), coordinateSpaceName: "RefreshControl", onRefresh: {
+                    viewStore.send(.refreshHistoryList)
+                })
+
+                VStack(spacing: 15) {
+                    ForEach(viewStore.histories, id: \.self) { history in
+                        InvoiceHistoryCell(history: history) {
+                            viewStore.send(.presentInvoiceDetailView(history.invoice))
+                        }
                     }
-                }, alignment: .center)
+                }
+                .padding(.horizontal, 15)
+                .padding(.top, 30)
+            }
+            .coordinateSpace(name: "RefreshControl")
+            .onAppear {
+                viewStore.send(.fetchHistoryList)
+            }
+            .background(Color.white)
+            .navigationBarTitle("履歴", displayMode: .inline)
         }
+        .navigate(
+            using: store.scope(
+                state: \.invoiceDetailState,
+                action: InvoiceHistoryListTCA.Action.propagateInvoiceDetail
+            ),
+            destination: InvoiceDetailView.init(store:),
+            onDismiss: {
+                ViewStore(store.stateless).send(.popInvoiceDetailView)
+            }
+        )
     }
 }
 

@@ -50,6 +50,7 @@
 		0275874126C4368A00213014 /* InvoiceHistoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0275874026C4368A00213014 /* InvoiceHistoryListView.swift */; };
 		0275874326C436A700213014 /* InvoiceHistoryListTCA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0275874226C436A700213014 /* InvoiceHistoryListTCA.swift */; };
 		0288BE2C26A6E78300AE5324 /* MisocaOAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0288BE2B26A6E78300AE5324 /* MisocaOAuthView.swift */; };
+		0299CF9426C4D3E300361BCB /* InvoiceHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0299CF9326C4D3E300361BCB /* InvoiceHistoryCell.swift */; };
 		029A140626A33CD000ACC9FF /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029A140526A33CD000ACC9FF /* Menu.swift */; };
 		02ADC85B26AC0C04005A9D06 /* InvoiceDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ADC85A26AC0C04005A9D06 /* InvoiceDetailView.swift */; };
 		02ADC85D26AC0C13005A9D06 /* PDFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ADC85C26AC0C13005A9D06 /* PDFView.swift */; };
@@ -119,6 +120,7 @@
 		0275874026C4368A00213014 /* InvoiceHistoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceHistoryListView.swift; sourceTree = "<group>"; };
 		0275874226C436A700213014 /* InvoiceHistoryListTCA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceHistoryListTCA.swift; sourceTree = "<group>"; };
 		0288BE2B26A6E78300AE5324 /* MisocaOAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MisocaOAuthView.swift; sourceTree = "<group>"; };
+		0299CF9326C4D3E300361BCB /* InvoiceHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceHistoryCell.swift; sourceTree = "<group>"; };
 		029A140526A33CD000ACC9FF /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		02ADC85A26AC0C04005A9D06 /* InvoiceDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceDetailView.swift; sourceTree = "<group>"; };
 		02ADC85C26AC0C13005A9D06 /* PDFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFView.swift; sourceTree = "<group>"; };
@@ -272,6 +274,7 @@
 			isa = PBXGroup;
 			children = (
 				0275874026C4368A00213014 /* InvoiceHistoryListView.swift */,
+				0299CF9326C4D3E300361BCB /* InvoiceHistoryCell.swift */,
 			);
 			path = InvoiceHistoryList;
 			sourceTree = "<group>";
@@ -461,6 +464,7 @@
 				026E551B26A444BC00295866 /* SupplierCreateTCA.swift in Sources */,
 				02B7019D269EEC4D00BA9937 /* WorksApp.swift in Sources */,
 				02362F4B26A5685E0001AA10 /* NavigationLink+Store.swift in Sources */,
+				0299CF9426C4D3E300361BCB /* InvoiceHistoryCell.swift in Sources */,
 				0219581A269FEC1700AB4D22 /* SettingView.swift in Sources */,
 				02F2EDF426A58054009ABF50 /* Reducer+Presents.swift in Sources */,
 				0270060726A31A55004E68A1 /* SupplierListTCA.swift in Sources */,

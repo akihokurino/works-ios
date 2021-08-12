@@ -23,7 +23,7 @@ struct SupplierListView: View {
                         .fontWeight(.bold)
                         .font(Font.system(size: 40.0))
                 }
-                .padding(.top, 40)
+                .padding(.top, 30)
 
                 VStack(spacing: 15) {
                     ForEach(viewStore.me.suppliers, id: \.self) { supplier in

@@ -133,7 +133,7 @@ struct GraphQLCaller {
         }
     }
 
-    func getInvoiceHistoryList(supplierId: String) -> Future<[InvoiceHistory], AppError> {
+    func getInvoiceHistoryList() -> Future<[InvoiceHistory], AppError> {
         return Future<[InvoiceHistory], AppError> { promise in
             cli.fetch(query: GraphQL.GetInvoiceHistoryListQuery()) { result in
                 switch result {
