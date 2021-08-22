@@ -7,19 +7,25 @@ struct SupplierEditView: View {
     @State private var name: String = ""
     @State private var billingAmount: String = ""
     @State private var subject: String = ""
+    @State private var subjectTemplate: String = ""
 
     var body: some View {
         WithViewStore(store) { viewStore in
             ScrollView {
                 VStack {
-                    TextFieldInput(value: $name, label: "取引先名", keyboardType: .default)
-                    Spacer().frame(height: 20)
+                    Group {
+                        TextFieldInput(value: $name, label: "取引先名", keyboardType: .default)
+                        Spacer().frame(height: 20)
 
-                    TextFieldInput(value: $subject, label: "件名", keyboardType: .default)
-                    Spacer().frame(height: 20)
+                        TextFieldInput(value: $subject, label: "件名", keyboardType: .default)
+                        Spacer().frame(height: 20)
 
-                    TextFieldInput(value: $billingAmount, label: "請求額（税抜）", keyboardType: .decimalPad)
-                    Spacer().frame(height: 20)
+                        TextFieldInput(value: $subjectTemplate, label: "件名テンプレート", keyboardType: .default)
+                        Spacer().frame(height: 20)
+
+                        TextFieldInput(value: $billingAmount, label: "請求額（税抜）", keyboardType: .decimalPad)
+                        Spacer().frame(height: 20)
+                    }
 
                     Spacer().frame(height: 20)
                     ActionButton(text: "編集", background: .primary) {
@@ -32,7 +38,8 @@ struct SupplierEditView: View {
                         viewStore.send(.update(UpdateSupplierParams(
                             name: name,
                             billingAmount: _billingAmount,
-                            subject: subject
+                            subject: subject,
+                            subjectTemplate: subjectTemplate
                         )))
                     }
                 }
@@ -41,17 +48,10 @@ struct SupplierEditView: View {
                     self.name = viewStore.state.supplier.name
                     self.billingAmount = String(viewStore.state.supplier.billingAmountExcludeTax)
                     self.subject = viewStore.state.supplier.subject
+                    self.subjectTemplate = viewStore.state.supplier.subjectTemplate
                 }
             }
             .navigationBarTitle("取引先編集", displayMode: .inline)
-//            .navigationBarBackButtonHidden(true)
-//            .navigationBarItems(
-//                leading: Button(action: {
-//                    viewStore.send(.back)
-//                }) {
-//                    Image(systemName: "chevron.backward").frame(width: 25, height: 25, alignment: .center)
-//                }
-//            )
             .overlay(Group {
                 if viewStore.isLoading {
                     HUD(isLoading: Binding(

@@ -9,6 +9,8 @@ struct SupplierCreateView: View {
     @State private var showBillingTypePicker: Bool = false
     @State private var selectedBillingTypeIndex: Int = 0
     @State private var subject: String = ""
+    @State private var subjectTemplate: String = ""
+
     private let billingTypeSelection = [
         PickerItem(label: "月々", value: "0"),
         PickerItem(label: "納品時", value: "1")
@@ -18,22 +20,27 @@ struct SupplierCreateView: View {
         WithViewStore(store) { viewStore in
             ScrollView {
                 VStack {
-                    TextFieldInput(value: $name, label: "取引先名", keyboardType: .default)
-                    Spacer().frame(height: 20)
+                    Group {
+                        TextFieldInput(value: $name, label: "取引先名", keyboardType: .default)
+                        Spacer().frame(height: 20)
 
-                    TextFieldInput(value: $subject, label: "件名", keyboardType: .default)
-                    Spacer().frame(height: 20)
+                        TextFieldInput(value: $subject, label: "件名", keyboardType: .default)
+                        Spacer().frame(height: 20)
 
-                    TextFieldInput(value: $billingAmount, label: "請求額（税抜）", keyboardType: .decimalPad)
-                    Spacer().frame(height: 20)
+                        TextFieldInput(value: $subjectTemplate, label: "件名テンプレート", keyboardType: .default)
+                        Spacer().frame(height: 20)
 
-                    PickerInput(
-                        selectIndex: $selectedBillingTypeIndex,
-                        showPicker: $showBillingTypePicker,
-                        label: "請求タイミング",
-                        selection: billingTypeSelection
-                    )
-                    Spacer().frame(height: 20)
+                        TextFieldInput(value: $billingAmount, label: "請求額（税抜）", keyboardType: .decimalPad)
+                        Spacer().frame(height: 20)
+
+                        PickerInput(
+                            selectIndex: $selectedBillingTypeIndex,
+                            showPicker: $showBillingTypePicker,
+                            label: "請求タイミング",
+                            selection: billingTypeSelection
+                        )
+                        Spacer().frame(height: 20)
+                    }
 
                     Spacer().frame(height: 20)
                     ActionButton(text: "登録", background: .primary) {
@@ -52,21 +59,14 @@ struct SupplierCreateView: View {
                             name: name,
                             billingAmount: _billingAmount,
                             billingType: _billingType,
-                            subject: subject
+                            subject: subject,
+                            subjectTemplate: subjectTemplate
                         )))
                     }
                 }
                 .padding()
             }
             .navigationBarTitle("取引先登録", displayMode: .inline)
-//            .navigationBarBackButtonHidden(true)
-//            .navigationBarItems(
-//                leading: Button(action: {
-//                    viewStore.send(.back)
-//                }) {
-//                    Image(systemName: "chevron.backward").frame(width: 25, height: 25, alignment: .center)
-//                }
-//            )
             .overlay(Group {
                 PickerView(
                     selectIndex: $selectedBillingTypeIndex,

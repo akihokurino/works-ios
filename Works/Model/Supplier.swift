@@ -7,6 +7,7 @@ struct Supplier: Equatable, Hashable {
     let billingAmountExcludeTax: Int
     let billingType: GraphQL.GraphQLBillingType
     let subject: String
+    let subjectTemplate: String
 
     var billingTypeText: String {
         switch billingType {
@@ -20,6 +21,6 @@ struct Supplier: Equatable, Hashable {
     }
 
     static var mock: Supplier {
-        Supplier(id: "1", name: "株式会社A", billingAmountIncludeTax: 220000, billingAmountExcludeTax: 200000, billingType: .monthly, subject: "件名")
+        Supplier(id: "1", name: "株式会社A", billingAmountIncludeTax: 220000, billingAmountExcludeTax: 200000, billingType: .monthly, subject: "件名", subjectTemplate: "")
     }
 }

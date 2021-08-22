@@ -30,8 +30,10 @@ enum SupplierDetailTCA {
                 .catchToEffect()
                 .map(SupplierDetailTCA.Action.deleted)
         case .deleted(.success(_)):
+            state.isLoading = false
             return .none
         case .deleted(.failure(_)):
+            state.isLoading = false
             return .none
         case .fetchInvoiceList:
             let supplierId = state.supplier.id
@@ -72,6 +74,9 @@ enum SupplierDetailTCA {
             }
         case .propagateInvoiceDetail(let action):
             switch action {
+            case .deleted(.success(_)):
+                state.invoiceDetailState = nil
+                return .none
             default:
                 return .none
             }

@@ -24,6 +24,22 @@ enum InvoiceDetailTCA {
         case .downloaded(.failure(let e)):
             state.isLoading = false
             return .none
+        case .delete:
+            state.isLoading = true
+            let id = state.invoice.id
+            return GraphQLClient.shared.caller()
+                .subscribe(on: environment.backgroundQueue)
+                .flatMap { caller in caller.deleteInvoice(id: id) }
+                .map { _ in true }
+                .receive(on: environment.mainQueue)
+                .catchToEffect()
+                .map(InvoiceDetailTCA.Action.deleted)
+        case .deleted(.success(_)):
+            state.isLoading = false
+            return .none
+        case .deleted(.failure(_)):
+            state.isLoading = false
+            return .none
         }
     }
 }
@@ -33,6 +49,8 @@ extension InvoiceDetailTCA {
         case back
         case onAppear
         case downloaded(Result<URL, AppError>)
+        case delete
+        case deleted(Result<Bool, AppError>)
     }
 
     struct State: Equatable {

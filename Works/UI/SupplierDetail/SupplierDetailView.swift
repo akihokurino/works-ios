@@ -67,13 +67,7 @@ struct SupplierDetailView: View {
                 viewStore.send(.fetchInvoiceList)
             }
             .navigationBarTitle(viewStore.supplier.name, displayMode: .inline)
-//            .navigationBarBackButtonHidden(true)
             .navigationBarItems(
-                //                leading: Button(action: {
-//                    viewStore.send(.back)
-//                }) {
-//                    Image(systemName: "chevron.backward").frame(width: 25, height: 25, alignment: .center)
-//                },
                 trailing: Button(action: {
                     self.isShowActionSheet = true
                 }) {

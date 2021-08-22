@@ -731,9 +731,9 @@ public enum GraphQL {
     /// The raw GraphQL definition of this operation.
     public let operationDefinition: String =
       """
-      mutation CreateSupplier($name: String!, $billingAmount: Int!, $billingType: GraphQLBillingType!, $subject: String!) {
+      mutation CreateSupplier($name: String!, $billingAmount: Int!, $billingType: GraphQLBillingType!, $subject: String!, $subjectTemplate: String!) {
         createSupplier(
-          input: {name: $name, billingAmount: $billingAmount, billingType: $billingType, subject: $subject}
+          input: {name: $name, billingAmount: $billingAmount, billingType: $billingType, subject: $subject, subjectTemplate: $subjectTemplate}
         ) {
           __typename
           ...SupplierFragment
@@ -753,16 +753,18 @@ public enum GraphQL {
     public var billingAmount: Int
     public var billingType: GraphQLBillingType
     public var subject: String
+    public var subjectTemplate: String
 
-    public init(name: String, billingAmount: Int, billingType: GraphQLBillingType, subject: String) {
+    public init(name: String, billingAmount: Int, billingType: GraphQLBillingType, subject: String, subjectTemplate: String) {
       self.name = name
       self.billingAmount = billingAmount
       self.billingType = billingType
       self.subject = subject
+      self.subjectTemplate = subjectTemplate
     }
 
     public var variables: GraphQLMap? {
-      return ["name": name, "billingAmount": billingAmount, "billingType": billingType, "subject": subject]
+      return ["name": name, "billingAmount": billingAmount, "billingType": billingType, "subject": subject, "subjectTemplate": subjectTemplate]
     }
 
     public struct Data: GraphQLSelectionSet {
@@ -770,7 +772,7 @@ public enum GraphQL {
 
       public static var selections: [GraphQLSelection] {
         return [
-          GraphQLField("createSupplier", arguments: ["input": ["name": GraphQLVariable("name"), "billingAmount": GraphQLVariable("billingAmount"), "billingType": GraphQLVariable("billingType"), "subject": GraphQLVariable("subject")]], type: .nonNull(.object(CreateSupplier.selections))),
+          GraphQLField("createSupplier", arguments: ["input": ["name": GraphQLVariable("name"), "billingAmount": GraphQLVariable("billingAmount"), "billingType": GraphQLVariable("billingType"), "subject": GraphQLVariable("subject"), "subjectTemplate": GraphQLVariable("subjectTemplate")]], type: .nonNull(.object(CreateSupplier.selections))),
         ]
       }
 
@@ -809,8 +811,8 @@ public enum GraphQL {
           self.resultMap = unsafeResultMap
         }
 
-        public init(id: GraphQLID, name: String, billingAmountIncludeTax: Int, billingAmountExcludeTax: Int, billingType: GraphQLBillingType, subject: String) {
-          self.init(unsafeResultMap: ["__typename": "Supplier", "id": id, "name": name, "billingAmountIncludeTax": billingAmountIncludeTax, "billingAmountExcludeTax": billingAmountExcludeTax, "billingType": billingType, "subject": subject])
+        public init(id: GraphQLID, name: String, billingAmountIncludeTax: Int, billingAmountExcludeTax: Int, billingType: GraphQLBillingType, subject: String, subjectTemplate: String) {
+          self.init(unsafeResultMap: ["__typename": "Supplier", "id": id, "name": name, "billingAmountIncludeTax": billingAmountIncludeTax, "billingAmountExcludeTax": billingAmountExcludeTax, "billingType": billingType, "subject": subject, "subjectTemplate": subjectTemplate])
         }
 
         public var __typename: String {
@@ -855,9 +857,9 @@ public enum GraphQL {
     /// The raw GraphQL definition of this operation.
     public let operationDefinition: String =
       """
-      mutation UpdateSupplier($id: String!, $name: String!, $billingAmount: Int!, $subject: String!) {
+      mutation UpdateSupplier($id: String!, $name: String!, $billingAmount: Int!, $subject: String!, $subjectTemplate: String!) {
         updateSupplier(
-          input: {id: $id, name: $name, billingAmount: $billingAmount, subject: $subject}
+          input: {id: $id, name: $name, billingAmount: $billingAmount, subject: $subject, subjectTemplate: $subjectTemplate}
         ) {
           __typename
           ...SupplierFragment
@@ -877,16 +879,18 @@ public enum GraphQL {
     public var name: String
     public var billingAmount: Int
     public var subject: String
+    public var subjectTemplate: String
 
-    public init(id: String, name: String, billingAmount: Int, subject: String) {
+    public init(id: String, name: String, billingAmount: Int, subject: String, subjectTemplate: String) {
       self.id = id
       self.name = name
       self.billingAmount = billingAmount
       self.subject = subject
+      self.subjectTemplate = subjectTemplate
     }
 
     public var variables: GraphQLMap? {
-      return ["id": id, "name": name, "billingAmount": billingAmount, "subject": subject]
+      return ["id": id, "name": name, "billingAmount": billingAmount, "subject": subject, "subjectTemplate": subjectTemplate]
     }
 
     public struct Data: GraphQLSelectionSet {
@@ -894,7 +898,7 @@ public enum GraphQL {
 
       public static var selections: [GraphQLSelection] {
         return [
-          GraphQLField("updateSupplier", arguments: ["input": ["id": GraphQLVariable("id"), "name": GraphQLVariable("name"), "billingAmount": GraphQLVariable("billingAmount"), "subject": GraphQLVariable("subject")]], type: .nonNull(.object(UpdateSupplier.selections))),
+          GraphQLField("updateSupplier", arguments: ["input": ["id": GraphQLVariable("id"), "name": GraphQLVariable("name"), "billingAmount": GraphQLVariable("billingAmount"), "subject": GraphQLVariable("subject"), "subjectTemplate": GraphQLVariable("subjectTemplate")]], type: .nonNull(.object(UpdateSupplier.selections))),
         ]
       }
 
@@ -933,8 +937,8 @@ public enum GraphQL {
           self.resultMap = unsafeResultMap
         }
 
-        public init(id: GraphQLID, name: String, billingAmountIncludeTax: Int, billingAmountExcludeTax: Int, billingType: GraphQLBillingType, subject: String) {
-          self.init(unsafeResultMap: ["__typename": "Supplier", "id": id, "name": name, "billingAmountIncludeTax": billingAmountIncludeTax, "billingAmountExcludeTax": billingAmountExcludeTax, "billingType": billingType, "subject": subject])
+        public init(id: GraphQLID, name: String, billingAmountIncludeTax: Int, billingAmountExcludeTax: Int, billingType: GraphQLBillingType, subject: String, subjectTemplate: String) {
+          self.init(unsafeResultMap: ["__typename": "Supplier", "id": id, "name": name, "billingAmountIncludeTax": billingAmountIncludeTax, "billingAmountExcludeTax": billingAmountExcludeTax, "billingType": billingType, "subject": subject, "subjectTemplate": subjectTemplate])
         }
 
         public var __typename: String {
@@ -1077,16 +1081,67 @@ public enum GraphQL {
     }
   }
 
+  public final class DeleteInvoiceMutation: GraphQLMutation {
+    /// The raw GraphQL definition of this operation.
+    public let operationDefinition: String =
+      """
+      mutation DeleteInvoice($id: String!) {
+        deleteInvoice(input: {id: $id})
+      }
+      """
+
+    public let operationName: String = "DeleteInvoice"
+
+    public var id: String
+
+    public init(id: String) {
+      self.id = id
+    }
+
+    public var variables: GraphQLMap? {
+      return ["id": id]
+    }
+
+    public struct Data: GraphQLSelectionSet {
+      public static let possibleTypes: [String] = ["Mutation"]
+
+      public static var selections: [GraphQLSelection] {
+        return [
+          GraphQLField("deleteInvoice", arguments: ["input": ["id": GraphQLVariable("id")]], type: .nonNull(.scalar(Bool.self))),
+        ]
+      }
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public init(deleteInvoice: Bool) {
+        self.init(unsafeResultMap: ["__typename": "Mutation", "deleteInvoice": deleteInvoice])
+      }
+
+      public var deleteInvoice: Bool {
+        get {
+          return resultMap["deleteInvoice"]! as! Bool
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "deleteInvoice")
+        }
+      }
+    }
+  }
+
   public final class ConnectMisocaMutation: GraphQLMutation {
     /// The raw GraphQL definition of this operation.
     public let operationDefinition: String =
       """
-      mutation connectMisoca($code: String!) {
+      mutation ConnectMisoca($code: String!) {
         connectMisoca(input: {code: $code})
       }
       """
 
-    public let operationName: String = "connectMisoca"
+    public let operationName: String = "ConnectMisoca"
 
     public var code: String
 
@@ -1132,12 +1187,12 @@ public enum GraphQL {
     /// The raw GraphQL definition of this operation.
     public let operationDefinition: String =
       """
-      mutation refreshMisoca {
+      mutation RefreshMisoca {
         refreshMisoca
       }
       """
 
-    public let operationName: String = "refreshMisoca"
+    public let operationName: String = "RefreshMisoca"
 
     public init() {
     }
@@ -1331,8 +1386,8 @@ public enum GraphQL {
             self.resultMap = unsafeResultMap
           }
 
-          public init(id: GraphQLID, name: String, billingAmountIncludeTax: Int, billingAmountExcludeTax: Int, billingType: GraphQLBillingType, subject: String) {
-            self.init(unsafeResultMap: ["__typename": "Supplier", "id": id, "name": name, "billingAmountIncludeTax": billingAmountIncludeTax, "billingAmountExcludeTax": billingAmountExcludeTax, "billingType": billingType, "subject": subject])
+          public init(id: GraphQLID, name: String, billingAmountIncludeTax: Int, billingAmountExcludeTax: Int, billingType: GraphQLBillingType, subject: String, subjectTemplate: String) {
+            self.init(unsafeResultMap: ["__typename": "Supplier", "id": id, "name": name, "billingAmountIncludeTax": billingAmountIncludeTax, "billingAmountExcludeTax": billingAmountExcludeTax, "billingType": billingType, "subject": subject, "subjectTemplate": subjectTemplate])
           }
 
           public var __typename: String {
@@ -1386,6 +1441,7 @@ public enum GraphQL {
         billingAmountExcludeTax
         billingType
         subject
+        subjectTemplate
       }
       """
 
@@ -1400,6 +1456,7 @@ public enum GraphQL {
         GraphQLField("billingAmountExcludeTax", type: .nonNull(.scalar(Int.self))),
         GraphQLField("billingType", type: .nonNull(.scalar(GraphQLBillingType.self))),
         GraphQLField("subject", type: .nonNull(.scalar(String.self))),
+        GraphQLField("subjectTemplate", type: .nonNull(.scalar(String.self))),
       ]
     }
 
@@ -1409,8 +1466,8 @@ public enum GraphQL {
       self.resultMap = unsafeResultMap
     }
 
-    public init(id: GraphQLID, name: String, billingAmountIncludeTax: Int, billingAmountExcludeTax: Int, billingType: GraphQLBillingType, subject: String) {
-      self.init(unsafeResultMap: ["__typename": "Supplier", "id": id, "name": name, "billingAmountIncludeTax": billingAmountIncludeTax, "billingAmountExcludeTax": billingAmountExcludeTax, "billingType": billingType, "subject": subject])
+    public init(id: GraphQLID, name: String, billingAmountIncludeTax: Int, billingAmountExcludeTax: Int, billingType: GraphQLBillingType, subject: String, subjectTemplate: String) {
+      self.init(unsafeResultMap: ["__typename": "Supplier", "id": id, "name": name, "billingAmountIncludeTax": billingAmountIncludeTax, "billingAmountExcludeTax": billingAmountExcludeTax, "billingType": billingType, "subject": subject, "subjectTemplate": subjectTemplate])
     }
 
     public var __typename: String {
@@ -1473,6 +1530,15 @@ public enum GraphQL {
       }
       set {
         resultMap.updateValue(newValue, forKey: "subject")
+      }
+    }
+
+    public var subjectTemplate: String {
+      get {
+        return resultMap["subjectTemplate"]! as! String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "subjectTemplate")
       }
     }
   }
@@ -1651,6 +1717,7 @@ public enum GraphQL {
           billingAmountExcludeTax
           billingType
           subject
+          subjectTemplate
         }
       }
       """
@@ -1843,6 +1910,7 @@ public enum GraphQL {
           GraphQLField("billingAmountExcludeTax", type: .nonNull(.scalar(Int.self))),
           GraphQLField("billingType", type: .nonNull(.scalar(GraphQLBillingType.self))),
           GraphQLField("subject", type: .nonNull(.scalar(String.self))),
+          GraphQLField("subjectTemplate", type: .nonNull(.scalar(String.self))),
         ]
       }
 
@@ -1852,8 +1920,8 @@ public enum GraphQL {
         self.resultMap = unsafeResultMap
       }
 
-      public init(id: GraphQLID, name: String, billingAmountIncludeTax: Int, billingAmountExcludeTax: Int, billingType: GraphQLBillingType, subject: String) {
-        self.init(unsafeResultMap: ["__typename": "Supplier", "id": id, "name": name, "billingAmountIncludeTax": billingAmountIncludeTax, "billingAmountExcludeTax": billingAmountExcludeTax, "billingType": billingType, "subject": subject])
+      public init(id: GraphQLID, name: String, billingAmountIncludeTax: Int, billingAmountExcludeTax: Int, billingType: GraphQLBillingType, subject: String, subjectTemplate: String) {
+        self.init(unsafeResultMap: ["__typename": "Supplier", "id": id, "name": name, "billingAmountIncludeTax": billingAmountIncludeTax, "billingAmountExcludeTax": billingAmountExcludeTax, "billingType": billingType, "subject": subject, "subjectTemplate": subjectTemplate])
       }
 
       public var __typename: String {
@@ -1916,6 +1984,15 @@ public enum GraphQL {
         }
         set {
           resultMap.updateValue(newValue, forKey: "subject")
+        }
+      }
+
+      public var subjectTemplate: String {
+        get {
+          return resultMap["subjectTemplate"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "subjectTemplate")
         }
       }
     }

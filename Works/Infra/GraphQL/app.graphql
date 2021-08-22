@@ -30,23 +30,25 @@ mutation Authenticate {
 	}
 }
 
-mutation CreateSupplier($name: String!, $billingAmount: Int!, $billingType: GraphQLBillingType!, $subject: String!) {
+mutation CreateSupplier($name: String!, $billingAmount: Int!, $billingType: GraphQLBillingType!, $subject: String!, $subjectTemplate: String!) {
 	createSupplier(input: {
 		name: $name,
 		billingAmount: $billingAmount,
 		billingType: $billingType,
 		subject: $subject,
+		subjectTemplate: $subjectTemplate,
 	}) {
 		...SupplierFragment
 	}
 }
 
-mutation UpdateSupplier($id: String!, $name: String!, $billingAmount: Int!, $subject: String!) {
+mutation UpdateSupplier($id: String!, $name: String!, $billingAmount: Int!, $subject: String!, $subjectTemplate: String!) {
 	updateSupplier(input: {
 		id: $id,
 		name: $name,
 		billingAmount: $billingAmount,
 		subject: $subject,
+		subjectTemplate: $subjectTemplate,
 	}) {
 		...SupplierFragment
 	}
@@ -64,13 +66,19 @@ mutation DownloadInvoicePDF($invoiceId: String!) {
 	})
 }
 
-mutation connectMisoca($code: String!) {
+mutation DeleteInvoice($id: String!) {
+	deleteInvoice(input: {
+		id: $id
+	})
+}
+
+mutation ConnectMisoca($code: String!) {
 	connectMisoca(input: {
 		code: $code,
 	})
 }
 
-mutation refreshMisoca {
+mutation RefreshMisoca {
 	refreshMisoca
 }
 
@@ -92,6 +100,7 @@ fragment SupplierFragment on Supplier {
 	billingAmountExcludeTax
 	billingType
 	subject
+	subjectTemplate
 }
 
 fragment InvoiceFragment on Invoice {
@@ -127,6 +136,7 @@ fragment InvoiceHistoryFragment on InvoiceHistory {
 		billingAmountExcludeTax
 		billingType
 		subject
+		subjectTemplate
 	}
 }
 

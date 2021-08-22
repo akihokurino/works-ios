@@ -22,7 +22,6 @@ struct InvoiceHistoryListView: View {
                     }
                 }
                 .padding(.horizontal, 15)
-                .padding(.top, 30)
             }
             .coordinateSpace(name: "RefreshControl")
             .onAppear {

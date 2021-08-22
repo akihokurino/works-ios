@@ -75,6 +75,14 @@ struct GraphQLCaller {
             cli.fetch(query: GraphQL.GetMeQuery()) { result in
                 switch result {
                     case .success(let graphQLResult):
+                        if let errors = graphQLResult.errors {
+                            if !errors.filter({ $0.message != nil }).isEmpty {
+                                let messages = errors.filter { $0.message != nil }.map { $0.message! }
+                                promise(.failure(AppError.system(messages.joined(separator: "\n"))))
+                                return
+                            }
+                        }
+
                         guard let data = graphQLResult.data else {
                             promise(.failure(AppError.system(defaultErrorMsg)))
                             return
@@ -89,7 +97,8 @@ struct GraphQLCaller {
                                     billingAmountIncludeTax: edge.node.fragments.supplierFragment.billingAmountIncludeTax,
                                     billingAmountExcludeTax: edge.node.fragments.supplierFragment.billingAmountExcludeTax,
                                     billingType: edge.node.fragments.supplierFragment.billingType,
-                                    subject: edge.node.fragments.supplierFragment.subject
+                                    subject: edge.node.fragments.supplierFragment.subject,
+                                    subjectTemplate: edge.node.fragments.supplierFragment.subjectTemplate
                                 )
                             }
                         )
@@ -106,6 +115,14 @@ struct GraphQLCaller {
             cli.fetch(query: GraphQL.GetInvoiceListQuery(supplierId: supplierId)) { result in
                 switch result {
                     case .success(let graphQLResult):
+                        if let errors = graphQLResult.errors {
+                            if !errors.filter({ $0.message != nil }).isEmpty {
+                                let messages = errors.filter { $0.message != nil }.map { $0.message! }
+                                promise(.failure(AppError.system(messages.joined(separator: "\n"))))
+                                return
+                            }
+                        }
+
                         guard let data = graphQLResult.data else {
                             promise(.failure(AppError.system(defaultErrorMsg)))
                             return
@@ -138,6 +155,14 @@ struct GraphQLCaller {
             cli.fetch(query: GraphQL.GetInvoiceHistoryListQuery()) { result in
                 switch result {
                     case .success(let graphQLResult):
+                        if let errors = graphQLResult.errors {
+                            if !errors.filter({ $0.message != nil }).isEmpty {
+                                let messages = errors.filter { $0.message != nil }.map { $0.message! }
+                                promise(.failure(AppError.system(messages.joined(separator: "\n"))))
+                                return
+                            }
+                        }
+
                         guard let data = graphQLResult.data else {
                             promise(.failure(AppError.system(defaultErrorMsg)))
                             return
@@ -164,7 +189,8 @@ struct GraphQLCaller {
                                     billingAmountIncludeTax: edge.node.fragments.invoiceHistoryFragment.supplier.billingAmountIncludeTax,
                                     billingAmountExcludeTax: edge.node.fragments.invoiceHistoryFragment.supplier.billingAmountExcludeTax,
                                     billingType: edge.node.fragments.invoiceHistoryFragment.supplier.billingType,
-                                    subject: edge.node.fragments.invoiceHistoryFragment.supplier.subject
+                                    subject: edge.node.fragments.invoiceHistoryFragment.supplier.subject,
+                                    subjectTemplate: edge.node.fragments.invoiceHistoryFragment.supplier.subjectTemplate
                                 )
                             )
                         }
@@ -181,6 +207,14 @@ struct GraphQLCaller {
             cli.perform(mutation: GraphQL.AuthenticateMutation()) { result in
                 switch result {
                     case .success(let graphQLResult):
+                        if let errors = graphQLResult.errors {
+                            if !errors.filter({ $0.message != nil }).isEmpty {
+                                let messages = errors.filter { $0.message != nil }.map { $0.message! }
+                                promise(.failure(AppError.system(messages.joined(separator: "\n"))))
+                                return
+                            }
+                        }
+
                         guard let data = graphQLResult.data else {
                             promise(.failure(AppError.system(defaultErrorMsg)))
                             return
@@ -195,7 +229,8 @@ struct GraphQLCaller {
                                     billingAmountIncludeTax: edge.node.fragments.supplierFragment.billingAmountIncludeTax,
                                     billingAmountExcludeTax: edge.node.fragments.supplierFragment.billingAmountExcludeTax,
                                     billingType: edge.node.fragments.supplierFragment.billingType,
-                                    subject: edge.node.fragments.supplierFragment.subject
+                                    subject: edge.node.fragments.supplierFragment.subject,
+                                    subjectTemplate: edge.node.fragments.supplierFragment.subjectTemplate
                                 )
                             }
                         )
@@ -207,11 +242,19 @@ struct GraphQLCaller {
         }
     }
 
-    func createSupplier(name: String, billingAmount: Int, billingType: GraphQL.GraphQLBillingType, subject: String) -> Future<Supplier, AppError> {
+    func createSupplier(name: String, billingAmount: Int, billingType: GraphQL.GraphQLBillingType, subject: String, subjectTemplate: String) -> Future<Supplier, AppError> {
         return Future<Supplier, AppError> { promise in
-            cli.perform(mutation: GraphQL.CreateSupplierMutation(name: name, billingAmount: billingAmount, billingType: billingType, subject: subject)) { result in
+            cli.perform(mutation: GraphQL.CreateSupplierMutation(name: name, billingAmount: billingAmount, billingType: billingType, subject: subject, subjectTemplate: subjectTemplate)) { result in
                 switch result {
                     case .success(let graphQLResult):
+                        if let errors = graphQLResult.errors {
+                            if !errors.filter({ $0.message != nil }).isEmpty {
+                                let messages = errors.filter { $0.message != nil }.map { $0.message! }
+                                promise(.failure(AppError.system(messages.joined(separator: "\n"))))
+                                return
+                            }
+                        }
+
                         guard let data = graphQLResult.data else {
                             promise(.failure(AppError.system(defaultErrorMsg)))
                             return
@@ -223,7 +266,8 @@ struct GraphQLCaller {
                             billingAmountIncludeTax: data.createSupplier.fragments.supplierFragment.billingAmountIncludeTax,
                             billingAmountExcludeTax: data.createSupplier.fragments.supplierFragment.billingAmountExcludeTax,
                             billingType: data.createSupplier.fragments.supplierFragment.billingType,
-                            subject: data.createSupplier.fragments.supplierFragment.subject
+                            subject: data.createSupplier.fragments.supplierFragment.subject,
+                            subjectTemplate: data.createSupplier.fragments.supplierFragment.subjectTemplate
                         )
                         promise(.success(supplier))
                     case .failure(let error):
@@ -233,11 +277,19 @@ struct GraphQLCaller {
         }
     }
 
-    func updateSupplier(id: String, name: String, billingAmount: Int, subject: String) -> Future<Supplier, AppError> {
+    func updateSupplier(id: String, name: String, billingAmount: Int, subject: String, subjectTemplate: String) -> Future<Supplier, AppError> {
         return Future<Supplier, AppError> { promise in
-            cli.perform(mutation: GraphQL.UpdateSupplierMutation(id: id, name: name, billingAmount: billingAmount, subject: subject)) { result in
+            cli.perform(mutation: GraphQL.UpdateSupplierMutation(id: id, name: name, billingAmount: billingAmount, subject: subject, subjectTemplate: subjectTemplate)) { result in
                 switch result {
                     case .success(let graphQLResult):
+                        if let errors = graphQLResult.errors {
+                            if !errors.filter({ $0.message != nil }).isEmpty {
+                                let messages = errors.filter { $0.message != nil }.map { $0.message! }
+                                promise(.failure(AppError.system(messages.joined(separator: "\n"))))
+                                return
+                            }
+                        }
+
                         guard let data = graphQLResult.data else {
                             promise(.failure(AppError.system(defaultErrorMsg)))
                             return
@@ -249,7 +301,8 @@ struct GraphQLCaller {
                             billingAmountIncludeTax: data.updateSupplier.fragments.supplierFragment.billingAmountIncludeTax,
                             billingAmountExcludeTax: data.updateSupplier.fragments.supplierFragment.billingAmountExcludeTax,
                             billingType: data.updateSupplier.fragments.supplierFragment.billingType,
-                            subject: data.updateSupplier.fragments.supplierFragment.subject
+                            subject: data.updateSupplier.fragments.supplierFragment.subject,
+                            subjectTemplate: data.updateSupplier.fragments.supplierFragment.subjectTemplate
                         )
                         promise(.success(supplier))
                     case .failure(let error):
@@ -263,7 +316,15 @@ struct GraphQLCaller {
         return Future<Void, AppError> { promise in
             cli.perform(mutation: GraphQL.DeleteSupplierMutation(id: id)) { result in
                 switch result {
-                    case .success:
+                    case .success(let graphQLResult):
+                        if let errors = graphQLResult.errors {
+                            if !errors.filter({ $0.message != nil }).isEmpty {
+                                let messages = errors.filter { $0.message != nil }.map { $0.message! }
+                                promise(.failure(AppError.system(messages.joined(separator: "\n"))))
+                                return
+                            }
+                        }
+
                         promise(.success(()))
                     case .failure(let error):
                         promise(.failure(AppError.system(error.localizedDescription)))
@@ -277,6 +338,14 @@ struct GraphQLCaller {
             cli.perform(mutation: GraphQL.DownloadInvoicePdfMutation(invoiceId: invoiceId)) { result in
                 switch result {
                     case .success(let graphQLResult):
+                        if let errors = graphQLResult.errors {
+                            if !errors.filter({ $0.message != nil }).isEmpty {
+                                let messages = errors.filter { $0.message != nil }.map { $0.message! }
+                                promise(.failure(AppError.system(messages.joined(separator: "\n"))))
+                                return
+                            }
+                        }
+
                         guard let data = graphQLResult.data else {
                             promise(.failure(AppError.system(defaultErrorMsg)))
                             return
@@ -293,11 +362,40 @@ struct GraphQLCaller {
         }
     }
 
+    func deleteInvoice(id: String) -> Future<Void, AppError> {
+        return Future<Void, AppError> { promise in
+            cli.perform(mutation: GraphQL.DeleteInvoiceMutation(id: id)) { result in
+                switch result {
+                    case .success(let graphQLResult):
+                        if let errors = graphQLResult.errors {
+                            if !errors.filter({ $0.message != nil }).isEmpty {
+                                let messages = errors.filter { $0.message != nil }.map { $0.message! }
+                                promise(.failure(AppError.system(messages.joined(separator: "\n"))))
+                                return
+                            }
+                        }
+
+                        promise(.success(()))
+                    case .failure(let error):
+                        promise(.failure(AppError.system(error.localizedDescription)))
+                }
+            }
+        }
+    }
+
     func connectMisoca(code: String) -> Future<Void, AppError> {
         return Future<Void, AppError> { promise in
             cli.perform(mutation: GraphQL.ConnectMisocaMutation(code: code)) { result in
                 switch result {
                     case .success(let graphQLResult):
+                        if let errors = graphQLResult.errors {
+                            if !errors.filter({ $0.message != nil }).isEmpty {
+                                let messages = errors.filter { $0.message != nil }.map { $0.message! }
+                                promise(.failure(AppError.system(messages.joined(separator: "\n"))))
+                                return
+                            }
+                        }
+
                         guard let _ = graphQLResult.data else {
                             promise(.failure(AppError.system(defaultErrorMsg)))
                             return

@@ -33,9 +33,12 @@ enum InvoiceHistoryListTCA {
         case .historyList(.failure(_)):
             state.isRefreshing = false
             return .none
-            
+
         case .propagateInvoiceDetail(let action):
             switch action {
+            case .deleted(.success(_)):
+                state.invoiceDetailState = nil
+                return .none
             default:
                 return .none
             }
@@ -61,7 +64,7 @@ extension InvoiceHistoryListTCA {
         case historyList(Result<[InvoiceHistory], AppError>)
         case presentInvoiceDetailView(Invoice)
         case popInvoiceDetailView
-        
+
         case propagateInvoiceDetail(InvoiceDetailTCA.Action)
     }
 

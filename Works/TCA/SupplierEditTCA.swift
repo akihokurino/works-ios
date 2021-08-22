@@ -6,6 +6,7 @@ struct UpdateSupplierParams: Equatable {
     let name: String
     let billingAmount: Int
     let subject: String
+    let subjectTemplate: String
 }
 
 enum SupplierEditTCA {
@@ -23,7 +24,8 @@ enum SupplierEditTCA {
                         id: id,
                         name: params.name,
                         billingAmount: params.billingAmount,
-                        subject: params.subject)
+                        subject: params.subject,
+                        subjectTemplate: params.subjectTemplate)
                 }
                 .receive(on: environment.mainQueue)
                 .catchToEffect()
