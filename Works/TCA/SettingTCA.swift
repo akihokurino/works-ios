@@ -40,8 +40,79 @@ enum SettingTCA {
                 state.alertText = ""
             }
             return .none
+        case .presentBankEditView:
+            let bank = state.me.bank
+            state.bankEditState = BankEditTCA.State(bank: bank)
+            return .none
+        case .popBankEditView:
+            state.bankEditState = nil
+            return .none
+        case .presentSenderEditView:
+            let sender = state.me.sender
+            state.senderEditState = SenderEditTCA.State(sender: sender)
+            return .none
+        case .popSenderEditView:
+            state.senderEditState = nil
+            return .none
+
+        case .propagateBankEdit(let action):
+            switch action {
+            case .back:
+                state.bankEditState = nil
+                return .none
+            case .updated(.success(let bank)):
+                state.me.bank = bank
+                return .none
+            case .deleted(.success(_)):
+                state.me.bank = nil
+                state.bankEditState = nil
+                state.isPresentedAlert = true
+                state.alertText = "振込先情報を削除しました"
+                return .none
+            default:
+                return .none
+            }
+        case .propagateSenderEdit(let action):
+            switch action {
+            case .back:
+                state.senderEditState = nil
+                return .none
+            case .updated(.success(let sender)):
+                state.me.sender = sender
+                return .none
+            case .deleted(.success(_)):
+                state.me.sender = nil
+                state.senderEditState = nil
+                state.isPresentedAlert = true
+                state.alertText = "自社情報を削除しました"
+                return .none
+            default:
+                return .none
+            }
         }
     }
+    .presents(
+        BankEditTCA.reducer,
+        state: \.bankEditState,
+        action: /SettingTCA.Action.propagateBankEdit,
+        environment: { _environment in
+            BankEditTCA.Environment(
+                mainQueue: _environment.mainQueue,
+                backgroundQueue: _environment.backgroundQueue
+            )
+        }
+    )
+    .presents(
+        SenderEditTCA.reducer,
+        state: \.senderEditState,
+        action: /SettingTCA.Action.propagateSenderEdit,
+        environment: { _environment in
+            SenderEditTCA.Environment(
+                mainQueue: _environment.mainQueue,
+                backgroundQueue: _environment.backgroundQueue
+            )
+        }
+    )
 }
 
 extension SettingTCA {
@@ -51,12 +122,23 @@ extension SettingTCA {
         case refreshMisoca
         case connectedMisoca(Result<Bool, AppError>)
         case isPresentedAlert(Bool)
+        case presentBankEditView
+        case popBankEditView
+        case presentSenderEditView
+        case popSenderEditView
+
+        case propagateBankEdit(BankEditTCA.Action)
+        case propagateSenderEdit(SenderEditTCA.Action)
     }
 
     struct State: Equatable {
         var isLoading: Bool = false
         var alertText: String = ""
         var isPresentedAlert: Bool = false
+        var me: Me
+
+        var bankEditState: BankEditTCA.State?
+        var senderEditState: SenderEditTCA.State?
     }
 
     struct Environment {

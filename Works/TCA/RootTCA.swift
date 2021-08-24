@@ -129,7 +129,7 @@ extension RootTCA {
             self.signInState = nil
             self.supplierListState = SupplierListTCA.State(me: me)
             self.invoiceHistoryListState = InvoiceHistoryListTCA.State()
-            self.settingState = SettingTCA.State()
+            self.settingState = SettingTCA.State(me: me)
         }
 
         mutating func setSignOutState() {

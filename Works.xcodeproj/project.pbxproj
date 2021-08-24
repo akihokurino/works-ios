@@ -51,7 +51,7 @@
 		0275874326C436A700213014 /* InvoiceHistoryListTCA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0275874226C436A700213014 /* InvoiceHistoryListTCA.swift */; };
 		0288BE2C26A6E78300AE5324 /* MisocaOAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0288BE2B26A6E78300AE5324 /* MisocaOAuthView.swift */; };
 		0299CF9426C4D3E300361BCB /* InvoiceHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0299CF9326C4D3E300361BCB /* InvoiceHistoryCell.swift */; };
-		029A140626A33CD000ACC9FF /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029A140526A33CD000ACC9FF /* Menu.swift */; };
+		029A140626A33CD000ACC9FF /* MenuLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029A140526A33CD000ACC9FF /* MenuLink.swift */; };
 		02ADC85B26AC0C04005A9D06 /* InvoiceDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ADC85A26AC0C04005A9D06 /* InvoiceDetailView.swift */; };
 		02ADC85D26AC0C13005A9D06 /* PDFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ADC85C26AC0C13005A9D06 /* PDFView.swift */; };
 		02ADC85F26AC0D61005A9D06 /* InvoiceDetailTCA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ADC85E26AC0D61005A9D06 /* InvoiceDetailTCA.swift */; };
@@ -64,6 +64,11 @@
 		02B701B7269EF0B300BA9937 /* RootTCA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B701B6269EF0B300BA9937 /* RootTCA.swift */; };
 		02BDB56626D53A2900817727 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BDB56526D53A2900817727 /* Bank.swift */; };
 		02BDB56826D53A3100817727 /* Sender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BDB56726D53A3100817727 /* Sender.swift */; };
+		02BDB56A26D545E700817727 /* BankEditTCA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BDB56926D545E700817727 /* BankEditTCA.swift */; };
+		02BDB56C26D545F500817727 /* SenderEditTCA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BDB56B26D545F500817727 /* SenderEditTCA.swift */; };
+		02BDB57026D54BF000817727 /* BankEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BDB56F26D54BF000817727 /* BankEditView.swift */; };
+		02BDB57226D54BFB00817727 /* SenderEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BDB57126D54BFB00817727 /* SenderEditView.swift */; };
+		02BDB57426D5505C00817727 /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BDB57326D5505C00817727 /* MenuButton.swift */; };
 		02F2EDF026A57FF3009ABF50 /* Reducer+ReplaceNilState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F2EDEF26A57FF3009ABF50 /* Reducer+ReplaceNilState.swift */; };
 		02F2EDF226A58024009ABF50 /* Reducer+CaptureState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F2EDF126A58024009ABF50 /* Reducer+CaptureState.swift */; };
 		02F2EDF426A58054009ABF50 /* Reducer+Presents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F2EDF326A58054009ABF50 /* Reducer+Presents.swift */; };
@@ -123,7 +128,7 @@
 		0275874226C436A700213014 /* InvoiceHistoryListTCA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceHistoryListTCA.swift; sourceTree = "<group>"; };
 		0288BE2B26A6E78300AE5324 /* MisocaOAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MisocaOAuthView.swift; sourceTree = "<group>"; };
 		0299CF9326C4D3E300361BCB /* InvoiceHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceHistoryCell.swift; sourceTree = "<group>"; };
-		029A140526A33CD000ACC9FF /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
+		029A140526A33CD000ACC9FF /* MenuLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuLink.swift; sourceTree = "<group>"; };
 		02ADC85A26AC0C04005A9D06 /* InvoiceDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceDetailView.swift; sourceTree = "<group>"; };
 		02ADC85C26AC0C13005A9D06 /* PDFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFView.swift; sourceTree = "<group>"; };
 		02ADC85E26AC0D61005A9D06 /* InvoiceDetailTCA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceDetailTCA.swift; sourceTree = "<group>"; };
@@ -136,6 +141,11 @@
 		02B701B6269EF0B300BA9937 /* RootTCA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTCA.swift; sourceTree = "<group>"; };
 		02BDB56526D53A2900817727 /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
 		02BDB56726D53A3100817727 /* Sender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sender.swift; sourceTree = "<group>"; };
+		02BDB56926D545E700817727 /* BankEditTCA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankEditTCA.swift; sourceTree = "<group>"; };
+		02BDB56B26D545F500817727 /* SenderEditTCA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenderEditTCA.swift; sourceTree = "<group>"; };
+		02BDB56F26D54BF000817727 /* BankEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankEditView.swift; sourceTree = "<group>"; };
+		02BDB57126D54BFB00817727 /* SenderEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenderEditView.swift; sourceTree = "<group>"; };
+		02BDB57326D5505C00817727 /* MenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
 		02E558DB269F21A600A8AE55 /* Works.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Works.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02F2EDEF26A57FF3009ABF50 /* Reducer+ReplaceNilState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reducer+ReplaceNilState.swift"; sourceTree = "<group>"; };
 		02F2EDF126A58024009ABF50 /* Reducer+CaptureState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reducer+CaptureState.swift"; sourceTree = "<group>"; };
@@ -191,7 +201,8 @@
 				021FF960269F39CA00FF55C1 /* ActionButton.swift */,
 				0219580E269FCDD200AB4D22 /* Hud.swift */,
 				0270060F26A33722004E68A1 /* RefreshControl.swift */,
-				029A140526A33CD000ACC9FF /* Menu.swift */,
+				029A140526A33CD000ACC9FF /* MenuLink.swift */,
+				02BDB57326D5505C00817727 /* MenuButton.swift */,
 				020C5B6426A6813300CF8ABB /* PickerInput.swift */,
 			);
 			path = Component;
@@ -331,6 +342,8 @@
 		02B701AF269EEF7900BA9937 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				02BDB56E26D54BDF00817727 /* SenderEdit */,
+				02BDB56D26D54BD600817727 /* BankEdit */,
 				021FF95D269F38C500FF55C1 /* Component */,
 				0270060826A31AA3004E68A1 /* SupplierList */,
 				026E551326A4441600295866 /* SupplierDetail */,
@@ -361,8 +374,26 @@
 				026E551C26A444C900295866 /* SupplierEditTCA.swift */,
 				02ADC85E26AC0D61005A9D06 /* InvoiceDetailTCA.swift */,
 				0275874226C436A700213014 /* InvoiceHistoryListTCA.swift */,
+				02BDB56926D545E700817727 /* BankEditTCA.swift */,
+				02BDB56B26D545F500817727 /* SenderEditTCA.swift */,
 			);
 			path = TCA;
+			sourceTree = "<group>";
+		};
+		02BDB56D26D54BD600817727 /* BankEdit */ = {
+			isa = PBXGroup;
+			children = (
+				02BDB56F26D54BF000817727 /* BankEditView.swift */,
+			);
+			path = BankEdit;
+			sourceTree = "<group>";
+		};
+		02BDB56E26D54BDF00817727 /* SenderEdit */ = {
+			isa = PBXGroup;
+			children = (
+				02BDB57126D54BFB00817727 /* SenderEditView.swift */,
+			);
+			path = SenderEdit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -461,6 +492,7 @@
 				026E552126A4451900295866 /* SupplierEditView.swift in Sources */,
 				021FF967269F4CF100FF55C1 /* PinCodeInputView.swift in Sources */,
 				0288BE2C26A6E78300AE5324 /* MisocaOAuthView.swift in Sources */,
+				02BDB56C26D545F500817727 /* SenderEditTCA.swift in Sources */,
 				02ADC85B26AC0C04005A9D06 /* InvoiceDetailView.swift in Sources */,
 				0275873E26C4350800213014 /* InvoiceHistory.swift in Sources */,
 				026E551926A4446400295866 /* SupplierDetailView.swift in Sources */,
@@ -468,6 +500,9 @@
 				0241DC7B26A2EB8900AFA313 /* GraphQLClient.swift in Sources */,
 				021FF96E269F557E00FF55C1 /* Int.swift in Sources */,
 				026E551B26A444BC00295866 /* SupplierCreateTCA.swift in Sources */,
+				02BDB57426D5505C00817727 /* MenuButton.swift in Sources */,
+				02BDB57226D54BFB00817727 /* SenderEditView.swift in Sources */,
+				02BDB57026D54BF000817727 /* BankEditView.swift in Sources */,
 				02B7019D269EEC4D00BA9937 /* WorksApp.swift in Sources */,
 				02362F4B26A5685E0001AA10 /* NavigationLink+Store.swift in Sources */,
 				0299CF9426C4D3E300361BCB /* InvoiceHistoryCell.swift in Sources */,
@@ -482,10 +517,11 @@
 				021E092726ABF0E7000C6B8F /* Invoice.swift in Sources */,
 				021FF95F269F38DA00FF55C1 /* TextFieldInput.swift in Sources */,
 				0275874126C4368A00213014 /* InvoiceHistoryListView.swift in Sources */,
+				02BDB56A26D545E700817727 /* BankEditTCA.swift in Sources */,
 				026E551D26A444C900295866 /* SupplierEditTCA.swift in Sources */,
 				02195817269FE0A000AB4D22 /* LocalStore.swift in Sources */,
 				021FF95A269F2FB400FF55C1 /* SignInView.swift in Sources */,
-				029A140626A33CD000ACC9FF /* Menu.swift in Sources */,
+				029A140626A33CD000ACC9FF /* MenuLink.swift in Sources */,
 				02F2EDF026A57FF3009ABF50 /* Reducer+ReplaceNilState.swift in Sources */,
 				02B701B7269EF0B300BA9937 /* RootTCA.swift in Sources */,
 				020C5B6526A6813300CF8ABB /* PickerInput.swift in Sources */,

@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct Menu<Next: View>: View {
+struct MenuLink<Next: View>: View {
     let text: String
     let next: Next
 
@@ -27,8 +27,8 @@ struct Menu<Next: View>: View {
     }
 }
 
-struct Menu_Previews: PreviewProvider {
+struct MenuLink_Previews: PreviewProvider {
     static var previews: some View {
-        Menu(text: "メニュー") {}.frame(width: 320, height: 50)
+        MenuLink(text: "メニュー") {}.frame(width: 320, height: 50)
     }
 }

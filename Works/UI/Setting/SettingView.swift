@@ -9,11 +9,15 @@ struct SettingView: View {
             ScrollView {
                 VStack {
                     Divider()
-                    Menu(text: "振込先") {}
+                    MenuButton(text: "振込先") {
+                        viewStore.send(.presentBankEditView)
+                    }
                     Divider()
-                    Menu(text: "自社") {}
+                    MenuButton(text: "自社") {
+                        viewStore.send(.presentSenderEditView)
+                    }
                     Divider()
-                    Menu(text: "Misoca接続") {
+                    MenuLink(text: "Misoca接続") {
                         MisocaOAuthView(onLogin: { code in
                             viewStore.send(.connectMisoca(code))
                         }, onRefresh: {
@@ -46,13 +50,33 @@ struct SettingView: View {
                 Alert(title: Text(viewStore.alertText))
             }
         }
+        .navigate(
+            using: store.scope(
+                state: \.bankEditState,
+                action: SettingTCA.Action.propagateBankEdit
+            ),
+            destination: BankEditView.init(store:),
+            onDismiss: {
+                ViewStore(store.stateless).send(.popBankEditView)
+            }
+        )
+        .navigate(
+            using: store.scope(
+                state: \.senderEditState,
+                action: SettingTCA.Action.propagateSenderEdit
+            ),
+            destination: SenderEditView.init(store:),
+            onDismiss: {
+                ViewStore(store.stateless).send(.popSenderEditView)
+            }
+        )
     }
 }
 
 struct SettingView_Previews: PreviewProvider {
     static var previews: some View {
         SettingView(store: .init(
-            initialState: SettingTCA.State(),
+            initialState: SettingTCA.State(me: Me.mock),
             reducer: .empty,
             environment: SettingTCA.Environment(
                 mainQueue: .main,
