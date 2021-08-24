@@ -30,52 +30,83 @@ mutation Authenticate {
 	}
 }
 
-mutation CreateSupplier($name: String!, $billingAmount: Int!, $billingType: GraphQLBillingType!, $subject: String!, $subjectTemplate: String!) {
+mutation CreateSupplier($name: String!,
+						$billingAmount: Int!,
+						$billingType: GraphQLBillingType!,
+						$endYm: String!,
+						$subject: String!,
+						$subjectTemplate: String!) {
 	createSupplier(input: {
-		name: $name,
-		billingAmount: $billingAmount,
-		billingType: $billingType,
-		subject: $subject,
-		subjectTemplate: $subjectTemplate,
-	}) {
+				   name: $name,
+				   billingAmount: $billingAmount,
+				   billingType: $billingType,
+				   endYm: $endYm,
+				   subject: $subject,
+				   subjectTemplate: $subjectTemplate}) {
 		...SupplierFragment
 	}
 }
 
-mutation UpdateSupplier($id: String!, $name: String!, $billingAmount: Int!, $subject: String!, $subjectTemplate: String!) {
+mutation UpdateSupplier($id: String!,
+						$name: String!,
+						$billingAmount: Int!,
+						$endYm: String!,
+						$subject: String!,
+						$subjectTemplate: String!) {
 	updateSupplier(input: {
-		id: $id,
-		name: $name,
-		billingAmount: $billingAmount,
-		subject: $subject,
-		subjectTemplate: $subjectTemplate,
-	}) {
+				   id: $id,
+				   name: $name,
+				   billingAmount: $billingAmount,
+				   endYm: $endYm,
+				   subject: $subject,
+				   subjectTemplate: $subjectTemplate}) {
 		...SupplierFragment
 	}
+}
+
+mutation RegisterBank($name: String!, $code: String!, $accountType: GraphQLBankAccountType!, $accountNumber: String!) {
+	registerBank(input: {
+				 name: $name,
+				 code: $code,
+				 accountType: $accountType,
+				 accountNumber: $accountNumber}) {
+		...BankFragment
+	}
+}
+
+mutation RegisterSender($name: String!, $email: String!, $tel: String!, $postalCode: String!, $address: String!) {
+	registerSender(input: {
+				   name: $name,
+				   email: $email,
+				   tel: $tel,
+				   postalCode: $postalCode,
+				   address: $address}) {
+		...SenderFragment
+	}
+}
+
+mutation DeleteBank($id: String!) {
+	deleteBank(input: {id: $id})
+}
+
+mutation DeleteSender($id: String!) {
+	deleteSender(input: {id: $id})
 }
 
 mutation DeleteSupplier($id: String!) {
-	deleteSupplier(input: {
-		id: $id
-	})
+	deleteSupplier(input: {id: $id})
 }
 
 mutation DownloadInvoicePDF($invoiceId: String!) {
-	downloadInvoicePdf(input: {
-		invoiceId: $invoiceId,
-	})
+	downloadInvoicePdf(input: {invoiceId: $invoiceId})
 }
 
 mutation DeleteInvoice($id: String!) {
-	deleteInvoice(input: {
-		id: $id
-	})
+	deleteInvoice(input: {id: $id})
 }
 
 mutation ConnectMisoca($code: String!) {
-	connectMisoca(input: {
-		code: $code,
-	})
+	connectMisoca(input: {code: $code})
 }
 
 mutation RefreshMisoca {
@@ -84,12 +115,18 @@ mutation RefreshMisoca {
 
 fragment MeFragment on Me {
 	id
-	suppliers {
+	supplierList {
 		edges {
 			node {
 				...SupplierFragment
 			}
 		}
+	}
+	sender {
+		...SenderFragment
+	}
+	bank {
+		...BankFragment
 	}
 }
 
@@ -99,6 +136,7 @@ fragment SupplierFragment on Supplier {
 	billingAmountIncludeTax
 	billingAmountExcludeTax
 	billingType
+	endYm
 	subject
 	subjectTemplate
 }
@@ -118,25 +156,26 @@ fragment InvoiceFragment on Invoice {
 
 fragment InvoiceHistoryFragment on InvoiceHistory {
 	invoice {
-		id
-		issueYmd
-		paymentDueOnYmd
-		invoiceNumber
-		paymentStatus
-		invoiceStatus
-		recipientName
-		subject
-		totalAmount
-		tax
+		...InvoiceFragment
 	}
 	supplier {
-		id
-		name
-		billingAmountIncludeTax
-		billingAmountExcludeTax
-		billingType
-		subject
-		subjectTemplate
+		...SupplierFragment
 	}
 }
 
+fragment BankFragment on Bank {
+	id
+	name
+	code
+	accountType
+	accountNumber
+}
+
+fragment SenderFragment on Sender {
+	id
+	name
+	email
+	tel
+	postalCode
+	address
+}

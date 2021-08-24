@@ -62,6 +62,8 @@
 		02B701AE269EEF5500BA9937 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 02B701AD269EEF5500BA9937 /* ComposableArchitecture */; };
 		02B701B5269EF08B00BA9937 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B701B4269EF08B00BA9937 /* RootView.swift */; };
 		02B701B7269EF0B300BA9937 /* RootTCA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B701B6269EF0B300BA9937 /* RootTCA.swift */; };
+		02BDB56626D53A2900817727 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BDB56526D53A2900817727 /* Bank.swift */; };
+		02BDB56826D53A3100817727 /* Sender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BDB56726D53A3100817727 /* Sender.swift */; };
 		02F2EDF026A57FF3009ABF50 /* Reducer+ReplaceNilState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F2EDEF26A57FF3009ABF50 /* Reducer+ReplaceNilState.swift */; };
 		02F2EDF226A58024009ABF50 /* Reducer+CaptureState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F2EDF126A58024009ABF50 /* Reducer+CaptureState.swift */; };
 		02F2EDF426A58054009ABF50 /* Reducer+Presents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F2EDF326A58054009ABF50 /* Reducer+Presents.swift */; };
@@ -132,6 +134,8 @@
 		02B701A5269EEC4F00BA9937 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		02B701B4269EF08B00BA9937 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		02B701B6269EF0B300BA9937 /* RootTCA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTCA.swift; sourceTree = "<group>"; };
+		02BDB56526D53A2900817727 /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
+		02BDB56726D53A3100817727 /* Sender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sender.swift; sourceTree = "<group>"; };
 		02E558DB269F21A600A8AE55 /* Works.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Works.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02F2EDEF26A57FF3009ABF50 /* Reducer+ReplaceNilState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reducer+ReplaceNilState.swift"; sourceTree = "<group>"; };
 		02F2EDF126A58024009ABF50 /* Reducer+CaptureState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reducer+CaptureState.swift"; sourceTree = "<group>"; };
@@ -202,6 +206,8 @@
 				0270060426A318EE004E68A1 /* Supplier.swift */,
 				021E092626ABF0E7000C6B8F /* Invoice.swift */,
 				0275873D26C4350800213014 /* InvoiceHistory.swift */,
+				02BDB56526D53A2900817727 /* Bank.swift */,
+				02BDB56726D53A3100817727 /* Sender.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -490,10 +496,12 @@
 				02362F4D26A568E00001AA10 /* ReplayNonNil.swift in Sources */,
 				021FF961269F39CA00FF55C1 /* ActionButton.swift in Sources */,
 				021FF969269F52FE00FF55C1 /* Error.swift in Sources */,
+				02BDB56826D53A3100817727 /* Sender.swift in Sources */,
 				0270060526A318EE004E68A1 /* Supplier.swift in Sources */,
 				0270060126A310D1004E68A1 /* Me.swift in Sources */,
 				026E551F26A4450E00295866 /* SupplierCreateView.swift in Sources */,
 				021FF964269F45EF00FF55C1 /* PhoneNumber.swift in Sources */,
+				02BDB56626D53A2900817727 /* Bank.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

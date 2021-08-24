@@ -38,6 +38,7 @@ struct SupplierEditView: View {
                         viewStore.send(.update(UpdateSupplierParams(
                             name: name,
                             billingAmount: _billingAmount,
+                            endYm: "",
                             subject: subject,
                             subjectTemplate: subjectTemplate
                         )))

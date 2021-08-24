@@ -3,9 +3,11 @@ import Foundation
 struct Me: Equatable, Hashable {
     let id: String
     let suppliers: [Supplier]
+    let sender: Sender?
+    let bank: Bank?
 
     static var mock: Me {
-        Me(id: "1", suppliers: [Supplier.mock])
+        Me(id: "1", suppliers: [Supplier.mock], sender: nil, bank: nil)
     }
 
     var totalAmountInMonthly: Int {

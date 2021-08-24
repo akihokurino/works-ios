@@ -59,6 +59,7 @@ struct SupplierCreateView: View {
                             name: name,
                             billingAmount: _billingAmount,
                             billingType: _billingType,
+                            endYm: "",
                             subject: subject,
                             subjectTemplate: subjectTemplate
                         )))

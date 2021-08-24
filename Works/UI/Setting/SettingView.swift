@@ -11,7 +11,7 @@ struct SettingView: View {
                     Divider()
                     Menu(text: "振込先") {}
                     Divider()
-                    Menu(text: "稼働状況") {}
+                    Menu(text: "自社") {}
                     Divider()
                     Menu(text: "Misoca接続") {
                         MisocaOAuthView(onLogin: { code in

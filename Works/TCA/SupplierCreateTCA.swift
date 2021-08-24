@@ -6,6 +6,7 @@ struct CreateSupplierParams: Equatable {
     let name: String
     let billingAmount: Int
     let billingType: GraphQL.GraphQLBillingType
+    let endYm: String
     let subject: String
     let subjectTemplate: String
 }
@@ -24,6 +25,7 @@ enum SupplierCreateTCA {
                         name: params.name,
                         billingAmount: params.billingAmount,
                         billingType: params.billingType,
+                        endYm: params.endYm,
                         subject: params.subject,
                         subjectTemplate: params.subjectTemplate)
                 }

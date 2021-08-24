@@ -5,6 +5,7 @@ import Firebase
 struct UpdateSupplierParams: Equatable {
     let name: String
     let billingAmount: Int
+    let endYm: String
     let subject: String
     let subjectTemplate: String
 }
@@ -24,6 +25,7 @@ enum SupplierEditTCA {
                         id: id,
                         name: params.name,
                         billingAmount: params.billingAmount,
+                        endYm: params.endYm,
                         subject: params.subject,
                         subjectTemplate: params.subjectTemplate)
                 }

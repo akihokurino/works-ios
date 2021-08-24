@@ -88,19 +88,45 @@ struct GraphQLCaller {
                             return
                         }
 
+                        let sender: Sender?
+                        if let v = data.me.fragments.meFragment.sender {
+                            sender = Sender(id: v.fragments.senderFragment.id,
+                                            name: v.fragments.senderFragment.name,
+                                            email: v.fragments.senderFragment.email,
+                                            tel: v.fragments.senderFragment.tel,
+                                            postalCode: v.fragments.senderFragment.postalCode,
+                                            address: v.fragments.senderFragment.address)
+                        } else {
+                            sender = nil
+                        }
+
+                        let bank: Bank?
+                        if let v = data.me.fragments.meFragment.bank {
+                            bank = Bank(id: v.fragments.bankFragment.id,
+                                        name: v.fragments.bankFragment.name,
+                                        code: v.fragments.bankFragment.code,
+                                        accountType: v.fragments.bankFragment.accountType,
+                                        accountNumber: v.fragments.bankFragment.accountNumber)
+                        } else {
+                            bank = nil
+                        }
+
                         let me = Me(
                             id: data.me.fragments.meFragment.id,
-                            suppliers: data.me.fragments.meFragment.suppliers.edges.map { edge in
+                            suppliers: data.me.fragments.meFragment.supplierList.edges.map { edge in
                                 Supplier(
                                     id: edge.node.fragments.supplierFragment.id,
                                     name: edge.node.fragments.supplierFragment.name,
                                     billingAmountIncludeTax: edge.node.fragments.supplierFragment.billingAmountIncludeTax,
                                     billingAmountExcludeTax: edge.node.fragments.supplierFragment.billingAmountExcludeTax,
                                     billingType: edge.node.fragments.supplierFragment.billingType,
+                                    endYm: edge.node.fragments.supplierFragment.endYm,
                                     subject: edge.node.fragments.supplierFragment.subject,
                                     subjectTemplate: edge.node.fragments.supplierFragment.subjectTemplate
                                 )
-                            }
+                            },
+                            sender: sender,
+                            bank: bank
                         )
                         promise(.success(me))
                     case .failure(let error):
@@ -170,27 +196,28 @@ struct GraphQLCaller {
 
                         let histories = data.invoiceHistoryList.edges.map { edge in
                             InvoiceHistory(
-                                id: edge.node.fragments.invoiceHistoryFragment.invoice.id,
+                                id: edge.node.fragments.invoiceHistoryFragment.invoice.fragments.invoiceFragment.id,
                                 invoice: Invoice(
-                                    id: edge.node.fragments.invoiceHistoryFragment.invoice.id,
-                                    issueYMD: edge.node.fragments.invoiceHistoryFragment.invoice.issueYmd,
-                                    paymentDueOnYMD: edge.node.fragments.invoiceHistoryFragment.invoice.paymentDueOnYmd,
-                                    invoiceNumber: edge.node.fragments.invoiceHistoryFragment.invoice.invoiceNumber,
-                                    paymentStatus: edge.node.fragments.invoiceHistoryFragment.invoice.paymentStatus,
-                                    invoiceStatus: edge.node.fragments.invoiceHistoryFragment.invoice.invoiceStatus,
-                                    recipientName: edge.node.fragments.invoiceHistoryFragment.invoice.recipientName,
-                                    subject: edge.node.fragments.invoiceHistoryFragment.invoice.subject,
-                                    totalAmount: edge.node.fragments.invoiceHistoryFragment.invoice.totalAmount,
-                                    tax: edge.node.fragments.invoiceHistoryFragment.invoice.tax
+                                    id: edge.node.fragments.invoiceHistoryFragment.invoice.fragments.invoiceFragment.id,
+                                    issueYMD: edge.node.fragments.invoiceHistoryFragment.invoice.fragments.invoiceFragment.issueYmd,
+                                    paymentDueOnYMD: edge.node.fragments.invoiceHistoryFragment.invoice.fragments.invoiceFragment.paymentDueOnYmd,
+                                    invoiceNumber: edge.node.fragments.invoiceHistoryFragment.invoice.fragments.invoiceFragment.invoiceNumber,
+                                    paymentStatus: edge.node.fragments.invoiceHistoryFragment.invoice.fragments.invoiceFragment.paymentStatus,
+                                    invoiceStatus: edge.node.fragments.invoiceHistoryFragment.invoice.fragments.invoiceFragment.invoiceStatus,
+                                    recipientName: edge.node.fragments.invoiceHistoryFragment.invoice.fragments.invoiceFragment.recipientName,
+                                    subject: edge.node.fragments.invoiceHistoryFragment.invoice.fragments.invoiceFragment.subject,
+                                    totalAmount: edge.node.fragments.invoiceHistoryFragment.invoice.fragments.invoiceFragment.totalAmount,
+                                    tax: edge.node.fragments.invoiceHistoryFragment.invoice.fragments.invoiceFragment.tax
                                 ),
                                 supplier: Supplier(
-                                    id: edge.node.fragments.invoiceHistoryFragment.supplier.id,
-                                    name: edge.node.fragments.invoiceHistoryFragment.supplier.name,
-                                    billingAmountIncludeTax: edge.node.fragments.invoiceHistoryFragment.supplier.billingAmountIncludeTax,
-                                    billingAmountExcludeTax: edge.node.fragments.invoiceHistoryFragment.supplier.billingAmountExcludeTax,
-                                    billingType: edge.node.fragments.invoiceHistoryFragment.supplier.billingType,
-                                    subject: edge.node.fragments.invoiceHistoryFragment.supplier.subject,
-                                    subjectTemplate: edge.node.fragments.invoiceHistoryFragment.supplier.subjectTemplate
+                                    id: edge.node.fragments.invoiceHistoryFragment.supplier.fragments.supplierFragment.id,
+                                    name: edge.node.fragments.invoiceHistoryFragment.supplier.fragments.supplierFragment.name,
+                                    billingAmountIncludeTax: edge.node.fragments.invoiceHistoryFragment.supplier.fragments.supplierFragment.billingAmountIncludeTax,
+                                    billingAmountExcludeTax: edge.node.fragments.invoiceHistoryFragment.supplier.fragments.supplierFragment.billingAmountExcludeTax,
+                                    billingType: edge.node.fragments.invoiceHistoryFragment.supplier.fragments.supplierFragment.billingType,
+                                    endYm: edge.node.fragments.invoiceHistoryFragment.supplier.fragments.supplierFragment.endYm,
+                                    subject: edge.node.fragments.invoiceHistoryFragment.supplier.fragments.supplierFragment.subject,
+                                    subjectTemplate: edge.node.fragments.invoiceHistoryFragment.supplier.fragments.supplierFragment.subjectTemplate
                                 )
                             )
                         }
@@ -220,19 +247,45 @@ struct GraphQLCaller {
                             return
                         }
 
+                        let sender: Sender?
+                        if let v = data.authenticate.fragments.meFragment.sender {
+                            sender = Sender(id: v.fragments.senderFragment.id,
+                                            name: v.fragments.senderFragment.name,
+                                            email: v.fragments.senderFragment.email,
+                                            tel: v.fragments.senderFragment.tel,
+                                            postalCode: v.fragments.senderFragment.postalCode,
+                                            address: v.fragments.senderFragment.address)
+                        } else {
+                            sender = nil
+                        }
+
+                        let bank: Bank?
+                        if let v = data.authenticate.fragments.meFragment.bank {
+                            bank = Bank(id: v.fragments.bankFragment.id,
+                                        name: v.fragments.bankFragment.name,
+                                        code: v.fragments.bankFragment.code,
+                                        accountType: v.fragments.bankFragment.accountType,
+                                        accountNumber: v.fragments.bankFragment.accountNumber)
+                        } else {
+                            bank = nil
+                        }
+
                         let me = Me(
                             id: data.authenticate.fragments.meFragment.id,
-                            suppliers: data.authenticate.fragments.meFragment.suppliers.edges.map { edge in
+                            suppliers: data.authenticate.fragments.meFragment.supplierList.edges.map { edge in
                                 Supplier(
                                     id: edge.node.fragments.supplierFragment.id,
                                     name: edge.node.fragments.supplierFragment.name,
                                     billingAmountIncludeTax: edge.node.fragments.supplierFragment.billingAmountIncludeTax,
                                     billingAmountExcludeTax: edge.node.fragments.supplierFragment.billingAmountExcludeTax,
                                     billingType: edge.node.fragments.supplierFragment.billingType,
+                                    endYm: edge.node.fragments.supplierFragment.endYm,
                                     subject: edge.node.fragments.supplierFragment.subject,
                                     subjectTemplate: edge.node.fragments.supplierFragment.subjectTemplate
                                 )
-                            }
+                            },
+                            sender: sender,
+                            bank: bank
                         )
                         promise(.success(me))
                     case .failure(let error):
@@ -242,9 +295,22 @@ struct GraphQLCaller {
         }
     }
 
-    func createSupplier(name: String, billingAmount: Int, billingType: GraphQL.GraphQLBillingType, subject: String, subjectTemplate: String) -> Future<Supplier, AppError> {
+    func createSupplier(name: String,
+                        billingAmount: Int,
+                        billingType: GraphQL.GraphQLBillingType,
+                        endYm: String,
+                        subject: String,
+                        subjectTemplate: String) -> Future<Supplier, AppError>
+    {
         return Future<Supplier, AppError> { promise in
-            cli.perform(mutation: GraphQL.CreateSupplierMutation(name: name, billingAmount: billingAmount, billingType: billingType, subject: subject, subjectTemplate: subjectTemplate)) { result in
+            cli.perform(mutation: GraphQL.CreateSupplierMutation(
+                name: name,
+                billingAmount: billingAmount,
+                billingType: billingType,
+                endYm: endYm,
+                subject: subject,
+                subjectTemplate: subjectTemplate
+            )) { result in
                 switch result {
                     case .success(let graphQLResult):
                         if let errors = graphQLResult.errors {
@@ -266,6 +332,7 @@ struct GraphQLCaller {
                             billingAmountIncludeTax: data.createSupplier.fragments.supplierFragment.billingAmountIncludeTax,
                             billingAmountExcludeTax: data.createSupplier.fragments.supplierFragment.billingAmountExcludeTax,
                             billingType: data.createSupplier.fragments.supplierFragment.billingType,
+                            endYm: data.createSupplier.fragments.supplierFragment.endYm,
                             subject: data.createSupplier.fragments.supplierFragment.subject,
                             subjectTemplate: data.createSupplier.fragments.supplierFragment.subjectTemplate
                         )
@@ -277,9 +344,22 @@ struct GraphQLCaller {
         }
     }
 
-    func updateSupplier(id: String, name: String, billingAmount: Int, subject: String, subjectTemplate: String) -> Future<Supplier, AppError> {
+    func updateSupplier(id: String,
+                        name: String,
+                        billingAmount: Int,
+                        endYm: String,
+                        subject: String,
+                        subjectTemplate: String) -> Future<Supplier, AppError>
+    {
         return Future<Supplier, AppError> { promise in
-            cli.perform(mutation: GraphQL.UpdateSupplierMutation(id: id, name: name, billingAmount: billingAmount, subject: subject, subjectTemplate: subjectTemplate)) { result in
+            cli.perform(mutation: GraphQL.UpdateSupplierMutation(
+                id: id,
+                name: name,
+                billingAmount: billingAmount,
+                endYm: endYm,
+                subject: subject,
+                subjectTemplate: subjectTemplate
+            )) { result in
                 switch result {
                     case .success(let graphQLResult):
                         if let errors = graphQLResult.errors {
@@ -301,6 +381,7 @@ struct GraphQLCaller {
                             billingAmountIncludeTax: data.updateSupplier.fragments.supplierFragment.billingAmountIncludeTax,
                             billingAmountExcludeTax: data.updateSupplier.fragments.supplierFragment.billingAmountExcludeTax,
                             billingType: data.updateSupplier.fragments.supplierFragment.billingType,
+                            endYm: data.updateSupplier.fragments.supplierFragment.endYm,
                             subject: data.updateSupplier.fragments.supplierFragment.subject,
                             subjectTemplate: data.updateSupplier.fragments.supplierFragment.subjectTemplate
                         )
@@ -417,6 +498,131 @@ struct GraphQLCaller {
                         guard let _ = graphQLResult.data else {
                             promise(.failure(AppError.system(defaultErrorMsg)))
                             return
+                        }
+
+                        promise(.success(()))
+                    case .failure(let error):
+                        promise(.failure(AppError.system(error.localizedDescription)))
+                }
+            }
+        }
+    }
+
+    func registerBank(name: String,
+                      code: String,
+                      accountType: GraphQL.GraphQLBankAccountType,
+                      accountNumber: String) -> Future<Bank, AppError>
+    {
+        return Future<Bank, AppError> { promise in
+            cli.perform(mutation: GraphQL.RegisterBankMutation(
+                name: name,
+                code: code,
+                accountType: accountType,
+                accountNumber: accountNumber
+            )) { result in
+                switch result {
+                    case .success(let graphQLResult):
+                        if let errors = graphQLResult.errors {
+                            if !errors.filter({ $0.message != nil }).isEmpty {
+                                let messages = errors.filter { $0.message != nil }.map { $0.message! }
+                                promise(.failure(AppError.system(messages.joined(separator: "\n"))))
+                                return
+                            }
+                        }
+
+                        guard let data = graphQLResult.data else {
+                            promise(.failure(AppError.system(defaultErrorMsg)))
+                            return
+                        }
+
+                        let bank = Bank(id: data.registerBank.fragments.bankFragment.id,
+                                        name: data.registerBank.fragments.bankFragment.name,
+                                        code: data.registerBank.fragments.bankFragment.code,
+                                        accountType: data.registerBank.fragments.bankFragment.accountType,
+                                        accountNumber: data.registerBank.fragments.bankFragment.accountNumber)
+                        promise(.success(bank))
+                    case .failure(let error):
+                        promise(.failure(AppError.system(error.localizedDescription)))
+                }
+            }
+        }
+    }
+
+    func registerSender(name: String,
+                        email: String,
+                        tel: String,
+                        postalCode: String,
+                        address: String) -> Future<Sender, AppError>
+    {
+        return Future<Sender, AppError> { promise in
+            cli.perform(mutation: GraphQL.RegisterSenderMutation(
+                name: name,
+                email: email,
+                tel: tel,
+                postalCode: postalCode,
+                address: address
+            )) { result in
+                switch result {
+                    case .success(let graphQLResult):
+                        if let errors = graphQLResult.errors {
+                            if !errors.filter({ $0.message != nil }).isEmpty {
+                                let messages = errors.filter { $0.message != nil }.map { $0.message! }
+                                promise(.failure(AppError.system(messages.joined(separator: "\n"))))
+                                return
+                            }
+                        }
+
+                        guard let data = graphQLResult.data else {
+                            promise(.failure(AppError.system(defaultErrorMsg)))
+                            return
+                        }
+
+                        let sender = Sender(id: data.registerSender.fragments.senderFragment.id,
+                                            name: data.registerSender.fragments.senderFragment.name,
+                                            email: data.registerSender.fragments.senderFragment.email,
+                                            tel: data.registerSender.fragments.senderFragment.tel,
+                                            postalCode: data.registerSender.fragments.senderFragment.postalCode,
+                                            address: data.registerSender.fragments.senderFragment.address)
+                        promise(.success(sender))
+                    case .failure(let error):
+                        promise(.failure(AppError.system(error.localizedDescription)))
+                }
+            }
+        }
+    }
+
+    func deleteBank(id: String) -> Future<Void, AppError> {
+        return Future<Void, AppError> { promise in
+            cli.perform(mutation: GraphQL.DeleteBankMutation(id: id)) { result in
+                switch result {
+                    case .success(let graphQLResult):
+                        if let errors = graphQLResult.errors {
+                            if !errors.filter({ $0.message != nil }).isEmpty {
+                                let messages = errors.filter { $0.message != nil }.map { $0.message! }
+                                promise(.failure(AppError.system(messages.joined(separator: "\n"))))
+                                return
+                            }
+                        }
+
+                        promise(.success(()))
+                    case .failure(let error):
+                        promise(.failure(AppError.system(error.localizedDescription)))
+                }
+            }
+        }
+    }
+    
+    func deleteSender(id: String) -> Future<Void, AppError> {
+        return Future<Void, AppError> { promise in
+            cli.perform(mutation: GraphQL.DeleteSenderMutation(id: id)) { result in
+                switch result {
+                    case .success(let graphQLResult):
+                        if let errors = graphQLResult.errors {
+                            if !errors.filter({ $0.message != nil }).isEmpty {
+                                let messages = errors.filter { $0.message != nil }.map { $0.message! }
+                                promise(.failure(AppError.system(messages.joined(separator: "\n"))))
+                                return
+                            }
                         }
 
                         promise(.success(()))
