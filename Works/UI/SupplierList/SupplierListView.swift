@@ -3,14 +3,14 @@ import SwiftUI
 
 struct SupplierListView: View {
     let store: Store<SupplierListTCA.State, SupplierListTCA.Action>
-    
+
     var body: some View {
         WithViewStore(store) { viewStore in
             ScrollView {
                 RefreshControl(isRefreshing: Binding(
                     get: { viewStore.isRefreshing },
                     set: { _ in }
-                ), coordinateSpaceName: "RefreshControl", onRefresh: {
+                ), coordinateSpaceName: RefreshControlKey, onRefresh: {
                     viewStore.send(.refresh)
                 })
 
@@ -23,7 +23,7 @@ struct SupplierListView: View {
                         .fontWeight(.bold)
                         .font(Font.system(size: 40.0))
                 }
-                .padding(.top, 30)
+                .padding(.top, 15)
 
                 VStack(spacing: 15) {
                     ForEach(viewStore.me.suppliers, id: \.self) { supplier in
@@ -32,9 +32,10 @@ struct SupplierListView: View {
                         }
                     }
                 }
-                .padding()
+                .padding(.horizontal, 15)
+                .padding(.top, 15)
             }
-            .coordinateSpace(name: "RefreshControl")
+            .coordinateSpace(name: RefreshControlKey)
             .navigationBarTitle("取引先", displayMode: .inline)
             .navigationBarItems(
                 trailing: Button(action: {
@@ -71,7 +72,7 @@ struct SupplierListView: View {
     }
 }
 
- struct SupplierListView_Previews: PreviewProvider {
+struct SupplierListView_Previews: PreviewProvider {
     static var previews: some View {
         SupplierListView(store: .init(
             initialState: SupplierListTCA.State(me: Me.mock),
@@ -82,4 +83,4 @@ struct SupplierListView: View {
             )
         ))
     }
- }
+}

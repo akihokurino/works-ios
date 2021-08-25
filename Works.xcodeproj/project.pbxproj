@@ -33,6 +33,9 @@
 		0241DC7B26A2EB8900AFA313 /* GraphQLClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0241DC7A26A2EB8900AFA313 /* GraphQLClient.swift */; };
 		0241DC7D26A2EE9500AFA313 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 0241DC7C26A2EE9500AFA313 /* Apollo */; };
 		0242C22F269F0EB300F3D002 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0242C22E269F0EB300F3D002 /* GoogleService-Info.plist */; };
+		024C324426D60A6C007E4FEA /* SwiftUIPager in Frameworks */ = {isa = PBXBuildFile; productRef = 024C324326D60A6C007E4FEA /* SwiftUIPager */; };
+		024C324626D61E6D007E4FEA /* InvoiceHistoryPagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024C324526D61E6D007E4FEA /* InvoiceHistoryPagerView.swift */; };
+		024C324826D6229F007E4FEA /* InvoiceHistorySimpleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024C324726D6229F007E4FEA /* InvoiceHistorySimpleCell.swift */; };
 		026E551726A4444D00295866 /* SupplierDetailTCA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026E551626A4444D00295866 /* SupplierDetailTCA.swift */; };
 		026E551926A4446400295866 /* SupplierDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026E551826A4446400295866 /* SupplierDetailView.swift */; };
 		026E551B26A444BC00295866 /* SupplierCreateTCA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026E551A26A444BC00295866 /* SupplierCreateTCA.swift */; };
@@ -111,6 +114,8 @@
 		0241DC7726A2E90800AFA313 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		0241DC7A26A2EB8900AFA313 /* GraphQLClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLClient.swift; sourceTree = "<group>"; };
 		0242C22E269F0EB300F3D002 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		024C324526D61E6D007E4FEA /* InvoiceHistoryPagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceHistoryPagerView.swift; sourceTree = "<group>"; };
+		024C324726D6229F007E4FEA /* InvoiceHistorySimpleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceHistorySimpleCell.swift; sourceTree = "<group>"; };
 		026E551626A4444D00295866 /* SupplierDetailTCA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupplierDetailTCA.swift; sourceTree = "<group>"; };
 		026E551826A4446400295866 /* SupplierDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupplierDetailView.swift; sourceTree = "<group>"; };
 		026E551A26A444BC00295866 /* SupplierCreateTCA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupplierCreateTCA.swift; sourceTree = "<group>"; };
@@ -159,6 +164,7 @@
 			files = (
 				02B701AE269EEF5500BA9937 /* ComposableArchitecture in Frameworks */,
 				0241DC7D26A2EE9500AFA313 /* Apollo in Frameworks */,
+				024C324426D60A6C007E4FEA /* SwiftUIPager in Frameworks */,
 				02195812269FCE6000AB4D22 /* ActivityIndicatorView in Frameworks */,
 				021FF958269F2F6200FF55C1 /* FirebaseAuth in Frameworks */,
 				027005FF26A2FBCA004E68A1 /* ApolloAPI in Frameworks */,
@@ -292,6 +298,8 @@
 			children = (
 				0275874026C4368A00213014 /* InvoiceHistoryListView.swift */,
 				0299CF9326C4D3E300361BCB /* InvoiceHistoryCell.swift */,
+				024C324726D6229F007E4FEA /* InvoiceHistorySimpleCell.swift */,
+				024C324526D61E6D007E4FEA /* InvoiceHistoryPagerView.swift */,
 			);
 			path = InvoiceHistoryList;
 			sourceTree = "<group>";
@@ -350,8 +358,8 @@
 				026E551526A4443200295866 /* SupplierEdit */,
 				02ADC85926AC0BE0005A9D06 /* InvoiceDetail */,
 				0275873F26C4366D00213014 /* InvoiceHistoryList */,
-				02195818269FEC0200AB4D22 /* Setting */,
 				021FF965269F4CBB00FF55C1 /* SignIn */,
+				02195818269FEC0200AB4D22 /* Setting */,
 				021FF95D269F38C500FF55C1 /* Component */,
 				02B701B4269EF08B00BA9937 /* RootView.swift */,
 			);
@@ -419,6 +427,7 @@
 				02195811269FCE6000AB4D22 /* ActivityIndicatorView */,
 				0241DC7C26A2EE9500AFA313 /* Apollo */,
 				027005FE26A2FBCA004E68A1 /* ApolloAPI */,
+				024C324326D60A6C007E4FEA /* SwiftUIPager */,
 			);
 			productName = Works;
 			productReference = 02E558DB269F21A600A8AE55 /* Works.app */;
@@ -453,6 +462,7 @@
 				021FF955269F2F2700FF55C1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				02195810269FCE6000AB4D22 /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */,
 				023FCEEF26A0786B00EFF51A /* XCRemoteSwiftPackageReference "apollo-ios" */,
+				024C324226D60A6C007E4FEA /* XCRemoteSwiftPackageReference "SwiftUIPager" */,
 			);
 			productRefGroup = 02B70190269EEC4D00BA9937;
 			projectDirPath = "";
@@ -492,6 +502,7 @@
 				026E552126A4451900295866 /* SupplierEditView.swift in Sources */,
 				021FF967269F4CF100FF55C1 /* PinCodeInputView.swift in Sources */,
 				0288BE2C26A6E78300AE5324 /* MisocaOAuthView.swift in Sources */,
+				024C324626D61E6D007E4FEA /* InvoiceHistoryPagerView.swift in Sources */,
 				02BDB56C26D545F500817727 /* SenderEditTCA.swift in Sources */,
 				02ADC85B26AC0C04005A9D06 /* InvoiceDetailView.swift in Sources */,
 				0275873E26C4350800213014 /* InvoiceHistory.swift in Sources */,
@@ -525,6 +536,7 @@
 				02F2EDF026A57FF3009ABF50 /* Reducer+ReplaceNilState.swift in Sources */,
 				02B701B7269EF0B300BA9937 /* RootTCA.swift in Sources */,
 				020C5B6526A6813300CF8ABB /* PickerInput.swift in Sources */,
+				024C324826D6229F007E4FEA /* InvoiceHistorySimpleCell.swift in Sources */,
 				0270061026A33722004E68A1 /* RefreshControl.swift in Sources */,
 				0270060A26A31AB7004E68A1 /* SupplierListView.swift in Sources */,
 				021FF95C269F31A200FF55C1 /* SignInTCA.swift in Sources */,
@@ -752,6 +764,14 @@
 				minimumVersion = 0.45.0;
 			};
 		};
+		024C324226D60A6C007E4FEA /* XCRemoteSwiftPackageReference "SwiftUIPager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/fermoya/SwiftUIPager.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.3.1;
+			};
+		};
 		02B701AC269EEF5500BA9937 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture.git";
@@ -777,6 +797,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 023FCEEF26A0786B00EFF51A /* XCRemoteSwiftPackageReference "apollo-ios" */;
 			productName = Apollo;
+		};
+		024C324326D60A6C007E4FEA /* SwiftUIPager */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 024C324226D60A6C007E4FEA /* XCRemoteSwiftPackageReference "SwiftUIPager" */;
+			productName = SwiftUIPager;
 		};
 		027005FE26A2FBCA004E68A1 /* ApolloAPI */ = {
 			isa = XCSwiftPackageProductDependency;

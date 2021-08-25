@@ -13,13 +13,13 @@ struct InvoiceHistoryCell: View {
                     .resizable()
                     .foregroundColor(.gray)
                     .frame(width: 45, height: 60)
-
+                    
                 VStack(alignment: .leading) {
                     Text("請求先: \(history.supplier.name)")
                         .font(Font.system(size: 15.0))
                         .foregroundColor(Color.black)
                         .padding(.horizontal, 15)
-                    
+
                     Text(history.invoice.subject)
                         .foregroundColor(Color.black)
                         .font(Font.system(size: 15.0))
@@ -77,13 +77,12 @@ struct InvoiceHistoryCell: View {
                 Spacer()
                 Image(systemName: "chevron.forward")
             }
+            .padding(.horizontal, 15)
         }
-        .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-        .padding(.horizontal, 15)
-        .padding(.vertical, 15)
+        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 180, alignment: .leading)
         .overlay(
             RoundedRectangle(cornerRadius: 4)
-                .stroke(Color.gray.opacity(0.5), lineWidth: 1)
+                .stroke(Color.gray.opacity(0.5), lineWidth: 0.5)
         )
     }
 }

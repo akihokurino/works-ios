@@ -12,7 +12,7 @@ struct SupplierDetailView: View {
                 RefreshControl(isRefreshing: Binding(
                     get: { viewStore.isRefreshing },
                     set: { _ in }
-                ), coordinateSpaceName: "RefreshControl", onRefresh: {
+                ), coordinateSpaceName: RefreshControlKey, onRefresh: {
                     viewStore.send(.refreshInvoiceList)
                 })
                 
@@ -43,14 +43,8 @@ struct SupplierDetailView: View {
                             .fontWeight(.bold)
                     }
                 }
-                .frame(
-                    minWidth: 0,
-                    maxWidth: .infinity,
-                    minHeight: 0,
-                    maxHeight: .infinity,
-                    alignment: .topLeading
-                )
                 .padding(.horizontal, 15)
+                .padding(.top, 15)
 
                 VStack(spacing: 15) {
                     ForEach(viewStore.invoices, id: \.self) { invoice in
@@ -60,9 +54,9 @@ struct SupplierDetailView: View {
                     }
                 }
                 .padding(.horizontal, 15)
-                .padding(.top, 80)
+                .padding(.top, 15)
             }
-            .coordinateSpace(name: "RefreshControl")
+            .coordinateSpace(name: RefreshControlKey)
             .onAppear {
                 viewStore.send(.fetchInvoiceList)
             }

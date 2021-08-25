@@ -3,20 +3,20 @@ import SwiftUI
 
 struct SettingView: View {
     let store: Store<SettingTCA.State, SettingTCA.Action>
-
+    
     var body: some View {
         WithViewStore(store) { viewStore in
             ScrollView {
                 VStack {
-                    Divider()
+                    Divider().background(Color.gray.opacity(0.5))
                     MenuButton(text: "振込先") {
                         viewStore.send(.presentBankEditView)
                     }
-                    Divider()
+                    Divider().background(Color.gray.opacity(0.5))
                     MenuButton(text: "自社") {
                         viewStore.send(.presentSenderEditView)
                     }
-                    Divider()
+                    Divider().background(Color.gray.opacity(0.5))
                     MenuLink(text: "Misoca接続") {
                         MisocaOAuthView(onLogin: { code in
                             viewStore.send(.connectMisoca(code))
@@ -24,7 +24,7 @@ struct SettingView: View {
                             viewStore.send(.refreshMisoca)
                         })
                     }
-                    Divider()
+                    Divider().background(Color.gray.opacity(0.5))
                 }
 
                 Spacer().frame(height: 40)

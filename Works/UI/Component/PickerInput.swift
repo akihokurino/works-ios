@@ -31,7 +31,7 @@ struct PickerInput: View {
             .frame(height: 50)
             .overlay(
                 RoundedRectangle(cornerRadius: 4)
-                    .stroke(Color.gray, lineWidth: 1)
+                    .stroke(Color.gray.opacity(0.5), lineWidth: 1)
             )
         }
     }
@@ -76,11 +76,8 @@ struct PickerView: View {
         }
         .background(Color.white)
         .overlay(
-            Rectangle()
-                .frame(height: 1)
-                .foregroundColor(.gray)
-                .opacity(0.5),
-            alignment: .top
+            RoundedRectangle(cornerRadius: 4)
+                .stroke(Color.gray.opacity(0.5), lineWidth: 1)
         )
     }
 }

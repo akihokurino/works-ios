@@ -6,29 +6,43 @@ struct InvoiceHistoryListView: View {
 
     var body: some View {
         WithViewStore(store) { viewStore in
-            ScrollView {
-                RefreshControl(isRefreshing: Binding(
-                    get: { viewStore.isRefreshing },
-                    set: { _ in }
-                ), coordinateSpaceName: "RefreshControl", onRefresh: {
-                    viewStore.send(.refreshHistoryList)
-                })
+            InvoiceHistoryPagerView { pagerType in
+                WithViewStore(store) { viewStore in
+                    ScrollView {
+                        RefreshControl(isRefreshing: Binding(
+                            get: { viewStore.isRefreshing },
+                            set: { _ in }
+                        ), coordinateSpaceName: RefreshControlKey, onRefresh: {
+                            viewStore.send(.refreshHistoryList)
+                        })
 
-                VStack(spacing: 15) {
-                    ForEach(viewStore.histories, id: \.self) { history in
-                        InvoiceHistoryCell(history: history) {
-                            viewStore.send(.presentInvoiceDetailView(history.invoice))
+                        if pagerType == .normal {
+                            VStack(spacing: 15) {
+                                ForEach(viewStore.histories, id: \.self) { history in
+                                    InvoiceHistoryCell(history: history) {
+                                        viewStore.send(.presentInvoiceDetailView(history.invoice))
+                                    }
+                                }
+                            }
+                            .padding(.horizontal, 15)
+                            .padding(.top, 15)
+                        } else {
+                            VStack(spacing: 15) {
+                                ForEach(viewStore.histories, id: \.self) { history in
+                                    InvoiceHistorySimpleCell(history: history) {
+                                        viewStore.send(.presentInvoiceDetailView(history.invoice))
+                                    }
+                                }
+                            }
+                            .padding(.top, 15)
                         }
                     }
+                    .coordinateSpace(name: RefreshControlKey)
                 }
-                .padding(.horizontal, 15)
             }
-            .coordinateSpace(name: "RefreshControl")
             .onAppear {
                 viewStore.send(.fetchHistoryList)
             }
-            .background(Color.white)
-            .navigationBarTitle("履歴", displayMode: .inline)
         }
         .navigate(
             using: store.scope(
@@ -40,6 +54,8 @@ struct InvoiceHistoryListView: View {
                 ViewStore(store.stateless).send(.popInvoiceDetailView)
             }
         )
+        .background(Color.white)
+        .navigationBarTitle("履歴", displayMode: .inline)
     }
 }
 

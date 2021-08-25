@@ -24,7 +24,7 @@ struct TextFieldInput: View {
             }
             .overlay(
                 RoundedRectangle(cornerRadius: 4)
-                    .stroke(Color.gray, lineWidth: 1)
+                    .stroke(Color.gray.opacity(0.5), lineWidth: 1)
             )
         }
     }

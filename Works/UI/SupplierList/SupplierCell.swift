@@ -37,7 +37,7 @@ struct SupplierCell: View {
         .padding(.vertical, 15)
         .overlay(
             RoundedRectangle(cornerRadius: 4)
-                .stroke(Color.gray.opacity(0.5), lineWidth: 1)
+                .stroke(Color.gray.opacity(0.5), lineWidth: 0.5)
         )
         .background(supplier.billingType == .monthly ? Color.green.opacity(0.1) : Color.orange.opacity(0.1))
     }
