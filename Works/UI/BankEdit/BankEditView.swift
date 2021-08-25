@@ -31,7 +31,8 @@ struct BankEditView: View {
                             selectIndex: $selectedAccountTypeIndex,
                             showPicker: $showAccountTypePicker,
                             label: "口座種別",
-                            selection: accountTypeSelection
+                            selection: accountTypeSelection,
+                            onTap: nil
                         )
                         Spacer().frame(height: 20)
 
@@ -60,7 +61,7 @@ struct BankEditView: View {
                 }
                 .padding()
                 .onAppear {
-                    if let bank = viewStore.state.bank {
+                    if let bank = viewStore.bank {
                         self.name = bank.name
                         self.code = bank.code
                         self.accountNumber = bank.accountNumber

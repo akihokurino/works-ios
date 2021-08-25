@@ -36,5 +36,6 @@ struct RefreshControl: View {
             }
         }
         .padding(.top, isRefreshing ? 0.0 : -RefreshControlHeight)
+        .frame(height: isRefreshing ? RefreshControlHeight : 0.0)
     }
 }

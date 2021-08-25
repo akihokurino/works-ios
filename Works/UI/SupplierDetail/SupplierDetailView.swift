@@ -15,7 +15,7 @@ struct SupplierDetailView: View {
                 ), coordinateSpaceName: RefreshControlKey, onRefresh: {
                     viewStore.send(.refreshInvoiceList)
                 })
-                
+
                 VStack(alignment: .leading) {
                     HStack {
                         Text("請求タイミング")
@@ -31,6 +31,24 @@ struct SupplierDetailView: View {
                     Spacer().frame(height: 15)
                     Divider().background(Color.gray)
                     Spacer().frame(height: 15)
+
+                    if viewStore.supplier.billingType == GraphQL.GraphQLBillingType.oneTime {
+                        Group {
+                            HStack {
+                                Text("契約終了月")
+                                    .foregroundColor(Color.gray)
+                                    .font(.body)
+                                    .frame(width: 150, alignment: .leading)
+                                Text(viewStore.supplier.endYmString)
+                                    .foregroundColor(Color.black)
+                                    .font(Font.system(size: 20.0))
+                            }
+
+                            Spacer().frame(height: 15)
+                            Divider().background(Color.gray)
+                            Spacer().frame(height: 15)
+                        }
+                    }
 
                     HStack {
                         Text("請求額（税込）")

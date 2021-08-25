@@ -49,7 +49,7 @@ struct SenderEditView: View {
                 }
                 .padding()
                 .onAppear {
-                    if let sender = viewStore.state.sender {
+                    if let sender = viewStore.sender {
                         self.name = sender.name
                         self.email = sender.email
                         self.tel = sender.tel

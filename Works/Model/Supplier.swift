@@ -21,6 +21,17 @@ struct Supplier: Equatable, Hashable {
         }
     }
 
+    var endYmString: String {
+        guard let endYm = endYm else {
+            return ""
+        }
+
+        let year = endYm.split(separator: "-")[0]
+        let month = endYm.split(separator: "-")[1]
+        
+        return "\(year)年\(month)月"
+    }
+
     static var mock: Supplier {
         Supplier(id: "1",
                  name: "株式会社A",

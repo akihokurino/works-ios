@@ -9,9 +9,10 @@ struct PickerItem: Hashable {
 struct PickerInput: View {
     @Binding var selectIndex: Int
     @Binding var showPicker: Bool
-
+    
     let label: String
     let selection: [PickerItem]
+    let onTap: (() -> Void)?
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -22,6 +23,9 @@ struct PickerInput: View {
             Button(action: {
                 UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                 showPicker = true
+                if let onTap = onTap {
+                    onTap()
+                }
             }) {
                 Text(selection[selectIndex].label)
                     .foregroundColor(Color.black)
@@ -42,7 +46,9 @@ struct PickerInput_Previews: PreviewProvider {
         PickerInput(selectIndex: .constant(0), showPicker: .constant(true), label: "性別", selection: [
             PickerItem(label: "男性", value: "1"),
             PickerItem(label: "女性", value: "2")
-        ])
+        ]) {
+            
+        }
     }
 }
 
