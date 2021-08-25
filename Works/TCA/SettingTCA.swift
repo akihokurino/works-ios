@@ -66,8 +66,6 @@ enum SettingTCA {
             case .deleted(.success(_)):
                 state.me.bank = nil
                 state.bankEditState = nil
-                state.isPresentedAlert = true
-                state.alertText = "振込先情報を削除しました"
                 return .none
             default:
                 return .none
@@ -83,8 +81,6 @@ enum SettingTCA {
             case .deleted(.success(_)):
                 state.me.sender = nil
                 state.senderEditState = nil
-                state.isPresentedAlert = true
-                state.alertText = "自社情報を削除しました"
                 return .none
             default:
                 return .none

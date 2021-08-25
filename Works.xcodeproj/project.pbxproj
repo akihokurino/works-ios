@@ -344,7 +344,6 @@
 			children = (
 				02BDB56E26D54BDF00817727 /* SenderEdit */,
 				02BDB56D26D54BD600817727 /* BankEdit */,
-				021FF95D269F38C500FF55C1 /* Component */,
 				0270060826A31AA3004E68A1 /* SupplierList */,
 				026E551326A4441600295866 /* SupplierDetail */,
 				026E551426A4442200295866 /* SupplierCreate */,
@@ -353,6 +352,7 @@
 				0275873F26C4366D00213014 /* InvoiceHistoryList */,
 				02195818269FEC0200AB4D22 /* Setting */,
 				021FF965269F4CBB00FF55C1 /* SignIn */,
+				021FF95D269F38C500FF55C1 /* Component */,
 				02B701B4269EF08B00BA9937 /* RootView.swift */,
 			);
 			path = UI;

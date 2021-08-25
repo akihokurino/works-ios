@@ -2,7 +2,7 @@ import Combine
 import ComposableArchitecture
 import Firebase
 
-struct UpdateBankParams: Equatable {
+struct RegisterBankParams: Equatable {
     let name: String
     let code: String
     let accountType: GraphQL.GraphQLBankAccountType
@@ -70,7 +70,7 @@ enum BankEditTCA {
 extension BankEditTCA {
     enum Action: Equatable {
         case back
-        case update(UpdateBankParams)
+        case update(RegisterBankParams)
         case updated(Result<Bank, AppError>)
         case delete
         case deleted(Result<Bool, AppError>)

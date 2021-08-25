@@ -2,7 +2,7 @@ import Combine
 import ComposableArchitecture
 import Firebase
 
-struct UpdateSenderParams: Equatable {
+struct RegisterSenderParams: Equatable {
     let name: String
     let email: String
     let tel: String
@@ -72,7 +72,7 @@ enum SenderEditTCA {
 extension SenderEditTCA {
     enum Action: Equatable {
         case back
-        case update(UpdateSenderParams)
+        case update(RegisterSenderParams)
         case updated(Result<Sender, AppError>)
         case delete
         case deleted(Result<Bool, AppError>)
