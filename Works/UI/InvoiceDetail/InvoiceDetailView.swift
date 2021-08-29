@@ -2,7 +2,7 @@ import ComposableArchitecture
 import SwiftUI
 
 struct InvoiceDetailView: View {
-    let store: Store<InvoiceDetailTCA.State, InvoiceDetailTCA.Action>
+    let store: Store<InvoiceDetailVM.State, InvoiceDetailVM.Action>
 
     @State private var isShowActionSheet = false
 
@@ -47,9 +47,9 @@ struct InvoiceDetailView: View {
 struct InvoiceDetailView_Previews: PreviewProvider {
     static var previews: some View {
         InvoiceDetailView(store: .init(
-            initialState: InvoiceDetailTCA.State(invoice: Invoice.mock),
+            initialState: InvoiceDetailVM.State(invoice: Invoice.mock),
             reducer: .empty,
-            environment: InvoiceDetailTCA.Environment(
+            environment: InvoiceDetailVM.Environment(
                 mainQueue: .main,
                 backgroundQueue: .init(DispatchQueue.global(qos: .background))
             )

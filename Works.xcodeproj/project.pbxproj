@@ -12,12 +12,12 @@
 		02195812269FCE6000AB4D22 /* ActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = 02195811269FCE6000AB4D22 /* ActivityIndicatorView */; };
 		02195817269FE0A000AB4D22 /* LocalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02195816269FE0A000AB4D22 /* LocalStore.swift */; };
 		0219581A269FEC1700AB4D22 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02195819269FEC1700AB4D22 /* SettingView.swift */; };
-		0219581C269FEC8000AB4D22 /* SettingTCA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0219581B269FEC8000AB4D22 /* SettingTCA.swift */; };
+		0219581C269FEC8000AB4D22 /* SettingVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0219581B269FEC8000AB4D22 /* SettingVM.swift */; };
 		021E092726ABF0E7000C6B8F /* Invoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021E092626ABF0E7000C6B8F /* Invoice.swift */; };
 		021E092D26ABFAAC000C6B8F /* InvoiceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021E092C26ABFAAC000C6B8F /* InvoiceCell.swift */; };
 		021FF958269F2F6200FF55C1 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 021FF957269F2F6200FF55C1 /* FirebaseAuth */; };
 		021FF95A269F2FB400FF55C1 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FF959269F2FB400FF55C1 /* SignInView.swift */; };
-		021FF95C269F31A200FF55C1 /* SignInTCA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FF95B269F31A200FF55C1 /* SignInTCA.swift */; };
+		021FF95C269F31A200FF55C1 /* SignInVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FF95B269F31A200FF55C1 /* SignInVM.swift */; };
 		021FF95F269F38DA00FF55C1 /* TextFieldInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FF95E269F38DA00FF55C1 /* TextFieldInput.swift */; };
 		021FF961269F39CA00FF55C1 /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FF960269F39CA00FF55C1 /* ActionButton.swift */; };
 		021FF964269F45EF00FF55C1 /* PhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FF963269F45EF00FF55C1 /* PhoneNumber.swift */; };
@@ -36,39 +36,39 @@
 		024C324426D60A6C007E4FEA /* SwiftUIPager in Frameworks */ = {isa = PBXBuildFile; productRef = 024C324326D60A6C007E4FEA /* SwiftUIPager */; };
 		024C324626D61E6D007E4FEA /* InvoiceHistoryPagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024C324526D61E6D007E4FEA /* InvoiceHistoryPagerView.swift */; };
 		024C324826D6229F007E4FEA /* InvoiceHistorySimpleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024C324726D6229F007E4FEA /* InvoiceHistorySimpleCell.swift */; };
-		026E551726A4444D00295866 /* SupplierDetailTCA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026E551626A4444D00295866 /* SupplierDetailTCA.swift */; };
+		026E551726A4444D00295866 /* SupplierDetailVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026E551626A4444D00295866 /* SupplierDetailVM.swift */; };
 		026E551926A4446400295866 /* SupplierDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026E551826A4446400295866 /* SupplierDetailView.swift */; };
-		026E551B26A444BC00295866 /* SupplierCreateTCA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026E551A26A444BC00295866 /* SupplierCreateTCA.swift */; };
-		026E551D26A444C900295866 /* SupplierEditTCA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026E551C26A444C900295866 /* SupplierEditTCA.swift */; };
+		026E551B26A444BC00295866 /* SupplierCreateVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026E551A26A444BC00295866 /* SupplierCreateVM.swift */; };
+		026E551D26A444C900295866 /* SupplierEditVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026E551C26A444C900295866 /* SupplierEditVM.swift */; };
 		026E551F26A4450E00295866 /* SupplierCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026E551E26A4450E00295866 /* SupplierCreateView.swift */; };
 		026E552126A4451900295866 /* SupplierEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026E552026A4451900295866 /* SupplierEditView.swift */; };
 		027005FF26A2FBCA004E68A1 /* ApolloAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 027005FE26A2FBCA004E68A1 /* ApolloAPI */; };
 		0270060126A310D1004E68A1 /* Me.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270060026A310D1004E68A1 /* Me.swift */; };
 		0270060526A318EE004E68A1 /* Supplier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270060426A318EE004E68A1 /* Supplier.swift */; };
-		0270060726A31A55004E68A1 /* SupplierListTCA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270060626A31A55004E68A1 /* SupplierListTCA.swift */; };
+		0270060726A31A55004E68A1 /* SupplierListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270060626A31A55004E68A1 /* SupplierListVM.swift */; };
 		0270060A26A31AB7004E68A1 /* SupplierListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270060926A31AB7004E68A1 /* SupplierListView.swift */; };
 		0270060C26A31C9D004E68A1 /* SupplierCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270060B26A31C9D004E68A1 /* SupplierCell.swift */; };
 		0270061026A33722004E68A1 /* RefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270060F26A33722004E68A1 /* RefreshControl.swift */; };
 		0275873E26C4350800213014 /* InvoiceHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0275873D26C4350800213014 /* InvoiceHistory.swift */; };
 		0275874126C4368A00213014 /* InvoiceHistoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0275874026C4368A00213014 /* InvoiceHistoryListView.swift */; };
-		0275874326C436A700213014 /* InvoiceHistoryListTCA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0275874226C436A700213014 /* InvoiceHistoryListTCA.swift */; };
+		0275874326C436A700213014 /* InvoiceHistoryListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0275874226C436A700213014 /* InvoiceHistoryListVM.swift */; };
 		0288BE2C26A6E78300AE5324 /* MisocaOAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0288BE2B26A6E78300AE5324 /* MisocaOAuthView.swift */; };
 		0299CF9426C4D3E300361BCB /* InvoiceHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0299CF9326C4D3E300361BCB /* InvoiceHistoryCell.swift */; };
 		029A140626A33CD000ACC9FF /* MenuLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029A140526A33CD000ACC9FF /* MenuLink.swift */; };
 		02ADC85B26AC0C04005A9D06 /* InvoiceDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ADC85A26AC0C04005A9D06 /* InvoiceDetailView.swift */; };
 		02ADC85D26AC0C13005A9D06 /* PDFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ADC85C26AC0C13005A9D06 /* PDFView.swift */; };
-		02ADC85F26AC0D61005A9D06 /* InvoiceDetailTCA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ADC85E26AC0D61005A9D06 /* InvoiceDetailTCA.swift */; };
+		02ADC85F26AC0D61005A9D06 /* InvoiceDetailVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ADC85E26AC0D61005A9D06 /* InvoiceDetailVM.swift */; };
 		02ADC86126AC3A57005A9D06 /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ADC86026AC3A56005A9D06 /* Downloader.swift */; };
 		02B7019D269EEC4D00BA9937 /* WorksApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B7019C269EEC4D00BA9937 /* WorksApp.swift */; };
 		02B701A1269EEC4F00BA9937 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02B701A0269EEC4F00BA9937 /* Assets.xcassets */; };
 		02B701A4269EEC4F00BA9937 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02B701A3269EEC4F00BA9937 /* Preview Assets.xcassets */; };
 		02B701AE269EEF5500BA9937 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 02B701AD269EEF5500BA9937 /* ComposableArchitecture */; };
 		02B701B5269EF08B00BA9937 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B701B4269EF08B00BA9937 /* RootView.swift */; };
-		02B701B7269EF0B300BA9937 /* RootTCA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B701B6269EF0B300BA9937 /* RootTCA.swift */; };
+		02B701B7269EF0B300BA9937 /* RootVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B701B6269EF0B300BA9937 /* RootVM.swift */; };
 		02BDB56626D53A2900817727 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BDB56526D53A2900817727 /* Bank.swift */; };
 		02BDB56826D53A3100817727 /* Sender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BDB56726D53A3100817727 /* Sender.swift */; };
-		02BDB56A26D545E700817727 /* BankEditTCA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BDB56926D545E700817727 /* BankEditTCA.swift */; };
-		02BDB56C26D545F500817727 /* SenderEditTCA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BDB56B26D545F500817727 /* SenderEditTCA.swift */; };
+		02BDB56A26D545E700817727 /* BankEditVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BDB56926D545E700817727 /* BankEditVM.swift */; };
+		02BDB56C26D545F500817727 /* SenderEditVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BDB56B26D545F500817727 /* SenderEditVM.swift */; };
 		02BDB57026D54BF000817727 /* BankEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BDB56F26D54BF000817727 /* BankEditView.swift */; };
 		02BDB57226D54BFB00817727 /* SenderEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BDB57126D54BFB00817727 /* SenderEditView.swift */; };
 		02BDB57426D5505C00817727 /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BDB57326D5505C00817727 /* MenuButton.swift */; };
@@ -95,11 +95,11 @@
 		0219580E269FCDD200AB4D22 /* Hud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hud.swift; sourceTree = "<group>"; };
 		02195816269FE0A000AB4D22 /* LocalStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStore.swift; sourceTree = "<group>"; };
 		02195819269FEC1700AB4D22 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
-		0219581B269FEC8000AB4D22 /* SettingTCA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTCA.swift; sourceTree = "<group>"; };
+		0219581B269FEC8000AB4D22 /* SettingVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingVM.swift; sourceTree = "<group>"; };
 		021E092626ABF0E7000C6B8F /* Invoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invoice.swift; sourceTree = "<group>"; };
 		021E092C26ABFAAC000C6B8F /* InvoiceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceCell.swift; sourceTree = "<group>"; };
 		021FF959269F2FB400FF55C1 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
-		021FF95B269F31A200FF55C1 /* SignInTCA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInTCA.swift; sourceTree = "<group>"; };
+		021FF95B269F31A200FF55C1 /* SignInVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVM.swift; sourceTree = "<group>"; };
 		021FF95E269F38DA00FF55C1 /* TextFieldInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldInput.swift; sourceTree = "<group>"; };
 		021FF960269F39CA00FF55C1 /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		021FF963269F45EF00FF55C1 /* PhoneNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumber.swift; sourceTree = "<group>"; };
@@ -116,38 +116,38 @@
 		0242C22E269F0EB300F3D002 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		024C324526D61E6D007E4FEA /* InvoiceHistoryPagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceHistoryPagerView.swift; sourceTree = "<group>"; };
 		024C324726D6229F007E4FEA /* InvoiceHistorySimpleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceHistorySimpleCell.swift; sourceTree = "<group>"; };
-		026E551626A4444D00295866 /* SupplierDetailTCA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupplierDetailTCA.swift; sourceTree = "<group>"; };
+		026E551626A4444D00295866 /* SupplierDetailVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupplierDetailVM.swift; sourceTree = "<group>"; };
 		026E551826A4446400295866 /* SupplierDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupplierDetailView.swift; sourceTree = "<group>"; };
-		026E551A26A444BC00295866 /* SupplierCreateTCA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupplierCreateTCA.swift; sourceTree = "<group>"; };
-		026E551C26A444C900295866 /* SupplierEditTCA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupplierEditTCA.swift; sourceTree = "<group>"; };
+		026E551A26A444BC00295866 /* SupplierCreateVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupplierCreateVM.swift; sourceTree = "<group>"; };
+		026E551C26A444C900295866 /* SupplierEditVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupplierEditVM.swift; sourceTree = "<group>"; };
 		026E551E26A4450E00295866 /* SupplierCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupplierCreateView.swift; sourceTree = "<group>"; };
 		026E552026A4451900295866 /* SupplierEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupplierEditView.swift; sourceTree = "<group>"; };
 		0270060026A310D1004E68A1 /* Me.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Me.swift; sourceTree = "<group>"; };
 		0270060426A318EE004E68A1 /* Supplier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Supplier.swift; sourceTree = "<group>"; };
-		0270060626A31A55004E68A1 /* SupplierListTCA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupplierListTCA.swift; sourceTree = "<group>"; };
+		0270060626A31A55004E68A1 /* SupplierListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupplierListVM.swift; sourceTree = "<group>"; };
 		0270060926A31AB7004E68A1 /* SupplierListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupplierListView.swift; sourceTree = "<group>"; };
 		0270060B26A31C9D004E68A1 /* SupplierCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupplierCell.swift; sourceTree = "<group>"; };
 		0270060F26A33722004E68A1 /* RefreshControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshControl.swift; sourceTree = "<group>"; };
 		0275873D26C4350800213014 /* InvoiceHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceHistory.swift; sourceTree = "<group>"; };
 		0275874026C4368A00213014 /* InvoiceHistoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceHistoryListView.swift; sourceTree = "<group>"; };
-		0275874226C436A700213014 /* InvoiceHistoryListTCA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceHistoryListTCA.swift; sourceTree = "<group>"; };
+		0275874226C436A700213014 /* InvoiceHistoryListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceHistoryListVM.swift; sourceTree = "<group>"; };
 		0288BE2B26A6E78300AE5324 /* MisocaOAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MisocaOAuthView.swift; sourceTree = "<group>"; };
 		0299CF9326C4D3E300361BCB /* InvoiceHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceHistoryCell.swift; sourceTree = "<group>"; };
 		029A140526A33CD000ACC9FF /* MenuLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuLink.swift; sourceTree = "<group>"; };
 		02ADC85A26AC0C04005A9D06 /* InvoiceDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceDetailView.swift; sourceTree = "<group>"; };
 		02ADC85C26AC0C13005A9D06 /* PDFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFView.swift; sourceTree = "<group>"; };
-		02ADC85E26AC0D61005A9D06 /* InvoiceDetailTCA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceDetailTCA.swift; sourceTree = "<group>"; };
+		02ADC85E26AC0D61005A9D06 /* InvoiceDetailVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceDetailVM.swift; sourceTree = "<group>"; };
 		02ADC86026AC3A56005A9D06 /* Downloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Downloader.swift; sourceTree = "<group>"; };
 		02B7019C269EEC4D00BA9937 /* WorksApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorksApp.swift; sourceTree = "<group>"; };
 		02B701A0269EEC4F00BA9937 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		02B701A3269EEC4F00BA9937 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		02B701A5269EEC4F00BA9937 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		02B701B4269EF08B00BA9937 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
-		02B701B6269EF0B300BA9937 /* RootTCA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTCA.swift; sourceTree = "<group>"; };
+		02B701B6269EF0B300BA9937 /* RootVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootVM.swift; sourceTree = "<group>"; };
 		02BDB56526D53A2900817727 /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
 		02BDB56726D53A3100817727 /* Sender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sender.swift; sourceTree = "<group>"; };
-		02BDB56926D545E700817727 /* BankEditTCA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankEditTCA.swift; sourceTree = "<group>"; };
-		02BDB56B26D545F500817727 /* SenderEditTCA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenderEditTCA.swift; sourceTree = "<group>"; };
+		02BDB56926D545E700817727 /* BankEditVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankEditVM.swift; sourceTree = "<group>"; };
+		02BDB56B26D545F500817727 /* SenderEditVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenderEditVM.swift; sourceTree = "<group>"; };
 		02BDB56F26D54BF000817727 /* BankEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankEditView.swift; sourceTree = "<group>"; };
 		02BDB57126D54BFB00817727 /* SenderEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenderEditView.swift; sourceTree = "<group>"; };
 		02BDB57326D5505C00817727 /* MenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
@@ -187,6 +187,7 @@
 		02195818269FEC0200AB4D22 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				0219581B269FEC8000AB4D22 /* SettingVM.swift */,
 				02195819269FEC1700AB4D22 /* SettingView.swift */,
 				0288BE2B26A6E78300AE5324 /* MisocaOAuthView.swift */,
 			);
@@ -232,6 +233,7 @@
 		021FF965269F4CBB00FF55C1 /* SignIn */ = {
 			isa = PBXGroup;
 			children = (
+				021FF95B269F31A200FF55C1 /* SignInVM.swift */,
 				021FF959269F2FB400FF55C1 /* SignInView.swift */,
 				021FF966269F4CF100FF55C1 /* PinCodeInputView.swift */,
 			);
@@ -262,6 +264,7 @@
 		026E551326A4441600295866 /* SupplierDetail */ = {
 			isa = PBXGroup;
 			children = (
+				026E551626A4444D00295866 /* SupplierDetailVM.swift */,
 				026E551826A4446400295866 /* SupplierDetailView.swift */,
 				021E092C26ABFAAC000C6B8F /* InvoiceCell.swift */,
 			);
@@ -271,6 +274,7 @@
 		026E551426A4442200295866 /* SupplierCreate */ = {
 			isa = PBXGroup;
 			children = (
+				026E551A26A444BC00295866 /* SupplierCreateVM.swift */,
 				026E551E26A4450E00295866 /* SupplierCreateView.swift */,
 			);
 			path = SupplierCreate;
@@ -279,6 +283,7 @@
 		026E551526A4443200295866 /* SupplierEdit */ = {
 			isa = PBXGroup;
 			children = (
+				026E551C26A444C900295866 /* SupplierEditVM.swift */,
 				026E552026A4451900295866 /* SupplierEditView.swift */,
 			);
 			path = SupplierEdit;
@@ -287,6 +292,7 @@
 		0270060826A31AA3004E68A1 /* SupplierList */ = {
 			isa = PBXGroup;
 			children = (
+				0270060626A31A55004E68A1 /* SupplierListVM.swift */,
 				0270060926A31AB7004E68A1 /* SupplierListView.swift */,
 				0270060B26A31C9D004E68A1 /* SupplierCell.swift */,
 			);
@@ -296,6 +302,7 @@
 		0275873F26C4366D00213014 /* InvoiceHistoryList */ = {
 			isa = PBXGroup;
 			children = (
+				0275874226C436A700213014 /* InvoiceHistoryListVM.swift */,
 				0275874026C4368A00213014 /* InvoiceHistoryListView.swift */,
 				0299CF9326C4D3E300361BCB /* InvoiceHistoryCell.swift */,
 				024C324726D6229F007E4FEA /* InvoiceHistorySimpleCell.swift */,
@@ -304,9 +311,19 @@
 			path = InvoiceHistoryList;
 			sourceTree = "<group>";
 		};
+		02941E8E26DBD228004FAA50 /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				02B701B6269EF0B300BA9937 /* RootVM.swift */,
+				02B701B4269EF08B00BA9937 /* RootView.swift */,
+			);
+			path = Root;
+			sourceTree = "<group>";
+		};
 		02ADC85926AC0BE0005A9D06 /* InvoiceDetail */ = {
 			isa = PBXGroup;
 			children = (
+				02ADC85E26AC0D61005A9D06 /* InvoiceDetailVM.swift */,
 				02ADC85A26AC0C04005A9D06 /* InvoiceDetailView.swift */,
 				02ADC85C26AC0C13005A9D06 /* PDFView.swift */,
 			);
@@ -328,7 +345,6 @@
 				02195815269FE08F00AB4D22 /* Infra */,
 				021FF96A269F555D00FF55C1 /* Util */,
 				021FF962269F45DA00FF55C1 /* Model */,
-				02B701B3269EF04B00BA9937 /* TCA */,
 				02B701AF269EEF7900BA9937 /* UI */,
 				02B7019C269EEC4D00BA9937 /* WorksApp.swift */,
 				02B701A0269EEC4F00BA9937 /* Assets.xcassets */,
@@ -360,37 +376,20 @@
 				0275873F26C4366D00213014 /* InvoiceHistoryList */,
 				021FF965269F4CBB00FF55C1 /* SignIn */,
 				02195818269FEC0200AB4D22 /* Setting */,
+				02941E8E26DBD228004FAA50 /* Root */,
 				021FF95D269F38C500FF55C1 /* Component */,
-				02B701B4269EF08B00BA9937 /* RootView.swift */,
-			);
-			path = UI;
-			sourceTree = "<group>";
-		};
-		02B701B3269EF04B00BA9937 /* TCA */ = {
-			isa = PBXGroup;
-			children = (
 				02362F4A26A5685E0001AA10 /* NavigationLink+Store.swift */,
 				02F2EDEF26A57FF3009ABF50 /* Reducer+ReplaceNilState.swift */,
 				02F2EDF126A58024009ABF50 /* Reducer+CaptureState.swift */,
 				02F2EDF326A58054009ABF50 /* Reducer+Presents.swift */,
-				02B701B6269EF0B300BA9937 /* RootTCA.swift */,
-				021FF95B269F31A200FF55C1 /* SignInTCA.swift */,
-				0219581B269FEC8000AB4D22 /* SettingTCA.swift */,
-				0270060626A31A55004E68A1 /* SupplierListTCA.swift */,
-				026E551626A4444D00295866 /* SupplierDetailTCA.swift */,
-				026E551A26A444BC00295866 /* SupplierCreateTCA.swift */,
-				026E551C26A444C900295866 /* SupplierEditTCA.swift */,
-				02ADC85E26AC0D61005A9D06 /* InvoiceDetailTCA.swift */,
-				0275874226C436A700213014 /* InvoiceHistoryListTCA.swift */,
-				02BDB56926D545E700817727 /* BankEditTCA.swift */,
-				02BDB56B26D545F500817727 /* SenderEditTCA.swift */,
 			);
-			path = TCA;
+			path = UI;
 			sourceTree = "<group>";
 		};
 		02BDB56D26D54BD600817727 /* BankEdit */ = {
 			isa = PBXGroup;
 			children = (
+				02BDB56926D545E700817727 /* BankEditVM.swift */,
 				02BDB56F26D54BF000817727 /* BankEditView.swift */,
 			);
 			path = BankEdit;
@@ -399,6 +398,7 @@
 		02BDB56E26D54BDF00817727 /* SenderEdit */ = {
 			isa = PBXGroup;
 			children = (
+				02BDB56B26D545F500817727 /* SenderEditVM.swift */,
 				02BDB57126D54BFB00817727 /* SenderEditView.swift */,
 			);
 			path = SenderEdit;
@@ -497,20 +497,20 @@
 				0241DC7826A2E90800AFA313 /* API.swift in Sources */,
 				02ADC85D26AC0C13005A9D06 /* PDFView.swift in Sources */,
 				0270060C26A31C9D004E68A1 /* SupplierCell.swift in Sources */,
-				02ADC85F26AC0D61005A9D06 /* InvoiceDetailTCA.swift in Sources */,
+				02ADC85F26AC0D61005A9D06 /* InvoiceDetailVM.swift in Sources */,
 				021FF96C269F557600FF55C1 /* String.swift in Sources */,
 				026E552126A4451900295866 /* SupplierEditView.swift in Sources */,
 				021FF967269F4CF100FF55C1 /* PinCodeInputView.swift in Sources */,
 				0288BE2C26A6E78300AE5324 /* MisocaOAuthView.swift in Sources */,
 				024C324626D61E6D007E4FEA /* InvoiceHistoryPagerView.swift in Sources */,
-				02BDB56C26D545F500817727 /* SenderEditTCA.swift in Sources */,
+				02BDB56C26D545F500817727 /* SenderEditVM.swift in Sources */,
 				02ADC85B26AC0C04005A9D06 /* InvoiceDetailView.swift in Sources */,
 				0275873E26C4350800213014 /* InvoiceHistory.swift in Sources */,
 				026E551926A4446400295866 /* SupplierDetailView.swift in Sources */,
 				02F2EDF226A58024009ABF50 /* Reducer+CaptureState.swift in Sources */,
 				0241DC7B26A2EB8900AFA313 /* GraphQLClient.swift in Sources */,
 				021FF96E269F557E00FF55C1 /* Int.swift in Sources */,
-				026E551B26A444BC00295866 /* SupplierCreateTCA.swift in Sources */,
+				026E551B26A444BC00295866 /* SupplierCreateVM.swift in Sources */,
 				02BDB57426D5505C00817727 /* MenuButton.swift in Sources */,
 				02BDB57226D54BFB00817727 /* SenderEditView.swift in Sources */,
 				02BDB57026D54BF000817727 /* BankEditView.swift in Sources */,
@@ -519,28 +519,28 @@
 				0299CF9426C4D3E300361BCB /* InvoiceHistoryCell.swift in Sources */,
 				0219581A269FEC1700AB4D22 /* SettingView.swift in Sources */,
 				02F2EDF426A58054009ABF50 /* Reducer+Presents.swift in Sources */,
-				0270060726A31A55004E68A1 /* SupplierListTCA.swift in Sources */,
+				0270060726A31A55004E68A1 /* SupplierListVM.swift in Sources */,
 				0219580F269FCDD200AB4D22 /* Hud.swift in Sources */,
 				021E092D26ABFAAC000C6B8F /* InvoiceCell.swift in Sources */,
 				02ADC86126AC3A57005A9D06 /* Downloader.swift in Sources */,
-				0275874326C436A700213014 /* InvoiceHistoryListTCA.swift in Sources */,
-				026E551726A4444D00295866 /* SupplierDetailTCA.swift in Sources */,
+				0275874326C436A700213014 /* InvoiceHistoryListVM.swift in Sources */,
+				026E551726A4444D00295866 /* SupplierDetailVM.swift in Sources */,
 				021E092726ABF0E7000C6B8F /* Invoice.swift in Sources */,
 				021FF95F269F38DA00FF55C1 /* TextFieldInput.swift in Sources */,
 				0275874126C4368A00213014 /* InvoiceHistoryListView.swift in Sources */,
-				02BDB56A26D545E700817727 /* BankEditTCA.swift in Sources */,
-				026E551D26A444C900295866 /* SupplierEditTCA.swift in Sources */,
+				02BDB56A26D545E700817727 /* BankEditVM.swift in Sources */,
+				026E551D26A444C900295866 /* SupplierEditVM.swift in Sources */,
 				02195817269FE0A000AB4D22 /* LocalStore.swift in Sources */,
 				021FF95A269F2FB400FF55C1 /* SignInView.swift in Sources */,
 				029A140626A33CD000ACC9FF /* MenuLink.swift in Sources */,
 				02F2EDF026A57FF3009ABF50 /* Reducer+ReplaceNilState.swift in Sources */,
-				02B701B7269EF0B300BA9937 /* RootTCA.swift in Sources */,
+				02B701B7269EF0B300BA9937 /* RootVM.swift in Sources */,
 				020C5B6526A6813300CF8ABB /* PickerInput.swift in Sources */,
 				024C324826D6229F007E4FEA /* InvoiceHistorySimpleCell.swift in Sources */,
 				0270061026A33722004E68A1 /* RefreshControl.swift in Sources */,
 				0270060A26A31AB7004E68A1 /* SupplierListView.swift in Sources */,
-				021FF95C269F31A200FF55C1 /* SignInTCA.swift in Sources */,
-				0219581C269FEC8000AB4D22 /* SettingTCA.swift in Sources */,
+				021FF95C269F31A200FF55C1 /* SignInVM.swift in Sources */,
+				0219581C269FEC8000AB4D22 /* SettingVM.swift in Sources */,
 				02362F4D26A568E00001AA10 /* ReplayNonNil.swift in Sources */,
 				021FF961269F39CA00FF55C1 /* ActionButton.swift in Sources */,
 				021FF969269F52FE00FF55C1 /* Error.swift in Sources */,

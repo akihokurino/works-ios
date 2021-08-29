@@ -2,7 +2,7 @@ import ComposableArchitecture
 import SwiftUI
 
 struct BankEditView: View {
-    let store: Store<BankEditTCA.State, BankEditTCA.Action>
+    let store: Store<BankEditVM.State, BankEditVM.Action>
 
     @State private var isShowActionSheet = false
     @State private var name: String = ""
@@ -107,7 +107,7 @@ struct BankEditView: View {
             }, alignment: .bottom)
             .alert(isPresented: viewStore.binding(
                 get: \.isPresentedAlert,
-                send: BankEditTCA.Action.isPresentedAlert
+                send: BankEditVM.Action.isPresentedAlert
             )) {
                 Alert(title: Text(viewStore.alertText))
             }
@@ -127,9 +127,9 @@ struct BankEditView: View {
 struct BankEditView_Previews: PreviewProvider {
     static var previews: some View {
         BankEditView(store: .init(
-            initialState: BankEditTCA.State(),
+            initialState: BankEditVM.State(),
             reducer: .empty,
-            environment: BankEditTCA.Environment(
+            environment: BankEditVM.Environment(
                 mainQueue: .main,
                 backgroundQueue: .init(DispatchQueue.global(qos: .background))
             )

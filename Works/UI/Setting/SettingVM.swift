@@ -2,7 +2,7 @@ import Combine
 import ComposableArchitecture
 import Firebase
 
-enum SettingTCA {
+enum SettingVM {
     static let reducer = Reducer<State, Action, Environment> { state, action, environment in
         switch action {
         case .signOut:
@@ -16,7 +16,7 @@ enum SettingTCA {
                 .map { _ in true }
                 .receive(on: environment.mainQueue)
                 .catchToEffect()
-                .map(SettingTCA.Action.connectedMisoca)
+                .map(SettingVM.Action.connectedMisoca)
         case .refreshMisoca:
             state.isLoading = true
             return GraphQLClient.shared.caller()
@@ -25,7 +25,7 @@ enum SettingTCA {
                 .map { _ in true }
                 .receive(on: environment.mainQueue)
                 .catchToEffect()
-                .map(SettingTCA.Action.connectedMisoca)
+                .map(SettingVM.Action.connectedMisoca)
         case .connectedMisoca(.success(_)):
             state.isPresentedAlert = true
             state.alertText = "Misocaとの同期に成功しました"
@@ -42,14 +42,14 @@ enum SettingTCA {
             return .none
         case .presentBankEditView:
             let bank = state.me.bank
-            state.bankEditState = BankEditTCA.State(bank: bank)
+            state.bankEditState = BankEditVM.State(bank: bank)
             return .none
         case .popBankEditView:
             state.bankEditState = nil
             return .none
         case .presentSenderEditView:
             let sender = state.me.sender
-            state.senderEditState = SenderEditTCA.State(sender: sender)
+            state.senderEditState = SenderEditVM.State(sender: sender)
             return .none
         case .popSenderEditView:
             state.senderEditState = nil
@@ -88,22 +88,22 @@ enum SettingTCA {
         }
     }
     .presents(
-        BankEditTCA.reducer,
+        BankEditVM.reducer,
         state: \.bankEditState,
-        action: /SettingTCA.Action.propagateBankEdit,
+        action: /SettingVM.Action.propagateBankEdit,
         environment: { _environment in
-            BankEditTCA.Environment(
+            BankEditVM.Environment(
                 mainQueue: _environment.mainQueue,
                 backgroundQueue: _environment.backgroundQueue
             )
         }
     )
     .presents(
-        SenderEditTCA.reducer,
+        SenderEditVM.reducer,
         state: \.senderEditState,
-        action: /SettingTCA.Action.propagateSenderEdit,
+        action: /SettingVM.Action.propagateSenderEdit,
         environment: { _environment in
-            SenderEditTCA.Environment(
+            SenderEditVM.Environment(
                 mainQueue: _environment.mainQueue,
                 backgroundQueue: _environment.backgroundQueue
             )
@@ -111,7 +111,7 @@ enum SettingTCA {
     )
 }
 
-extension SettingTCA {
+extension SettingVM {
     enum Action: Equatable {
         case signOut
         case connectMisoca(String)
@@ -123,8 +123,8 @@ extension SettingTCA {
         case presentSenderEditView
         case popSenderEditView
 
-        case propagateBankEdit(BankEditTCA.Action)
-        case propagateSenderEdit(SenderEditTCA.Action)
+        case propagateBankEdit(BankEditVM.Action)
+        case propagateSenderEdit(SenderEditVM.Action)
     }
 
     struct State: Equatable {
@@ -133,8 +133,8 @@ extension SettingTCA {
         var isPresentedAlert: Bool = false
         var me: Me
 
-        var bankEditState: BankEditTCA.State?
-        var senderEditState: SenderEditTCA.State?
+        var bankEditState: BankEditVM.State?
+        var senderEditState: SenderEditVM.State?
     }
 
     struct Environment {

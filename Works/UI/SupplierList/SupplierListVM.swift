@@ -2,7 +2,7 @@ import Combine
 import ComposableArchitecture
 import Firebase
 
-enum SupplierListTCA {
+enum SupplierListVM {
     static let reducer = Reducer<State, Action, Environment> { state, action, environment in
         switch action {
         case .refresh:
@@ -12,7 +12,7 @@ enum SupplierListTCA {
                 .flatMap { caller in caller.me() }
                 .receive(on: environment.mainQueue)
                 .catchToEffect()
-                .map(SupplierListTCA.Action.refreshed)
+                .map(SupplierListVM.Action.refreshed)
         case .refreshed(.success(let me)):
             state.isRefreshing = false
             state.me = me
@@ -21,13 +21,13 @@ enum SupplierListTCA {
             state.isRefreshing = false
             return .none
         case .presentCreateView:
-            state.crateState = SupplierCreateTCA.State()
+            state.crateState = SupplierCreateVM.State()
             return .none
         case .popCreateView:
             state.crateState = nil
             return .none
         case .presentDetailView(let supplier):
-            state.detailState = SupplierDetailTCA.State(supplier: supplier)
+            state.detailState = SupplierDetailVM.State(supplier: supplier)
             return .none
         case .popDetailView:
             state.detailState = nil
@@ -45,7 +45,7 @@ enum SupplierListTCA {
                     .flatMap { caller in caller.me() }
                     .receive(on: environment.mainQueue)
                     .catchToEffect()
-                    .map(SupplierListTCA.Action.refreshed)
+                    .map(SupplierListVM.Action.refreshed)
             default:
                 return .none
             }
@@ -61,29 +61,29 @@ enum SupplierListTCA {
                     .flatMap { caller in caller.me() }
                     .receive(on: environment.mainQueue)
                     .catchToEffect()
-                    .map(SupplierListTCA.Action.refreshed)
+                    .map(SupplierListVM.Action.refreshed)
             default:
                 return .none
             }
         }
     }
     .presents(
-        SupplierCreateTCA.reducer,
+        SupplierCreateVM.reducer,
         state: \.crateState,
-        action: /SupplierListTCA.Action.propagateCreate,
+        action: /SupplierListVM.Action.propagateCreate,
         environment: { _environment in
-            SupplierCreateTCA.Environment(
+            SupplierCreateVM.Environment(
                 mainQueue: _environment.mainQueue,
                 backgroundQueue: _environment.backgroundQueue
             )
         }
     )
     .presents(
-        SupplierDetailTCA.reducer,
+        SupplierDetailVM.reducer,
         state: \.detailState,
-        action: /SupplierListTCA.Action.propagateDetail,
+        action: /SupplierListVM.Action.propagateDetail,
         environment: { _environment in
-            SupplierDetailTCA.Environment(
+            SupplierDetailVM.Environment(
                 mainQueue: _environment.mainQueue,
                 backgroundQueue: _environment.backgroundQueue
             )
@@ -91,7 +91,7 @@ enum SupplierListTCA {
     )
 }
 
-extension SupplierListTCA {
+extension SupplierListVM {
     enum Action: Equatable {
         case refresh
         case refreshed(Result<Me, AppError>)
@@ -100,16 +100,16 @@ extension SupplierListTCA {
         case presentDetailView(Supplier)
         case popDetailView
 
-        case propagateCreate(SupplierCreateTCA.Action)
-        case propagateDetail(SupplierDetailTCA.Action)
+        case propagateCreate(SupplierCreateVM.Action)
+        case propagateDetail(SupplierDetailVM.Action)
     }
 
     struct State: Equatable {
         var isRefreshing: Bool = false
         var me: Me
 
-        var crateState: SupplierCreateTCA.State?
-        var detailState: SupplierDetailTCA.State?
+        var crateState: SupplierCreateVM.State?
+        var detailState: SupplierDetailVM.State?
     }
 
     struct Environment {

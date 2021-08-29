@@ -2,7 +2,7 @@ import ComposableArchitecture
 import SwiftUI
 
 struct SupplierEditView: View {
-    let store: Store<SupplierEditTCA.State, SupplierEditTCA.Action>
+    let store: Store<SupplierEditVM.State, SupplierEditVM.Action>
 
     @State private var name: String = ""
     @State private var billingAmount: String = ""
@@ -151,9 +151,9 @@ struct SupplierEditView: View {
 struct SupplierEditView_Previews: PreviewProvider {
     static var previews: some View {
         SupplierEditView(store: .init(
-            initialState: SupplierEditTCA.State(supplier: Supplier.mock),
+            initialState: SupplierEditVM.State(supplier: Supplier.mock),
             reducer: .empty,
-            environment: SupplierEditTCA.Environment(
+            environment: SupplierEditVM.Environment(
                 mainQueue: .main,
                 backgroundQueue: .init(DispatchQueue.global(qos: .background))
             )

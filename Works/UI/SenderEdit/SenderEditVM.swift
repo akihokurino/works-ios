@@ -10,7 +10,7 @@ struct RegisterSenderParams: Equatable {
     let address: String
 }
 
-enum SenderEditTCA {
+enum SenderEditVM {
     static let reducer = Reducer<State, Action, Environment> { state, action, environment in
         switch action {
         case .back:
@@ -29,7 +29,7 @@ enum SenderEditTCA {
                 }
                 .receive(on: environment.mainQueue)
                 .catchToEffect()
-                .map(SenderEditTCA.Action.updated)
+                .map(SenderEditVM.Action.updated)
         case .updated(.success(_)):
             state.isPresentedAlert = true
             state.alertText = "自社情報を登録しました"
@@ -52,7 +52,7 @@ enum SenderEditTCA {
                 .map { _ in true }
                 .receive(on: environment.mainQueue)
                 .catchToEffect()
-                .map(SenderEditTCA.Action.deleted)
+                .map(SenderEditVM.Action.deleted)
         case .deleted(.success(_)):
             state.isLoading = false
             return .none
@@ -69,7 +69,7 @@ enum SenderEditTCA {
     }
 }
 
-extension SenderEditTCA {
+extension SenderEditVM {
     enum Action: Equatable {
         case back
         case update(RegisterSenderParams)

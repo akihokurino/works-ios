@@ -2,7 +2,7 @@ import ComposableArchitecture
 import SwiftUI
 
 struct RootView: View {
-    let store: Store<RootTCA.State, RootTCA.Action>
+    let store: Store<RootVM.State, RootVM.Action>
 
     var body: some View {
         WithViewStore(store, removeDuplicates: { $0.authState == $1.authState }) { viewStore in
@@ -13,7 +13,7 @@ struct RootView: View {
                             IfLetStore(
                                 store.scope(
                                     state: { $0.supplierListState },
-                                    action: RootTCA.Action.propagateSupplierList
+                                    action: RootVM.Action.propagateSupplierList
                                 ),
                                 then: SupplierListView.init(store:)
                             )
@@ -29,7 +29,7 @@ struct RootView: View {
                             IfLetStore(
                                 store.scope(
                                     state: { $0.invoiceHistoryListState },
-                                    action: RootTCA.Action.propagateInvoiceHistoryList
+                                    action: RootVM.Action.propagateInvoiceHistoryList
                                 ),
                                 then: InvoiceHistoryListView.init(store:)
                             )
@@ -45,7 +45,7 @@ struct RootView: View {
                             IfLetStore(
                                 store.scope(
                                     state: { $0.settingState },
-                                    action: RootTCA.Action.propagateSetting
+                                    action: RootVM.Action.propagateSetting
                                 ),
                                 then: SettingView.init(store:)
                             )
@@ -61,7 +61,7 @@ struct RootView: View {
                     IfLetStore(
                         store.scope(
                             state: { $0.signInState },
-                            action: RootTCA.Action.propagateSignIn
+                            action: RootVM.Action.propagateSignIn
                         ),
                         then: SignInView.init(store:)
                     )
@@ -79,9 +79,9 @@ struct RootView: View {
 struct RootView_Previews: PreviewProvider {
     static var previews: some View {
         RootView(store: .init(
-            initialState: RootTCA.State(),
+            initialState: RootVM.State(),
             reducer: .empty,
-            environment: RootTCA.Environment(
+            environment: RootVM.Environment(
                 mainQueue: .main,
                 backgroundQueue: .init(DispatchQueue.global(qos: .background))
             )

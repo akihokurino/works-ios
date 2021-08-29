@@ -2,7 +2,7 @@ import ComposableArchitecture
 import SwiftUI
 
 struct SupplierDetailView: View {
-    let store: Store<SupplierDetailTCA.State, SupplierDetailTCA.Action>
+    let store: Store<SupplierDetailVM.State, SupplierDetailVM.Action>
 
     @State private var isShowActionSheet = false
 
@@ -113,7 +113,7 @@ struct SupplierDetailView: View {
         .navigate(
             using: store.scope(
                 state: \.editState,
-                action: SupplierDetailTCA.Action.propagateEdit
+                action: SupplierDetailVM.Action.propagateEdit
             ),
             destination: SupplierEditView.init(store:),
             onDismiss: {
@@ -123,7 +123,7 @@ struct SupplierDetailView: View {
         .navigate(
             using: store.scope(
                 state: \.invoiceDetailState,
-                action: SupplierDetailTCA.Action.propagateInvoiceDetail
+                action: SupplierDetailVM.Action.propagateInvoiceDetail
             ),
             destination: InvoiceDetailView.init(store:),
             onDismiss: {
@@ -136,9 +136,9 @@ struct SupplierDetailView: View {
 struct SupplierDetailView_Previews: PreviewProvider {
     static var previews: some View {
         SupplierDetailView(store: .init(
-            initialState: SupplierDetailTCA.State(supplier: Supplier.mock),
+            initialState: SupplierDetailVM.State(supplier: Supplier.mock),
             reducer: .empty,
-            environment: SupplierDetailTCA.Environment(
+            environment: SupplierDetailVM.Environment(
                 mainQueue: .main,
                 backgroundQueue: .init(DispatchQueue.global(qos: .background))
             )

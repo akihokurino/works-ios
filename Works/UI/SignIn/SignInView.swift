@@ -2,7 +2,7 @@ import ComposableArchitecture
 import SwiftUI
 
 struct SignInView: View {
-    let store: Store<SignInTCA.State, SignInTCA.Action>
+    let store: Store<SignInVM.State, SignInVM.Action>
 
     @State private var phoneNumber: String = ""
 
@@ -45,9 +45,9 @@ struct SignInView: View {
 struct SignInView_Previews: PreviewProvider {
     static var previews: some View {
         SignInView(store: .init(
-            initialState: SignInTCA.State(),
+            initialState: SignInVM.State(),
             reducer: .empty,
-            environment: SignInTCA.Environment(
+            environment: SignInVM.Environment(
                 mainQueue: .main,
                 backgroundQueue: .init(DispatchQueue.global(qos: .background))
             )

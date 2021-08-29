@@ -2,7 +2,7 @@ import Combine
 import ComposableArchitecture
 import Firebase
 
-enum RootTCA {
+enum RootVM {
     static let reducer = Reducer<State, Action, Environment> { state, action, environment in
         switch action {
         case .onAppear:
@@ -13,7 +13,7 @@ enum RootTCA {
                     .flatMap { caller in caller.me() }
                     .receive(on: environment.mainQueue)
                     .catchToEffect()
-                    .map(RootTCA.Action.me)
+                    .map(RootVM.Action.me)
             } else {
                 state.setSignOutState()
                 return .none
@@ -57,44 +57,44 @@ enum RootTCA {
         }
     }
     .presents(
-        SignInTCA.reducer,
+        SignInVM.reducer,
         state: \.signInState,
-        action: /RootTCA.Action.propagateSignIn,
+        action: /RootVM.Action.propagateSignIn,
         environment: { _environment in
-            SignInTCA.Environment(
+            SignInVM.Environment(
                 mainQueue: _environment.mainQueue,
                 backgroundQueue: _environment.backgroundQueue
             )
         }
     )
     .presents(
-        SupplierListTCA.reducer,
+        SupplierListVM.reducer,
         state: \.supplierListState,
-        action: /RootTCA.Action.propagateSupplierList,
+        action: /RootVM.Action.propagateSupplierList,
         environment: { _environment in
-            SupplierListTCA.Environment(
+            SupplierListVM.Environment(
                 mainQueue: _environment.mainQueue,
                 backgroundQueue: _environment.backgroundQueue
             )
         }
     )
     .presents(
-        InvoiceHistoryListTCA.reducer,
+        InvoiceHistoryListVM.reducer,
         state: \.invoiceHistoryListState,
-        action: /RootTCA.Action.propagateInvoiceHistoryList,
+        action: /RootVM.Action.propagateInvoiceHistoryList,
         environment: { _environment in
-            InvoiceHistoryListTCA.Environment(
+            InvoiceHistoryListVM.Environment(
                 mainQueue: _environment.mainQueue,
                 backgroundQueue: _environment.backgroundQueue
             )
         }
     )
     .presents(
-        SettingTCA.reducer,
+        SettingVM.reducer,
         state: \.settingState,
-        action: /RootTCA.Action.propagateSetting,
+        action: /RootVM.Action.propagateSetting,
         environment: { _environment in
-            SettingTCA.Environment(
+            SettingVM.Environment(
                 mainQueue: _environment.mainQueue,
                 backgroundQueue: _environment.backgroundQueue
             )
@@ -102,15 +102,15 @@ enum RootTCA {
     )
 }
 
-extension RootTCA {
+extension RootVM {
     enum Action: Equatable {
         case onAppear
         case me(Result<Me, AppError>)
 
-        case propagateSignIn(SignInTCA.Action)
-        case propagateSupplierList(SupplierListTCA.Action)
-        case propagateInvoiceHistoryList(InvoiceHistoryListTCA.Action)
-        case propagateSetting(SettingTCA.Action)
+        case propagateSignIn(SignInVM.Action)
+        case propagateSupplierList(SupplierListVM.Action)
+        case propagateInvoiceHistoryList(InvoiceHistoryListVM.Action)
+        case propagateSetting(SettingVM.Action)
     }
 
     struct State: Equatable {
@@ -118,24 +118,24 @@ extension RootTCA {
         var me: Me?
         var authState: AuthState = .unknown
 
-        var signInState: SignInTCA.State?
-        var supplierListState: SupplierListTCA.State?
-        var invoiceHistoryListState: InvoiceHistoryListTCA.State?
-        var settingState: SettingTCA.State?
+        var signInState: SignInVM.State?
+        var supplierListState: SupplierListVM.State?
+        var invoiceHistoryListState: InvoiceHistoryListVM.State?
+        var settingState: SettingVM.State?
 
         mutating func setSignInState(me: Me) {
             self.me = me
             self.authState = .alreadyLogin
             self.signInState = nil
-            self.supplierListState = SupplierListTCA.State(me: me)
-            self.invoiceHistoryListState = InvoiceHistoryListTCA.State()
-            self.settingState = SettingTCA.State(me: me)
+            self.supplierListState = SupplierListVM.State(me: me)
+            self.invoiceHistoryListState = InvoiceHistoryListVM.State()
+            self.settingState = SettingVM.State(me: me)
         }
 
         mutating func setSignOutState() {
             self.me = nil
             self.authState = .shouldLogin
-            self.signInState = SignInTCA.State()
+            self.signInState = SignInVM.State()
             self.supplierListState = nil
             self.invoiceHistoryListState = nil
             self.settingState = nil

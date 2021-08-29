@@ -9,7 +9,7 @@ struct RegisterBankParams: Equatable {
     let accountNumber: String
 }
 
-enum BankEditTCA {
+enum BankEditVM {
     static let reducer = Reducer<State, Action, Environment> { state, action, environment in
         switch action {
         case .back:
@@ -27,7 +27,7 @@ enum BankEditTCA {
                 }
                 .receive(on: environment.mainQueue)
                 .catchToEffect()
-                .map(BankEditTCA.Action.updated)
+                .map(BankEditVM.Action.updated)
         case .updated(.success(_)):
             state.isPresentedAlert = true
             state.alertText = "振込先情報を登録しました"
@@ -50,7 +50,7 @@ enum BankEditTCA {
                 .map { _ in true }
                 .receive(on: environment.mainQueue)
                 .catchToEffect()
-                .map(BankEditTCA.Action.deleted)
+                .map(BankEditVM.Action.deleted)
         case .deleted(.success(_)):
             state.isLoading = false
             return .none
@@ -67,7 +67,7 @@ enum BankEditTCA {
     }
 }
 
-extension BankEditTCA {
+extension BankEditVM {
     enum Action: Equatable {
         case back
         case update(RegisterBankParams)

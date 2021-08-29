@@ -2,7 +2,7 @@ import ComposableArchitecture
 import SwiftUI
 
 struct SenderEditView: View {
-    let store: Store<SenderEditTCA.State, SenderEditTCA.Action>
+    let store: Store<SenderEditVM.State, SenderEditVM.Action>
 
     @State private var isShowActionSheet = false
     @State private var name: String = ""
@@ -79,7 +79,7 @@ struct SenderEditView: View {
             }, alignment: .center)
             .alert(isPresented: viewStore.binding(
                 get: \.isPresentedAlert,
-                send: SenderEditTCA.Action.isPresentedAlert
+                send: SenderEditVM.Action.isPresentedAlert
             )) {
                 Alert(title: Text(viewStore.alertText))
             }
@@ -99,9 +99,9 @@ struct SenderEditView: View {
 struct SenderEditView_Previews: PreviewProvider {
     static var previews: some View {
         SenderEditView(store: .init(
-            initialState: SenderEditTCA.State(),
+            initialState: SenderEditVM.State(),
             reducer: .empty,
-            environment: SenderEditTCA.Environment(
+            environment: SenderEditVM.Environment(
                 mainQueue: .main,
                 backgroundQueue: .init(DispatchQueue.global(qos: .background))
             )

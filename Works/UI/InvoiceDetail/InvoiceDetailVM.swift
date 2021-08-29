@@ -2,7 +2,7 @@ import Combine
 import ComposableArchitecture
 import Firebase
 
-enum InvoiceDetailTCA {
+enum InvoiceDetailVM {
     static let reducer = Reducer<State, Action, Environment> { state, action, environment in
         switch action {
         case .back:
@@ -16,7 +16,7 @@ enum InvoiceDetailTCA {
                 .flatMap { url in Downloader.shared.download(url: url) }
                 .receive(on: environment.mainQueue)
                 .catchToEffect()
-                .map(InvoiceDetailTCA.Action.downloaded)
+                .map(InvoiceDetailVM.Action.downloaded)
         case .downloaded(.success(let data)):
             state.isLoading = false
             state.pdf = data
@@ -33,7 +33,7 @@ enum InvoiceDetailTCA {
                 .map { _ in true }
                 .receive(on: environment.mainQueue)
                 .catchToEffect()
-                .map(InvoiceDetailTCA.Action.deleted)
+                .map(InvoiceDetailVM.Action.deleted)
         case .deleted(.success(_)):
             state.isLoading = false
             return .none
@@ -44,7 +44,7 @@ enum InvoiceDetailTCA {
     }
 }
 
-extension InvoiceDetailTCA {
+extension InvoiceDetailVM {
     enum Action: Equatable {
         case back
         case onAppear

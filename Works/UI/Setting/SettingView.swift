@@ -2,7 +2,7 @@ import ComposableArchitecture
 import SwiftUI
 
 struct SettingView: View {
-    let store: Store<SettingTCA.State, SettingTCA.Action>
+    let store: Store<SettingVM.State, SettingVM.Action>
     
     var body: some View {
         WithViewStore(store) { viewStore in
@@ -45,7 +45,7 @@ struct SettingView: View {
             }, alignment: .center)
             .alert(isPresented: viewStore.binding(
                 get: \.isPresentedAlert,
-                send: SettingTCA.Action.isPresentedAlert
+                send: SettingVM.Action.isPresentedAlert
             )) {
                 Alert(title: Text(viewStore.alertText))
             }
@@ -53,7 +53,7 @@ struct SettingView: View {
         .navigate(
             using: store.scope(
                 state: \.bankEditState,
-                action: SettingTCA.Action.propagateBankEdit
+                action: SettingVM.Action.propagateBankEdit
             ),
             destination: BankEditView.init(store:),
             onDismiss: {
@@ -63,7 +63,7 @@ struct SettingView: View {
         .navigate(
             using: store.scope(
                 state: \.senderEditState,
-                action: SettingTCA.Action.propagateSenderEdit
+                action: SettingVM.Action.propagateSenderEdit
             ),
             destination: SenderEditView.init(store:),
             onDismiss: {
@@ -76,9 +76,9 @@ struct SettingView: View {
 struct SettingView_Previews: PreviewProvider {
     static var previews: some View {
         SettingView(store: .init(
-            initialState: SettingTCA.State(me: Me.mock),
+            initialState: SettingVM.State(me: Me.mock),
             reducer: .empty,
-            environment: SettingTCA.Environment(
+            environment: SettingVM.Environment(
                 mainQueue: .main,
                 backgroundQueue: .init(DispatchQueue.global(qos: .background))
             )

@@ -3,7 +3,7 @@ import Combine
 import ComposableArchitecture
 import Firebase
 
-enum SignInTCA {
+enum SignInVM {
     static let reducer = Reducer<State, Action, Environment> { state, action, environment in
         switch action {
         case .onAppear:
@@ -29,7 +29,7 @@ enum SignInTCA {
                 }
             }
 
-            return verify.catchToEffect().map(SignInTCA.Action.sendVerification)
+            return verify.catchToEffect().map(SignInVM.Action.sendVerification)
         case .sendVerification(.success(let verificationId)):
             LocalStore.setAauthVerificationId(val: verificationId)
             state.shouldShowPinCodeInput = true
@@ -67,7 +67,7 @@ enum SignInTCA {
                 .flatMap { caller in caller.authenticate() }
                 .receive(on: environment.mainQueue)
                 .catchToEffect()
-                .map(SignInTCA.Action.verified)
+                .map(SignInVM.Action.verified)
         case .verified(.success(let me)):
             state.isLoading = false
             return .none
@@ -78,7 +78,7 @@ enum SignInTCA {
     }
 }
 
-extension SignInTCA {
+extension SignInVM {
     enum Action: Equatable {
         case onAppear
         case signIn(PhoneNumber)

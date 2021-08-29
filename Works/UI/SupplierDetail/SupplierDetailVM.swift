@@ -2,19 +2,19 @@ import Combine
 import ComposableArchitecture
 import Firebase
 
-enum SupplierDetailTCA {
+enum SupplierDetailVM {
     static let reducer = Reducer<State, Action, Environment> { state, action, environment in
         switch action {
         case .back:
             return .none
         case .presentEditView:
-            state.editState = SupplierEditTCA.State(supplier: state.supplier)
+            state.editState = SupplierEditVM.State(supplier: state.supplier)
             return .none
         case .popEditView:
             state.editState = nil
             return .none
         case .presentInvoiceDetailView(let invoice):
-            state.invoiceDetailState = InvoiceDetailTCA.State(invoice: invoice)
+            state.invoiceDetailState = InvoiceDetailVM.State(invoice: invoice)
             return .none
         case .popInvoiceDetailView:
             state.invoiceDetailState = nil
@@ -28,7 +28,7 @@ enum SupplierDetailTCA {
                 .map { _ in true }
                 .receive(on: environment.mainQueue)
                 .catchToEffect()
-                .map(SupplierDetailTCA.Action.deleted)
+                .map(SupplierDetailVM.Action.deleted)
         case .deleted(.success(_)):
             state.isLoading = false
             return .none
@@ -42,7 +42,7 @@ enum SupplierDetailTCA {
                 .flatMap { caller in caller.getInvoiceList(supplierId: supplierId) }
                 .receive(on: environment.mainQueue)
                 .catchToEffect()
-                .map(SupplierDetailTCA.Action.invoiceList)
+                .map(SupplierDetailVM.Action.invoiceList)
         case .refreshInvoiceList:
             let supplierId = state.supplier.id
             state.isRefreshing = true
@@ -51,7 +51,7 @@ enum SupplierDetailTCA {
                 .flatMap { caller in caller.getInvoiceList(supplierId: supplierId) }
                 .receive(on: environment.mainQueue)
                 .catchToEffect()
-                .map(SupplierDetailTCA.Action.invoiceList)
+                .map(SupplierDetailVM.Action.invoiceList)
         case .invoiceList(.success(let items)):
             state.isRefreshing = false
             state.invoices = items
@@ -83,22 +83,22 @@ enum SupplierDetailTCA {
         }
     }
     .presents(
-        SupplierEditTCA.reducer,
+        SupplierEditVM.reducer,
         state: \.editState,
-        action: /SupplierDetailTCA.Action.propagateEdit,
+        action: /SupplierDetailVM.Action.propagateEdit,
         environment: { _environment in
-            SupplierEditTCA.Environment(
+            SupplierEditVM.Environment(
                 mainQueue: _environment.mainQueue,
                 backgroundQueue: _environment.backgroundQueue
             )
         }
     )
     .presents(
-        InvoiceDetailTCA.reducer,
+        InvoiceDetailVM.reducer,
         state: \.invoiceDetailState,
-        action: /SupplierDetailTCA.Action.propagateInvoiceDetail,
+        action: /SupplierDetailVM.Action.propagateInvoiceDetail,
         environment: { _environment in
-            InvoiceDetailTCA.Environment(
+            InvoiceDetailVM.Environment(
                 mainQueue: _environment.mainQueue,
                 backgroundQueue: _environment.backgroundQueue
             )
@@ -106,7 +106,7 @@ enum SupplierDetailTCA {
     )
 }
 
-extension SupplierDetailTCA {
+extension SupplierDetailVM {
     enum Action: Equatable {
         case back
         case presentEditView
@@ -119,8 +119,8 @@ extension SupplierDetailTCA {
         case refreshInvoiceList
         case invoiceList(Result<[Invoice], AppError>)
 
-        case propagateEdit(SupplierEditTCA.Action)
-        case propagateInvoiceDetail(InvoiceDetailTCA.Action)
+        case propagateEdit(SupplierEditVM.Action)
+        case propagateInvoiceDetail(InvoiceDetailVM.Action)
     }
 
     struct State: Equatable {
@@ -129,8 +129,8 @@ extension SupplierDetailTCA {
         var isLoading: Bool = false
         var isRefreshing: Bool = false
 
-        var editState: SupplierEditTCA.State?
-        var invoiceDetailState: InvoiceDetailTCA.State?
+        var editState: SupplierEditVM.State?
+        var invoiceDetailState: InvoiceDetailVM.State?
     }
 
     struct Environment {

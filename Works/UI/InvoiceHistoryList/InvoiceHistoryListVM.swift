@@ -2,11 +2,11 @@ import Combine
 import ComposableArchitecture
 import Firebase
 
-enum InvoiceHistoryListTCA {
+enum InvoiceHistoryListVM {
     static let reducer = Reducer<State, Action, Environment> { state, action, environment in
         switch action {
         case .presentInvoiceDetailView(let invoice):
-            state.invoiceDetailState = InvoiceDetailTCA.State(invoice: invoice)
+            state.invoiceDetailState = InvoiceDetailVM.State(invoice: invoice)
             return .none
         case .popInvoiceDetailView:
             state.invoiceDetailState = nil
@@ -17,7 +17,7 @@ enum InvoiceHistoryListTCA {
                 .flatMap { caller in caller.getInvoiceHistoryList() }
                 .receive(on: environment.mainQueue)
                 .catchToEffect()
-                .map(InvoiceHistoryListTCA.Action.historyList)
+                .map(InvoiceHistoryListVM.Action.historyList)
         case .refreshHistoryList:
             state.isRefreshing = true
             return GraphQLClient.shared.caller()
@@ -25,7 +25,7 @@ enum InvoiceHistoryListTCA {
                 .flatMap { caller in caller.getInvoiceHistoryList() }
                 .receive(on: environment.mainQueue)
                 .catchToEffect()
-                .map(InvoiceHistoryListTCA.Action.historyList)
+                .map(InvoiceHistoryListVM.Action.historyList)
         case .historyList(.success(let items)):
             state.isRefreshing = false
             state.histories = items
@@ -45,11 +45,11 @@ enum InvoiceHistoryListTCA {
         }
     }
     .presents(
-        InvoiceDetailTCA.reducer,
+        InvoiceDetailVM.reducer,
         state: \.invoiceDetailState,
-        action: /InvoiceHistoryListTCA.Action.propagateInvoiceDetail,
+        action: /InvoiceHistoryListVM.Action.propagateInvoiceDetail,
         environment: { _environment in
-            InvoiceDetailTCA.Environment(
+            InvoiceDetailVM.Environment(
                 mainQueue: _environment.mainQueue,
                 backgroundQueue: _environment.backgroundQueue
             )
@@ -57,7 +57,7 @@ enum InvoiceHistoryListTCA {
     )
 }
 
-extension InvoiceHistoryListTCA {
+extension InvoiceHistoryListVM {
     enum Action: Equatable {
         case fetchHistoryList
         case refreshHistoryList
@@ -65,13 +65,13 @@ extension InvoiceHistoryListTCA {
         case presentInvoiceDetailView(Invoice)
         case popInvoiceDetailView
 
-        case propagateInvoiceDetail(InvoiceDetailTCA.Action)
+        case propagateInvoiceDetail(InvoiceDetailVM.Action)
     }
 
     struct State: Equatable {
         var isRefreshing: Bool = false
         var histories: [InvoiceHistory] = []
-        var invoiceDetailState: InvoiceDetailTCA.State?
+        var invoiceDetailState: InvoiceDetailVM.State?
     }
 
     struct Environment {

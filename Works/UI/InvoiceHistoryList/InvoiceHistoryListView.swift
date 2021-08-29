@@ -2,7 +2,7 @@ import ComposableArchitecture
 import SwiftUI
 
 struct InvoiceHistoryListView: View {
-    let store: Store<InvoiceHistoryListTCA.State, InvoiceHistoryListTCA.Action>
+    let store: Store<InvoiceHistoryListVM.State, InvoiceHistoryListVM.Action>
 
     var body: some View {
         WithViewStore(store) { viewStore in
@@ -47,7 +47,7 @@ struct InvoiceHistoryListView: View {
         .navigate(
             using: store.scope(
                 state: \.invoiceDetailState,
-                action: InvoiceHistoryListTCA.Action.propagateInvoiceDetail
+                action: InvoiceHistoryListVM.Action.propagateInvoiceDetail
             ),
             destination: InvoiceDetailView.init(store:),
             onDismiss: {
@@ -62,9 +62,9 @@ struct InvoiceHistoryListView: View {
 struct InvoiceHistoryListView_Previews: PreviewProvider {
     static var previews: some View {
         InvoiceHistoryListView(store: .init(
-            initialState: InvoiceHistoryListTCA.State(),
+            initialState: InvoiceHistoryListVM.State(),
             reducer: .empty,
-            environment: InvoiceHistoryListTCA.Environment(
+            environment: InvoiceHistoryListVM.Environment(
                 mainQueue: .main,
                 backgroundQueue: .init(DispatchQueue.global(qos: .background))
             )

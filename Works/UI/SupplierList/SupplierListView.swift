@@ -2,7 +2,7 @@ import ComposableArchitecture
 import SwiftUI
 
 struct SupplierListView: View {
-    let store: Store<SupplierListTCA.State, SupplierListTCA.Action>
+    let store: Store<SupplierListVM.State, SupplierListVM.Action>
 
     var body: some View {
         WithViewStore(store) { viewStore in
@@ -52,7 +52,7 @@ struct SupplierListView: View {
         .navigate(
             using: store.scope(
                 state: \.crateState,
-                action: SupplierListTCA.Action.propagateCreate
+                action: SupplierListVM.Action.propagateCreate
             ),
             destination: SupplierCreateView.init(store:),
             onDismiss: {
@@ -62,7 +62,7 @@ struct SupplierListView: View {
         .navigate(
             using: store.scope(
                 state: \.detailState,
-                action: SupplierListTCA.Action.propagateDetail
+                action: SupplierListVM.Action.propagateDetail
             ),
             destination: SupplierDetailView.init(store:),
             onDismiss: {
@@ -75,9 +75,9 @@ struct SupplierListView: View {
 struct SupplierListView_Previews: PreviewProvider {
     static var previews: some View {
         SupplierListView(store: .init(
-            initialState: SupplierListTCA.State(me: Me.mock),
+            initialState: SupplierListVM.State(me: Me.mock),
             reducer: .empty,
-            environment: SupplierListTCA.Environment(
+            environment: SupplierListVM.Environment(
                 mainQueue: .main,
                 backgroundQueue: .init(DispatchQueue.global(qos: .background))
             )

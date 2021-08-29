@@ -2,7 +2,7 @@ import ComposableArchitecture
 import SwiftUI
 
 struct SupplierCreateView: View {
-    let store: Store<SupplierCreateTCA.State, SupplierCreateTCA.Action>
+    let store: Store<SupplierCreateVM.State, SupplierCreateVM.Action>
 
     @State private var name: String = ""
     @State private var billingAmount: String = ""
@@ -171,9 +171,9 @@ struct SupplierCreateView: View {
 struct SupplierCreateView_Previews: PreviewProvider {
     static var previews: some View {
         SupplierCreateView(store: .init(
-            initialState: SupplierCreateTCA.State(),
+            initialState: SupplierCreateVM.State(),
             reducer: .empty,
-            environment: SupplierCreateTCA.Environment(
+            environment: SupplierCreateVM.Environment(
                 mainQueue: .main,
                 backgroundQueue: .init(DispatchQueue.global(qos: .background))
             )
