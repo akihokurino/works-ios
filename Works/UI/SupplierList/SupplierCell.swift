@@ -33,8 +33,7 @@ struct SupplierCell: View {
             }
         }
         .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-        .padding(.horizontal, 15)
-        .padding(.vertical, 15)
+        .padding(15)
         .overlay(
             RoundedRectangle(cornerRadius: 4)
                 .stroke(Color.gray.opacity(0.5), lineWidth: 0.5)

@@ -77,7 +77,7 @@ struct InvoiceHistoryCell: View {
                 Spacer()
                 Image(systemName: "chevron.forward")
             }
-            .padding(.horizontal, 15)
+            .padding(15)
         }
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 180, alignment: .leading)
         .overlay(
