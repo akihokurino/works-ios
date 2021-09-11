@@ -36,10 +36,11 @@ enum InvoiceHistoryListVM {
                 .catchToEffect()
                 .map(InvoiceHistoryListVM.Action.historyList)
         case .nextHistoryList:
-            if !state.hasNext {
+            if !state.hasNext || state.isNextLoading {
                 return .none
             }
-
+            
+            state.isNextLoading = true
             state.page += 1
             let page = state.page
             return GraphQLClient.shared.caller()
@@ -59,10 +60,12 @@ enum InvoiceHistoryListVM {
             }
 
             state.isRefreshing = false
+            state.isNextLoading = false
             state.hasNext = result.paging.hasNext
             return .none
         case .historyList(.failure(_)):
             state.isRefreshing = false
+            state.isNextLoading = false
             return .none
 
         case .propagateInvoiceDetail(let action):
@@ -105,6 +108,7 @@ extension InvoiceHistoryListVM {
         var histories: [InvoiceHistory] = []
         var page: Int = 1
         var hasNext: Bool = false
+        var isNextLoading: Bool = false
         var invoiceDetailState: InvoiceDetailVM.State?
     }
 

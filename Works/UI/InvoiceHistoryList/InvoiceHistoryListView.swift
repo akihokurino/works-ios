@@ -61,7 +61,9 @@ struct InvoiceHistoryListView: View {
                 }
             }
             .onAppear {
-                viewStore.send(.initHistoryList)
+                if viewStore.histories.count == 0 {
+                    viewStore.send(.initHistoryList)
+                }
             }
         }
         .navigate(

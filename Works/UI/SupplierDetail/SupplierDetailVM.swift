@@ -62,10 +62,11 @@ enum SupplierDetailVM {
                 .catchToEffect()
                 .map(SupplierDetailVM.Action.invoiceList)
         case .nextInvoiceList:
-            if !state.hasNext {
+            if !state.hasNext || state.isNextLoading {
                 return .none
             }
-
+            
+            state.isNextLoading = true
             state.page += 1
             let page = state.page
             let supplierId = state.supplier.id
@@ -86,10 +87,12 @@ enum SupplierDetailVM {
             }
 
             state.isRefreshing = false
+            state.isNextLoading = false
             state.hasNext = result.paging.hasNext
             return .none
         case .invoiceList(.failure(_)):
             state.isRefreshing = false
+            state.isNextLoading = false
             return .none
 
         case .propagateEdit(let action):
@@ -163,6 +166,7 @@ extension SupplierDetailVM {
         var hasNext: Bool = true
         var isLoading: Bool = false
         var isRefreshing: Bool = false
+        var isNextLoading: Bool = false
 
         var editState: SupplierEditVM.State?
         var invoiceDetailState: InvoiceDetailVM.State?

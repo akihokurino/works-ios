@@ -96,7 +96,9 @@ struct SupplierDetailView: View {
             }
             .coordinateSpace(name: RefreshControlKey)
             .onAppear {
-                viewStore.send(.initInvoiceList)
+                if viewStore.invoices.count == 0 {
+                    viewStore.send(.initInvoiceList)
+                }
             }
             .navigationBarTitle(viewStore.supplier.name, displayMode: .inline)
             .navigationBarItems(
