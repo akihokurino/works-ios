@@ -35,26 +35,58 @@ enum SupplierDetailVM {
         case .deleted(.failure(_)):
             state.isLoading = false
             return .none
-        case .fetchInvoiceList:
+        case .initInvoiceList:
+            state.page = 1
+            state.hasNext = true
+            state.invoices = []
+            let page = state.page
             let supplierId = state.supplier.id
             return GraphQLClient.shared.caller()
                 .subscribe(on: environment.backgroundQueue)
-                .flatMap { caller in caller.getInvoiceList(supplierId: supplierId) }
+                .flatMap { caller in caller.getInvoiceList(supplierId: supplierId, page: page, limit: 20) }
+                .map { $0.withRefresh(false) }
                 .receive(on: environment.mainQueue)
                 .catchToEffect()
                 .map(SupplierDetailVM.Action.invoiceList)
         case .refreshInvoiceList:
-            let supplierId = state.supplier.id
+            state.page = 1
+            state.hasNext = true
             state.isRefreshing = true
+            let page = state.page
+            let supplierId = state.supplier.id
             return GraphQLClient.shared.caller()
                 .subscribe(on: environment.backgroundQueue)
-                .flatMap { caller in caller.getInvoiceList(supplierId: supplierId) }
+                .flatMap { caller in caller.getInvoiceList(supplierId: supplierId, page: page, limit: 20) }
+                .map { $0.withRefresh(true) }
                 .receive(on: environment.mainQueue)
                 .catchToEffect()
                 .map(SupplierDetailVM.Action.invoiceList)
-        case .invoiceList(.success(let items)):
+        case .nextInvoiceList:
+            if !state.hasNext {
+                return .none
+            }
+
+            state.page += 1
+            let page = state.page
+            let supplierId = state.supplier.id
+            return GraphQLClient.shared.caller()
+                .subscribe(on: environment.backgroundQueue)
+                .flatMap { caller in caller.getInvoiceList(supplierId: supplierId, page: page, limit: 20) }
+                .map { $0.withRefresh(false) }
+                .receive(on: environment.mainQueue)
+                .catchToEffect()
+                .map(SupplierDetailVM.Action.invoiceList)
+        case .invoiceList(.success(let result)):
+            if result.isRefresh {
+                state.invoices = result.paging.items
+            } else {
+                var current = state.invoices
+                current.append(contentsOf: result.paging.items)
+                state.invoices = current
+            }
+
             state.isRefreshing = false
-            state.invoices = items
+            state.hasNext = result.paging.hasNext
             return .none
         case .invoiceList(.failure(_)):
             state.isRefreshing = false
@@ -115,9 +147,10 @@ extension SupplierDetailVM {
         case popInvoiceDetailView
         case delete
         case deleted(Result<Bool, AppError>)
-        case fetchInvoiceList
+        case initInvoiceList
         case refreshInvoiceList
-        case invoiceList(Result<[Invoice], AppError>)
+        case nextInvoiceList
+        case invoiceList(Result<PagingWithRefresh<Invoice>, AppError>)
 
         case propagateEdit(SupplierEditVM.Action)
         case propagateInvoiceDetail(InvoiceDetailVM.Action)
@@ -126,6 +159,8 @@ extension SupplierDetailVM {
     struct State: Equatable {
         var supplier: Supplier
         var invoices: [Invoice] = []
+        var page: Int = 1
+        var hasNext: Bool = true
         var isLoading: Bool = false
         var isRefreshing: Bool = false
 

@@ -72,6 +72,7 @@
 		02BDB57026D54BF000817727 /* BankEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BDB56F26D54BF000817727 /* BankEditView.swift */; };
 		02BDB57226D54BFB00817727 /* SenderEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BDB57126D54BFB00817727 /* SenderEditView.swift */; };
 		02BDB57426D5505C00817727 /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BDB57326D5505C00817727 /* MenuButton.swift */; };
+		02E248B026EC865A00B1955D /* Paging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E248AF26EC865A00B1955D /* Paging.swift */; };
 		02F2EDF026A57FF3009ABF50 /* Reducer+ReplaceNilState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F2EDEF26A57FF3009ABF50 /* Reducer+ReplaceNilState.swift */; };
 		02F2EDF226A58024009ABF50 /* Reducer+CaptureState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F2EDF126A58024009ABF50 /* Reducer+CaptureState.swift */; };
 		02F2EDF426A58054009ABF50 /* Reducer+Presents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F2EDF326A58054009ABF50 /* Reducer+Presents.swift */; };
@@ -151,6 +152,7 @@
 		02BDB56F26D54BF000817727 /* BankEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankEditView.swift; sourceTree = "<group>"; };
 		02BDB57126D54BFB00817727 /* SenderEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenderEditView.swift; sourceTree = "<group>"; };
 		02BDB57326D5505C00817727 /* MenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
+		02E248AF26EC865A00B1955D /* Paging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paging.swift; sourceTree = "<group>"; };
 		02E558DB269F21A600A8AE55 /* Works.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Works.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02F2EDEF26A57FF3009ABF50 /* Reducer+ReplaceNilState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reducer+ReplaceNilState.swift"; sourceTree = "<group>"; };
 		02F2EDF126A58024009ABF50 /* Reducer+CaptureState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reducer+CaptureState.swift"; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 				0275873D26C4350800213014 /* InvoiceHistory.swift */,
 				02BDB56526D53A2900817727 /* Bank.swift */,
 				02BDB56726D53A3100817727 /* Sender.swift */,
+				02E248AF26EC865A00B1955D /* Paging.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -496,6 +499,7 @@
 				02B701B5269EF08B00BA9937 /* RootView.swift in Sources */,
 				0241DC7826A2E90800AFA313 /* API.swift in Sources */,
 				02ADC85D26AC0C13005A9D06 /* PDFView.swift in Sources */,
+				02E248B026EC865A00B1955D /* Paging.swift in Sources */,
 				0270060C26A31C9D004E68A1 /* SupplierCell.swift in Sources */,
 				02ADC85F26AC0D61005A9D06 /* InvoiceDetailVM.swift in Sources */,
 				021FF96C269F557600FF55C1 /* String.swift in Sources */,

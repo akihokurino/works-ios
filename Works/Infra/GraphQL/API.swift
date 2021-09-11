@@ -278,8 +278,8 @@ public enum GraphQL {
     /// The raw GraphQL definition of this operation.
     public let operationDefinition: String =
       """
-      query GetInvoiceList($supplierId: String!) {
-        invoiceList(supplierId: $supplierId) {
+      query GetInvoiceList($supplierId: String!, $page: Int!, $limit: Int!) {
+        invoiceList(supplierId: $supplierId, page: $page, limit: $limit) {
           __typename
           edges {
             __typename
@@ -287,6 +287,11 @@ public enum GraphQL {
               __typename
               ...InvoiceFragment
             }
+          }
+          pageInfo {
+            __typename
+            totalCount
+            hasNextPage
           }
         }
       }
@@ -301,13 +306,17 @@ public enum GraphQL {
     }
 
     public var supplierId: String
+    public var page: Int
+    public var limit: Int
 
-    public init(supplierId: String) {
+    public init(supplierId: String, page: Int, limit: Int) {
       self.supplierId = supplierId
+      self.page = page
+      self.limit = limit
     }
 
     public var variables: GraphQLMap? {
-      return ["supplierId": supplierId]
+      return ["supplierId": supplierId, "page": page, "limit": limit]
     }
 
     public struct Data: GraphQLSelectionSet {
@@ -315,7 +324,7 @@ public enum GraphQL {
 
       public static var selections: [GraphQLSelection] {
         return [
-          GraphQLField("invoiceList", arguments: ["supplierId": GraphQLVariable("supplierId")], type: .nonNull(.object(InvoiceList.selections))),
+          GraphQLField("invoiceList", arguments: ["supplierId": GraphQLVariable("supplierId"), "page": GraphQLVariable("page"), "limit": GraphQLVariable("limit")], type: .nonNull(.object(InvoiceList.selections))),
         ]
       }
 
@@ -345,6 +354,7 @@ public enum GraphQL {
           return [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
             GraphQLField("edges", type: .nonNull(.list(.nonNull(.object(Edge.selections))))),
+            GraphQLField("pageInfo", type: .nonNull(.object(PageInfo.selections))),
           ]
         }
 
@@ -354,8 +364,8 @@ public enum GraphQL {
           self.resultMap = unsafeResultMap
         }
 
-        public init(edges: [Edge]) {
-          self.init(unsafeResultMap: ["__typename": "InvoiceConnection", "edges": edges.map { (value: Edge) -> ResultMap in value.resultMap }])
+        public init(edges: [Edge], pageInfo: PageInfo) {
+          self.init(unsafeResultMap: ["__typename": "InvoiceConnection", "edges": edges.map { (value: Edge) -> ResultMap in value.resultMap }, "pageInfo": pageInfo.resultMap])
         }
 
         public var __typename: String {
@@ -373,6 +383,15 @@ public enum GraphQL {
           }
           set {
             resultMap.updateValue(newValue.map { (value: Edge) -> ResultMap in value.resultMap }, forKey: "edges")
+          }
+        }
+
+        public var pageInfo: PageInfo {
+          get {
+            return PageInfo(unsafeResultMap: resultMap["pageInfo"]! as! ResultMap)
+          }
+          set {
+            resultMap.updateValue(newValue.resultMap, forKey: "pageInfo")
           }
         }
 
@@ -470,6 +489,55 @@ public enum GraphQL {
             }
           }
         }
+
+        public struct PageInfo: GraphQLSelectionSet {
+          public static let possibleTypes: [String] = ["PageInfo"]
+
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
+              GraphQLField("hasNextPage", type: .nonNull(.scalar(Bool.self))),
+            ]
+          }
+
+          public private(set) var resultMap: ResultMap
+
+          public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+          }
+
+          public init(totalCount: Int, hasNextPage: Bool) {
+            self.init(unsafeResultMap: ["__typename": "PageInfo", "totalCount": totalCount, "hasNextPage": hasNextPage])
+          }
+
+          public var __typename: String {
+            get {
+              return resultMap["__typename"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "__typename")
+            }
+          }
+
+          public var totalCount: Int {
+            get {
+              return resultMap["totalCount"]! as! Int
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "totalCount")
+            }
+          }
+
+          public var hasNextPage: Bool {
+            get {
+              return resultMap["hasNextPage"]! as! Bool
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "hasNextPage")
+            }
+          }
+        }
       }
     }
   }
@@ -478,8 +546,8 @@ public enum GraphQL {
     /// The raw GraphQL definition of this operation.
     public let operationDefinition: String =
       """
-      query GetInvoiceHistoryList {
-        invoiceHistoryList {
+      query GetInvoiceHistoryList($page: Int!, $limit: Int!) {
+        invoiceHistoryList(page: $page, limit: $limit) {
           __typename
           edges {
             __typename
@@ -487,6 +555,11 @@ public enum GraphQL {
               __typename
               ...InvoiceHistoryFragment
             }
+          }
+          pageInfo {
+            __typename
+            totalCount
+            hasNextPage
           }
         }
       }
@@ -502,7 +575,16 @@ public enum GraphQL {
       return document
     }
 
-    public init() {
+    public var page: Int
+    public var limit: Int
+
+    public init(page: Int, limit: Int) {
+      self.page = page
+      self.limit = limit
+    }
+
+    public var variables: GraphQLMap? {
+      return ["page": page, "limit": limit]
     }
 
     public struct Data: GraphQLSelectionSet {
@@ -510,7 +592,7 @@ public enum GraphQL {
 
       public static var selections: [GraphQLSelection] {
         return [
-          GraphQLField("invoiceHistoryList", type: .nonNull(.object(InvoiceHistoryList.selections))),
+          GraphQLField("invoiceHistoryList", arguments: ["page": GraphQLVariable("page"), "limit": GraphQLVariable("limit")], type: .nonNull(.object(InvoiceHistoryList.selections))),
         ]
       }
 
@@ -540,6 +622,7 @@ public enum GraphQL {
           return [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
             GraphQLField("edges", type: .nonNull(.list(.nonNull(.object(Edge.selections))))),
+            GraphQLField("pageInfo", type: .nonNull(.object(PageInfo.selections))),
           ]
         }
 
@@ -549,8 +632,8 @@ public enum GraphQL {
           self.resultMap = unsafeResultMap
         }
 
-        public init(edges: [Edge]) {
-          self.init(unsafeResultMap: ["__typename": "InvoiceHistoryConnection", "edges": edges.map { (value: Edge) -> ResultMap in value.resultMap }])
+        public init(edges: [Edge], pageInfo: PageInfo) {
+          self.init(unsafeResultMap: ["__typename": "InvoiceHistoryConnection", "edges": edges.map { (value: Edge) -> ResultMap in value.resultMap }, "pageInfo": pageInfo.resultMap])
         }
 
         public var __typename: String {
@@ -568,6 +651,15 @@ public enum GraphQL {
           }
           set {
             resultMap.updateValue(newValue.map { (value: Edge) -> ResultMap in value.resultMap }, forKey: "edges")
+          }
+        }
+
+        public var pageInfo: PageInfo {
+          get {
+            return PageInfo(unsafeResultMap: resultMap["pageInfo"]! as! ResultMap)
+          }
+          set {
+            resultMap.updateValue(newValue.resultMap, forKey: "pageInfo")
           }
         }
 
@@ -658,6 +750,55 @@ public enum GraphQL {
                   resultMap += newValue.resultMap
                 }
               }
+            }
+          }
+        }
+
+        public struct PageInfo: GraphQLSelectionSet {
+          public static let possibleTypes: [String] = ["PageInfo"]
+
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
+              GraphQLField("hasNextPage", type: .nonNull(.scalar(Bool.self))),
+            ]
+          }
+
+          public private(set) var resultMap: ResultMap
+
+          public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+          }
+
+          public init(totalCount: Int, hasNextPage: Bool) {
+            self.init(unsafeResultMap: ["__typename": "PageInfo", "totalCount": totalCount, "hasNextPage": hasNextPage])
+          }
+
+          public var __typename: String {
+            get {
+              return resultMap["__typename"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "__typename")
+            }
+          }
+
+          public var totalCount: Int {
+            get {
+              return resultMap["totalCount"]! as! Int
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "totalCount")
+            }
+          }
+
+          public var hasNextPage: Bool {
+            get {
+              return resultMap["hasNextPage"]! as! Bool
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "hasNextPage")
             }
           }
         }
@@ -1638,13 +1779,7 @@ public enum GraphQL {
         id
         supplierList {
           __typename
-          edges {
-            __typename
-            node {
-              __typename
-              ...SupplierFragment
-            }
-          }
+          ...SupplierFragment
         }
         sender {
           __typename
@@ -1663,7 +1798,7 @@ public enum GraphQL {
       return [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
         GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-        GraphQLField("supplierList", type: .nonNull(.object(SupplierList.selections))),
+        GraphQLField("supplierList", type: .nonNull(.list(.nonNull(.object(SupplierList.selections))))),
         GraphQLField("sender", type: .object(Sender.selections)),
         GraphQLField("bank", type: .object(Bank.selections)),
       ]
@@ -1675,8 +1810,8 @@ public enum GraphQL {
       self.resultMap = unsafeResultMap
     }
 
-    public init(id: GraphQLID, supplierList: SupplierList, sender: Sender? = nil, bank: Bank? = nil) {
-      self.init(unsafeResultMap: ["__typename": "Me", "id": id, "supplierList": supplierList.resultMap, "sender": sender.flatMap { (value: Sender) -> ResultMap in value.resultMap }, "bank": bank.flatMap { (value: Bank) -> ResultMap in value.resultMap }])
+    public init(id: GraphQLID, supplierList: [SupplierList], sender: Sender? = nil, bank: Bank? = nil) {
+      self.init(unsafeResultMap: ["__typename": "Me", "id": id, "supplierList": supplierList.map { (value: SupplierList) -> ResultMap in value.resultMap }, "sender": sender.flatMap { (value: Sender) -> ResultMap in value.resultMap }, "bank": bank.flatMap { (value: Bank) -> ResultMap in value.resultMap }])
     }
 
     public var __typename: String {
@@ -1697,12 +1832,12 @@ public enum GraphQL {
       }
     }
 
-    public var supplierList: SupplierList {
+    public var supplierList: [SupplierList] {
       get {
-        return SupplierList(unsafeResultMap: resultMap["supplierList"]! as! ResultMap)
+        return (resultMap["supplierList"] as! [ResultMap]).map { (value: ResultMap) -> SupplierList in SupplierList(unsafeResultMap: value) }
       }
       set {
-        resultMap.updateValue(newValue.resultMap, forKey: "supplierList")
+        resultMap.updateValue(newValue.map { (value: SupplierList) -> ResultMap in value.resultMap }, forKey: "supplierList")
       }
     }
 
@@ -1725,12 +1860,12 @@ public enum GraphQL {
     }
 
     public struct SupplierList: GraphQLSelectionSet {
-      public static let possibleTypes: [String] = ["SupplierConnection"]
+      public static let possibleTypes: [String] = ["Supplier"]
 
       public static var selections: [GraphQLSelection] {
         return [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("edges", type: .nonNull(.list(.nonNull(.object(Edge.selections))))),
+          GraphQLFragmentSpread(SupplierFragment.self),
         ]
       }
 
@@ -1740,8 +1875,8 @@ public enum GraphQL {
         self.resultMap = unsafeResultMap
       }
 
-      public init(edges: [Edge]) {
-        self.init(unsafeResultMap: ["__typename": "SupplierConnection", "edges": edges.map { (value: Edge) -> ResultMap in value.resultMap }])
+      public init(id: GraphQLID, name: String, billingAmountIncludeTax: Int, billingAmountExcludeTax: Int, billingType: GraphQLBillingType, endYm: String? = nil, subject: String, subjectTemplate: String) {
+        self.init(unsafeResultMap: ["__typename": "Supplier", "id": id, "name": name, "billingAmountIncludeTax": billingAmountIncludeTax, "billingAmountExcludeTax": billingAmountExcludeTax, "billingType": billingType, "endYm": endYm, "subject": subject, "subjectTemplate": subjectTemplate])
       }
 
       public var __typename: String {
@@ -1753,106 +1888,28 @@ public enum GraphQL {
         }
       }
 
-      public var edges: [Edge] {
+      public var fragments: Fragments {
         get {
-          return (resultMap["edges"] as! [ResultMap]).map { (value: ResultMap) -> Edge in Edge(unsafeResultMap: value) }
+          return Fragments(unsafeResultMap: resultMap)
         }
         set {
-          resultMap.updateValue(newValue.map { (value: Edge) -> ResultMap in value.resultMap }, forKey: "edges")
+          resultMap += newValue.resultMap
         }
       }
 
-      public struct Edge: GraphQLSelectionSet {
-        public static let possibleTypes: [String] = ["SupplierEdge"]
-
-        public static var selections: [GraphQLSelection] {
-          return [
-            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("node", type: .nonNull(.object(Node.selections))),
-          ]
-        }
-
+      public struct Fragments {
         public private(set) var resultMap: ResultMap
 
         public init(unsafeResultMap: ResultMap) {
           self.resultMap = unsafeResultMap
         }
 
-        public init(node: Node) {
-          self.init(unsafeResultMap: ["__typename": "SupplierEdge", "node": node.resultMap])
-        }
-
-        public var __typename: String {
+        public var supplierFragment: SupplierFragment {
           get {
-            return resultMap["__typename"]! as! String
+            return SupplierFragment(unsafeResultMap: resultMap)
           }
           set {
-            resultMap.updateValue(newValue, forKey: "__typename")
-          }
-        }
-
-        public var node: Node {
-          get {
-            return Node(unsafeResultMap: resultMap["node"]! as! ResultMap)
-          }
-          set {
-            resultMap.updateValue(newValue.resultMap, forKey: "node")
-          }
-        }
-
-        public struct Node: GraphQLSelectionSet {
-          public static let possibleTypes: [String] = ["Supplier"]
-
-          public static var selections: [GraphQLSelection] {
-            return [
-              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              GraphQLFragmentSpread(SupplierFragment.self),
-            ]
-          }
-
-          public private(set) var resultMap: ResultMap
-
-          public init(unsafeResultMap: ResultMap) {
-            self.resultMap = unsafeResultMap
-          }
-
-          public init(id: GraphQLID, name: String, billingAmountIncludeTax: Int, billingAmountExcludeTax: Int, billingType: GraphQLBillingType, endYm: String? = nil, subject: String, subjectTemplate: String) {
-            self.init(unsafeResultMap: ["__typename": "Supplier", "id": id, "name": name, "billingAmountIncludeTax": billingAmountIncludeTax, "billingAmountExcludeTax": billingAmountExcludeTax, "billingType": billingType, "endYm": endYm, "subject": subject, "subjectTemplate": subjectTemplate])
-          }
-
-          public var __typename: String {
-            get {
-              return resultMap["__typename"]! as! String
-            }
-            set {
-              resultMap.updateValue(newValue, forKey: "__typename")
-            }
-          }
-
-          public var fragments: Fragments {
-            get {
-              return Fragments(unsafeResultMap: resultMap)
-            }
-            set {
-              resultMap += newValue.resultMap
-            }
-          }
-
-          public struct Fragments {
-            public private(set) var resultMap: ResultMap
-
-            public init(unsafeResultMap: ResultMap) {
-              self.resultMap = unsafeResultMap
-            }
-
-            public var supplierFragment: SupplierFragment {
-              get {
-                return SupplierFragment(unsafeResultMap: resultMap)
-              }
-              set {
-                resultMap += newValue.resultMap
-              }
-            }
+            resultMap += newValue.resultMap
           }
         }
       }

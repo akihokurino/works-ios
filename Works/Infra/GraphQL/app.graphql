@@ -4,22 +4,30 @@ query GetMe {
 	}
 }
 
-query GetInvoiceList($supplierId: String!) {
-	invoiceList(supplierId: $supplierId) {
+query GetInvoiceList($supplierId: String!, $page: Int!, $limit: Int!) {
+	invoiceList(supplierId: $supplierId, page: $page, limit: $limit) {
 		edges {
 			node {
 				...InvoiceFragment
 			}
 		}
+		pageInfo {
+			totalCount
+			hasNextPage
+		}
 	}
 }
 
-query GetInvoiceHistoryList {
-	invoiceHistoryList {
+query GetInvoiceHistoryList($page: Int!, $limit: Int!) {
+	invoiceHistoryList(page: $page, limit: $limit) {
 		edges {
 			node {
 				...InvoiceHistoryFragment
 			}
+		}
+		pageInfo {
+			totalCount
+			hasNextPage
 		}
 	}
 }
@@ -116,11 +124,7 @@ mutation RefreshMisoca {
 fragment MeFragment on Me {
 	id
 	supplierList {
-		edges {
-			node {
-				...SupplierFragment
-			}
-		}
+		...SupplierFragment
 	}
 	sender {
 		...SenderFragment

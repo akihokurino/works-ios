@@ -36,12 +36,32 @@ struct InvoiceHistoryListView: View {
                             }
                             .padding(.top, 15)
                         }
+
+                        if viewStore.hasNext && viewStore.histories.count > 0 {
+                            Button(action: {
+                                viewStore.send(.nextHistoryList)
+                            }) {
+                                HStack {
+                                    Spacer()
+                                    Text("次の20件を表示する")
+                                    Spacer()
+                                }
+                            }
+                            .padding(.top, 15)
+                            .padding(.bottom, 30)
+                        }
+
+                        if viewStore.hasNext && viewStore.histories.count == 0 {
+                            ProgressView()
+                                .padding(.top, 15)
+                                .padding(.bottom, 30)
+                        }
                     }
                     .coordinateSpace(name: RefreshControlKey)
                 }
             }
             .onAppear {
-                viewStore.send(.fetchHistoryList)
+                viewStore.send(.initHistoryList)
             }
         }
         .navigate(

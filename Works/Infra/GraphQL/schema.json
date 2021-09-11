@@ -10,6 +10,132 @@
     "subscriptionType": null,
     "types": [
       {
+        "kind": "ENUM",
+        "name": "__DirectiveLocation",
+        "description": "A Directive can be adjacent to many parts of the GraphQL language, a __DirectiveLocation describes one such possible adjacencies.",
+        "specifiedByUrl": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "QUERY",
+            "description": "Location adjacent to a query operation.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "MUTATION",
+            "description": "Location adjacent to a mutation operation.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "SUBSCRIPTION",
+            "description": "Location adjacent to a subscription operation.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "FIELD",
+            "description": "Location adjacent to a field.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "FRAGMENT_DEFINITION",
+            "description": "Location adjacent to a fragment definition.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "FRAGMENT_SPREAD",
+            "description": "Location adjacent to a fragment spread.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "INLINE_FRAGMENT",
+            "description": "Location adjacent to an inline fragment.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "VARIABLE_DEFINITION",
+            "description": "Location adjacent to a variable definition.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "SCHEMA",
+            "description": "Location adjacent to a schema definition.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "SCALAR",
+            "description": "Location adjacent to a scalar definition.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "OBJECT",
+            "description": "Location adjacent to an object type definition.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "FIELD_DEFINITION",
+            "description": "Location adjacent to a field definition.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "ARGUMENT_DEFINITION",
+            "description": "Location adjacent to an argument definition.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "INTERFACE",
+            "description": "Location adjacent to an interface definition.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "UNION",
+            "description": "Location adjacent to a union definition.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "ENUM",
+            "description": "Location adjacent to an enum definition.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "ENUM_VALUE",
+            "description": "Location adjacent to an enum value definition.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "INPUT_OBJECT",
+            "description": "Location adjacent to an input object type definition.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "INPUT_FIELD_DEFINITION",
+            "description": "Location adjacent to an input object field definition.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
         "kind": "OBJECT",
         "name": "Sender",
         "description": null,
@@ -254,16 +380,24 @@
             "deprecationReason": null
           },
           {
-            "name": "invoiceList",
+            "name": "latestInvoiceList",
             "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "OBJECT",
-                "name": "InvoiceConnection",
-                "ofType": null
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "Invoice",
+                    "ofType": null
+                  }
+                }
               }
             },
             "isDeprecated": false,
@@ -926,6 +1060,22 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "pageInfo",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "PageInfo",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -1142,9 +1292,17 @@
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "OBJECT",
-                "name": "SupplierConnection",
-                "ofType": null
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "Supplier",
+                    "ofType": null
+                  }
+                }
               }
             },
             "isDeprecated": false,
@@ -1169,6 +1327,38 @@
                 "defaultValue": null,
                 "isDeprecated": false,
                 "deprecationReason": null
+              },
+              {
+                "name": "page",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "limit",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
               }
             ],
             "type": {
@@ -1186,7 +1376,40 @@
           {
             "name": "invoiceHistoryList",
             "description": null,
-            "args": [],
+            "args": [
+              {
+                "name": "page",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "limit",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -1849,9 +2072,17 @@
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "OBJECT",
-                "name": "SupplierConnection",
-                "ofType": null
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "Supplier",
+                    "ofType": null
+                  }
+                }
               }
             },
             "isDeprecated": false,
@@ -2127,30 +2358,30 @@
         "possibleTypes": null
       },
       {
-        "kind": "OBJECT",
-        "name": "SupplierEdge",
+        "kind": "INPUT_OBJECT",
+        "name": "ConnectMisocaInput",
         "description": null,
         "specifiedByUrl": null,
-        "fields": [
+        "fields": null,
+        "inputFields": [
           {
-            "name": "node",
+            "name": "code",
             "description": null,
-            "args": [],
             "type": {
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "OBJECT",
-                "name": "Supplier",
+                "kind": "SCALAR",
+                "name": "String",
                 "ofType": null
               }
             },
+            "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
           }
         ],
-        "inputFields": null,
-        "interfaces": [],
+        "interfaces": null,
         "enumValues": null,
         "possibleTypes": null
       },
@@ -2179,70 +2410,6 @@
         ],
         "inputFields": null,
         "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
-        "name": "SupplierConnection",
-        "description": null,
-        "specifiedByUrl": null,
-        "fields": [
-          {
-            "name": "edges",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "OBJECT",
-                    "name": "SupplierEdge",
-                    "ofType": null
-                  }
-                }
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "ConnectMisocaInput",
-        "description": null,
-        "specifiedByUrl": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "code",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
         "enumValues": null,
         "possibleTypes": null
       },
@@ -2367,6 +2534,22 @@
                     "ofType": null
                   }
                 }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "pageInfo",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "PageInfo",
+                "ofType": null
               }
             },
             "isDeprecated": false,
@@ -2664,6 +2847,50 @@
         "possibleTypes": null
       },
       {
+        "kind": "OBJECT",
+        "name": "PageInfo",
+        "description": null,
+        "specifiedByUrl": null,
+        "fields": [
+          {
+            "name": "totalCount",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "hasNextPage",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
         "kind": "ENUM",
         "name": "GraphQLInvoiceStatus",
         "description": null,
@@ -2897,132 +3124,6 @@
         "inputFields": null,
         "interfaces": [],
         "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "ENUM",
-        "name": "__DirectiveLocation",
-        "description": "A Directive can be adjacent to many parts of the GraphQL language, a __DirectiveLocation describes one such possible adjacencies.",
-        "specifiedByUrl": null,
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": [
-          {
-            "name": "QUERY",
-            "description": "Location adjacent to a query operation.",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "MUTATION",
-            "description": "Location adjacent to a mutation operation.",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "SUBSCRIPTION",
-            "description": "Location adjacent to a subscription operation.",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "FIELD",
-            "description": "Location adjacent to a field.",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "FRAGMENT_DEFINITION",
-            "description": "Location adjacent to a fragment definition.",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "FRAGMENT_SPREAD",
-            "description": "Location adjacent to a fragment spread.",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "INLINE_FRAGMENT",
-            "description": "Location adjacent to an inline fragment.",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "VARIABLE_DEFINITION",
-            "description": "Location adjacent to a variable definition.",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "SCHEMA",
-            "description": "Location adjacent to a schema definition.",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "SCALAR",
-            "description": "Location adjacent to a scalar definition.",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "OBJECT",
-            "description": "Location adjacent to an object type definition.",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "FIELD_DEFINITION",
-            "description": "Location adjacent to a field definition.",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "ARGUMENT_DEFINITION",
-            "description": "Location adjacent to an argument definition.",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "INTERFACE",
-            "description": "Location adjacent to an interface definition.",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "UNION",
-            "description": "Location adjacent to a union definition.",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "ENUM",
-            "description": "Location adjacent to an enum definition.",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "ENUM_VALUE",
-            "description": "Location adjacent to an enum value definition.",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "INPUT_OBJECT",
-            "description": "Location adjacent to an input object type definition.",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "INPUT_FIELD_DEFINITION",
-            "description": "Location adjacent to an input object field definition.",
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
         "possibleTypes": null
       }
     ],

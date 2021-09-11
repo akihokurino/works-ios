@@ -11,24 +11,55 @@ enum InvoiceHistoryListVM {
         case .popInvoiceDetailView:
             state.invoiceDetailState = nil
             return .none
-        case .fetchHistoryList:
+        case .initHistoryList:
+            state.page = 1
+            state.hasNext = true
+            state.histories = []
+            let page = state.page
             return GraphQLClient.shared.caller()
                 .subscribe(on: environment.backgroundQueue)
-                .flatMap { caller in caller.getInvoiceHistoryList() }
+                .flatMap { caller in caller.getInvoiceHistoryList(page: page, limit: 20) }
+                .map { $0.withRefresh(false) }
                 .receive(on: environment.mainQueue)
                 .catchToEffect()
                 .map(InvoiceHistoryListVM.Action.historyList)
         case .refreshHistoryList:
+            state.page = 1
+            state.hasNext = true
             state.isRefreshing = true
+            let page = state.page
             return GraphQLClient.shared.caller()
                 .subscribe(on: environment.backgroundQueue)
-                .flatMap { caller in caller.getInvoiceHistoryList() }
+                .flatMap { caller in caller.getInvoiceHistoryList(page: page, limit: 20) }
+                .map { $0.withRefresh(true) }
                 .receive(on: environment.mainQueue)
                 .catchToEffect()
                 .map(InvoiceHistoryListVM.Action.historyList)
-        case .historyList(.success(let items)):
+        case .nextHistoryList:
+            if !state.hasNext {
+                return .none
+            }
+
+            state.page += 1
+            let page = state.page
+            return GraphQLClient.shared.caller()
+                .subscribe(on: environment.backgroundQueue)
+                .flatMap { caller in caller.getInvoiceHistoryList(page: page, limit: 20) }
+                .map { $0.withRefresh(false) }
+                .receive(on: environment.mainQueue)
+                .catchToEffect()
+                .map(InvoiceHistoryListVM.Action.historyList)
+        case .historyList(.success(let result)):
+            if result.isRefresh {
+                state.histories = result.paging.items
+            } else {
+                var current = state.histories
+                current.append(contentsOf: result.paging.items)
+                state.histories = current
+            }
+
             state.isRefreshing = false
-            state.histories = items
+            state.hasNext = result.paging.hasNext
             return .none
         case .historyList(.failure(_)):
             state.isRefreshing = false
@@ -59,9 +90,10 @@ enum InvoiceHistoryListVM {
 
 extension InvoiceHistoryListVM {
     enum Action: Equatable {
-        case fetchHistoryList
+        case initHistoryList
         case refreshHistoryList
-        case historyList(Result<[InvoiceHistory], AppError>)
+        case nextHistoryList
+        case historyList(Result<PagingWithRefresh<InvoiceHistory>, AppError>)
         case presentInvoiceDetailView(Invoice)
         case popInvoiceDetailView
 
@@ -71,6 +103,8 @@ extension InvoiceHistoryListVM {
     struct State: Equatable {
         var isRefreshing: Bool = false
         var histories: [InvoiceHistory] = []
+        var page: Int = 1
+        var hasNext: Bool = false
         var invoiceDetailState: InvoiceDetailVM.State?
     }
 

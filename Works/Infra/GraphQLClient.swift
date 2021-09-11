@@ -113,16 +113,16 @@ struct GraphQLCaller {
 
                         let me = Me(
                             id: data.me.fragments.meFragment.id,
-                            suppliers: data.me.fragments.meFragment.supplierList.edges.map { edge in
+                            suppliers: data.me.fragments.meFragment.supplierList.map { node in
                                 Supplier(
-                                    id: edge.node.fragments.supplierFragment.id,
-                                    name: edge.node.fragments.supplierFragment.name,
-                                    billingAmountIncludeTax: edge.node.fragments.supplierFragment.billingAmountIncludeTax,
-                                    billingAmountExcludeTax: edge.node.fragments.supplierFragment.billingAmountExcludeTax,
-                                    billingType: edge.node.fragments.supplierFragment.billingType,
-                                    endYm: edge.node.fragments.supplierFragment.endYm,
-                                    subject: edge.node.fragments.supplierFragment.subject,
-                                    subjectTemplate: edge.node.fragments.supplierFragment.subjectTemplate
+                                    id: node.fragments.supplierFragment.id,
+                                    name: node.fragments.supplierFragment.name,
+                                    billingAmountIncludeTax: node.fragments.supplierFragment.billingAmountIncludeTax,
+                                    billingAmountExcludeTax: node.fragments.supplierFragment.billingAmountExcludeTax,
+                                    billingType: node.fragments.supplierFragment.billingType,
+                                    endYm: node.fragments.supplierFragment.endYm,
+                                    subject: node.fragments.supplierFragment.subject,
+                                    subjectTemplate: node.fragments.supplierFragment.subjectTemplate
                                 )
                             },
                             sender: sender,
@@ -136,9 +136,9 @@ struct GraphQLCaller {
         }
     }
 
-    func getInvoiceList(supplierId: String) -> Future<[Invoice], AppError> {
-        return Future<[Invoice], AppError> { promise in
-            cli.fetch(query: GraphQL.GetInvoiceListQuery(supplierId: supplierId)) { result in
+    func getInvoiceList(supplierId: String, page: Int, limit: Int) -> Future<Paging<Invoice>, AppError> {
+        return Future<Paging<Invoice>, AppError> { promise in
+            cli.fetch(query: GraphQL.GetInvoiceListQuery(supplierId: supplierId, page: page, limit: limit)) { result in
                 switch result {
                     case .success(let graphQLResult):
                         if let errors = graphQLResult.errors {
@@ -168,7 +168,7 @@ struct GraphQLCaller {
                                 tax: edge.node.fragments.invoiceFragment.tax
                             )
                         }
-                        promise(.success(invoices))
+                        promise(.success(Paging<Invoice>(items: invoices, hasNext: data.invoiceList.pageInfo.hasNextPage)))
                     case .failure(let error):
                         promise(.failure(AppError.system(error.localizedDescription)))
                 }
@@ -176,9 +176,9 @@ struct GraphQLCaller {
         }
     }
 
-    func getInvoiceHistoryList() -> Future<[InvoiceHistory], AppError> {
-        return Future<[InvoiceHistory], AppError> { promise in
-            cli.fetch(query: GraphQL.GetInvoiceHistoryListQuery()) { result in
+    func getInvoiceHistoryList(page: Int, limit: Int) -> Future<Paging<InvoiceHistory>, AppError> {
+        return Future<Paging<InvoiceHistory>, AppError> { promise in
+            cli.fetch(query: GraphQL.GetInvoiceHistoryListQuery(page: page, limit: limit)) { result in
                 switch result {
                     case .success(let graphQLResult):
                         if let errors = graphQLResult.errors {
@@ -221,7 +221,7 @@ struct GraphQLCaller {
                                 )
                             )
                         }
-                        promise(.success(histories))
+                        promise(.success(Paging<InvoiceHistory>(items: histories, hasNext: data.invoiceHistoryList.pageInfo.hasNextPage)))
                     case .failure(let error):
                         promise(.failure(AppError.system(error.localizedDescription)))
                 }
@@ -272,16 +272,16 @@ struct GraphQLCaller {
 
                         let me = Me(
                             id: data.authenticate.fragments.meFragment.id,
-                            suppliers: data.authenticate.fragments.meFragment.supplierList.edges.map { edge in
+                            suppliers: data.authenticate.fragments.meFragment.supplierList.map { node in
                                 Supplier(
-                                    id: edge.node.fragments.supplierFragment.id,
-                                    name: edge.node.fragments.supplierFragment.name,
-                                    billingAmountIncludeTax: edge.node.fragments.supplierFragment.billingAmountIncludeTax,
-                                    billingAmountExcludeTax: edge.node.fragments.supplierFragment.billingAmountExcludeTax,
-                                    billingType: edge.node.fragments.supplierFragment.billingType,
-                                    endYm: edge.node.fragments.supplierFragment.endYm,
-                                    subject: edge.node.fragments.supplierFragment.subject,
-                                    subjectTemplate: edge.node.fragments.supplierFragment.subjectTemplate
+                                    id: node.fragments.supplierFragment.id,
+                                    name: node.fragments.supplierFragment.name,
+                                    billingAmountIncludeTax: node.fragments.supplierFragment.billingAmountIncludeTax,
+                                    billingAmountExcludeTax: node.fragments.supplierFragment.billingAmountExcludeTax,
+                                    billingType: node.fragments.supplierFragment.billingType,
+                                    endYm: node.fragments.supplierFragment.endYm,
+                                    subject: node.fragments.supplierFragment.subject,
+                                    subjectTemplate: node.fragments.supplierFragment.subjectTemplate
                                 )
                             },
                             sender: sender,

@@ -73,10 +73,30 @@ struct SupplierDetailView: View {
                 }
                 .padding(.horizontal, 15)
                 .padding(.top, 15)
+
+                if viewStore.hasNext && viewStore.invoices.count > 0 {
+                    Button(action: {
+                        viewStore.send(.nextInvoiceList)
+                    }) {
+                        HStack {
+                            Spacer()
+                            Text("次の20件を表示する")
+                            Spacer()
+                        }
+                    }
+                    .padding(.top, 15)
+                    .padding(.bottom, 30)
+                }
+
+                if viewStore.hasNext && viewStore.invoices.count == 0 {
+                    ProgressView()
+                        .padding(.top, 15)
+                        .padding(.bottom, 30)
+                }
             }
             .coordinateSpace(name: RefreshControlKey)
             .onAppear {
-                viewStore.send(.fetchInvoiceList)
+                viewStore.send(.initInvoiceList)
             }
             .navigationBarTitle(viewStore.supplier.name, displayMode: .inline)
             .navigationBarItems(
