@@ -1,6 +1,4 @@
-# works-ios
-
-## 構成
+## Specs
 
 - swiftui
 - combine
